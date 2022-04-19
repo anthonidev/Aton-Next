@@ -1,18 +1,18 @@
-# Template
-_Next js, Typescript,Redux-toolkit, Tailwind, JWT  `_
+# Ecommerce ATON 
+_ Next js, Typescript,Redux-toolkit, Tailwind, JWT  _
 
 ## Instalación 🔧
 
 _step 1_
 
 ```
-git clone https://github.com/anthonidev/next-auth-template-JWT.git
+git clone https://github.com/anthonidev/Aton-Next.git
 ```
 
 _step 2_
 
 ```
-cd next-auth-template-JWT
+cd Aton-Next
 ```
 _Instalamos las dependencias_
 
