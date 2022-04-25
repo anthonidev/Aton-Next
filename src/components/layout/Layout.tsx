@@ -4,7 +4,8 @@ import React, { useEffect } from 'react'
 import { useDispatch} from "react-redux";
 import { check_authenticated, load_user, refresh } from "../../hooks/auth";
 import Alert from "../notifications/Alert";
-import Navbar from "../navigation/navbar/navbar";
+import Navbar from "../navigation/navbar/Navbar";
+import NavBartMain from "../navigation/navbar/NavBarMain";
 
 
 const Layout: React.FC<Props> = ({ title, content ,children} ) => {
@@ -25,6 +26,7 @@ const Layout: React.FC<Props> = ({ title, content ,children} ) => {
 
       <main>
         <Navbar />
+        <NavBartMain />
         {children}
       </main>
       <Alert />
