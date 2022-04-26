@@ -15,6 +15,7 @@ const NavItem: FunctionComponent<{ iten: NavbarIten, type: string }> = ({ iten: 
     if (type === "main") {
         hover = 'hover:text-pri-100'
         select = 'text-let '
+        noSelect=' '
 
     }
     if (type === "top") {
@@ -29,7 +30,7 @@ const NavItem: FunctionComponent<{ iten: NavbarIten, type: string }> = ({ iten: 
             <div className='md:block hidden'>
                 <Link href={to}>
                     <a>
-                        <div className={`flex justify-center mx-3   ${hover} ${pathname === to ? select : noSelect}     `}>
+                        <div className={`flex justify-center mx-3 font-semibold  ${hover} ${pathname === to ? select : noSelect}     `}>
                             <span className=' ' >{name}</span>
                         </div>
                     </a>

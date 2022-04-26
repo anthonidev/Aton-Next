@@ -7,18 +7,12 @@ import { RiSearchLine } from "react-icons/ri";
 
 const NavBartMain = () => {
     return (
-        <div className="sticky   m-auto top-0 z-10 flex-shrink-0 flex h-14  ">
+        <div className="sticky  hidden    m-auto top-0 z-10 flex-shrink-0 md:flex h-14  ">
 
-            <button
-                type="button"
-                className="px-4 border-gray-200 text-gray-500 focus:outline-none hover:text-white  md:hidden"
-            >
-                <GiHamburgerMenu className='h-8 w-8' />
-                <span className="sr-only">Open navbar</span>
-            </button>
 
-            <div className="  hidden   flex-1  md:flex items-center justify-around space-x-2 z-40 bg-white ">
-                <div className='flex  text-lg text-pri'>
+
+            <div className="  flex-1  md:flex items-center justify-evenly space-x-2 z-40 bg-white ">
+                <div className='flex  text-lg text-pri space-x-5 justify-center items-center'>
                     {
                         MainNav.map((iten, index) => (<NavItem key={index} iten={iten} type={"main"} />))
                     }
@@ -26,8 +20,8 @@ const NavBartMain = () => {
                 <form>
                     <div className='flex bg-white  items-center p-2 border border-plo-100'>
                         <label htmlFor=""></label>
-                        <input type="text" />
-                        <RiSearchLine className='h-4 w-4' />
+                        <input type="text" className='focus:outline-none text-gray-600' placeholder='Buscar' />
+                        <RiSearchLine className='h-4 w-4 text-let ' />
                     </div>
 
                 </form>

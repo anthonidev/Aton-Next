@@ -33,8 +33,6 @@ export const check_authenticated = () => async (dispatch: AppDispatch) => {
     }
 };
 
-
-
 export const load_user = () => async (dispatch: AppDispatch) => {
     if (getStoreLocal('access')) {
         const config = {
@@ -60,7 +58,6 @@ export const load_user = () => async (dispatch: AppDispatch) => {
         dispatch(fail_user());
     }
 }
-
 // /jwt/create/
 export const login = (email: string, password: string) => async (dispatch: AppDispatch) => {
     dispatch(on_loading());
@@ -101,7 +98,6 @@ export const login = (email: string, password: string) => async (dispatch: AppDi
     }
 }
 
-
 export const refresh = () => async (dispatch: AppDispatch) => {
     if (getStoreLocal('refresh')) {
         const config = {
@@ -133,7 +129,6 @@ export const refresh = () => async (dispatch: AppDispatch) => {
         dispatch(fail_clear());
     }
 }
-
 
 export const signup = (first_name: string, last_name: string, email: string, password: string, re_password: string) => async (dispatch: AppDispatch) => {
     dispatch(on_loading());
@@ -230,6 +225,7 @@ export const reset_password = (email: string) => async (dispatch: AppDispatch) =
 
     }
 }
+
 export const reset_password_confirm = (uid: (string | string[] | undefined), token: (string | string[] | undefined),new_password:string,re_new_password:string) => async (dispatch: AppDispatch) => {
     dispatch(on_loading());
     const body = JSON.stringify({

@@ -37,7 +37,7 @@ const Signup = () => {
         <Layout title='Registrarse | Auth' content="registrar usuario">
             <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Register</h2>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-pri">Registrate es gratis y lo seguira siendo</h2>
                 </div>
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -47,35 +47,35 @@ const Signup = () => {
                                 type='text'
                                 onChange={onChange}
                                 value={formData.first_name}
-                                placeholder="First Name"
+                                placeholder="Nombre"
                             />
                             <InputForm
                                 name={'last_name'}
                                 type='text'
                                 onChange={onChange}
                                 value={formData.last_name}
-                                placeholder="Last Name"
+                                placeholder="Apellido"
                             />
                             <InputForm
                                 name={'email'}
                                 type='text'
                                 onChange={onChange}
                                 value={formData.email}
-                                placeholder="Email"
+                                placeholder="Correo"
                             />
                             <InputForm
                                 name={'password'}
                                 type='password'
                                 onChange={onChange}
                                 value={formData.password}
-                                placeholder="Password"
+                                placeholder="Contraseña"
                             />
                             <InputForm
                                 name={'re_password'}
                                 type='password'
                                 onChange={onChange}
                                 value={formData.re_password}
-                                placeholder="Password Confirm"
+                                placeholder="Repetir Contraseña"
                             />
                             <Submit loading={loading} text="Register" />
                         </form>
