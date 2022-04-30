@@ -40,7 +40,6 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     setUserOpen(!userOpen)
   }
 
-  console.log(userOpen);
 
 
   return (

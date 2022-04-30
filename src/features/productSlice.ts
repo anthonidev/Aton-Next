@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ProductState, Characteristic, Product } from '../types/insterfaces/Product';
+import { ProductState, Characteristic, Product, Category } from '../types/insterfaces/Product';
 
 const initialState: ProductState = {
     products: null,
     product: null,
+    categories: null,
     previous: null,
     next: null,
     count: null,
@@ -27,6 +28,9 @@ export const productSlice = createSlice({
                 state.related = action.payload.related,
                 state.colors = action.payload.colors,
                 state.product = action.payload.product
+        },
+        categories_ok: (state, action: PayloadAction<Category[]>) => {
+            state.categories = action.payload
         }
 
     }
@@ -35,7 +39,8 @@ export const productSlice = createSlice({
 
 export const {
     products_home_ok,
-    product_ok
+    product_ok,
+    categories_ok
 } = productSlice.actions
 
 

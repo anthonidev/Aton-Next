@@ -17,6 +17,6 @@ export const NavbarItensIcons: NavbarIten[] = [
 export const MainNav: NavbarIten[] = [
     { name: 'Ofertas especiales', to: '/about', Icon: FaHeart },
     { name: 'Nuevos Productos', to: '/about', Icon: FaHeart },
-    { name: 'Tienda', to: '/xd', Icon: RiUser3Fill },
+    { name: 'Tienda', to: '/store', Icon: RiUser3Fill },
     { name: 'Categorias', to: '/skills', Icon: RiShoppingCartFill },
 ];

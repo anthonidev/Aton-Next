@@ -2,6 +2,7 @@
 export interface ProductState {
     products: Product[] | null
     product: Product | null
+    categories: Category[] | null
     previous: string | null
     next: string | null
     count: string | null
@@ -11,7 +12,15 @@ export interface ProductState {
     colors: Product[] | null
 }
 
-
+export interface Category {
+    id: number
+    title: string
+    photo: string
+    slug: string
+    description: string
+    total: number
+    sub_categories: Category[] | null
+}
 export interface Product {
     id: number
     title: string
