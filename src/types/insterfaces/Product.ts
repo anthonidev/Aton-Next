@@ -3,6 +3,7 @@ export interface ProductState {
     products: Product[] | null
     product: Product | null
     categories: Category[] | null
+    brands: Brand[] | null
     previous: string | null
     next: string | null
     count: string | null
@@ -11,7 +12,12 @@ export interface ProductState {
     related: Product[] | null
     colors: Product[] | null
 }
-
+export interface resultProducts {
+    count: string,
+    next: string,
+    previous: string,
+    results: Product[]
+}
 export interface Category {
     id: number
     title: string
@@ -20,6 +26,12 @@ export interface Category {
     description: string
     total: number
     sub_categories: Category[] | null
+}
+export interface Brand {
+    id: number
+    title: string
+    is_featured: string
+    photo: string
 }
 export interface Product {
     id: number
