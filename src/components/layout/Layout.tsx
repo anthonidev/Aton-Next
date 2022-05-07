@@ -11,6 +11,7 @@ import NavBartOfert from "../navigation/navbar/NavBartOfert";
 import { motion } from 'framer-motion';
 import SidebarOpen from "../navigation/sidebar/sidebar";
 import SidebarUser from '../navigation/user/SidebarUser';
+import { get_items } from "../../hooks/cart";
 
 const Layout: React.FC<Props> = ({ title, content, children }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     dispatch(check_authenticated());
     dispatch(load_user());
     dispatch(refresh());
+    dispatch(get_items());
   }, [dispatch]);
 
   const [sidebarOpen, setSidebarOpen] = useState(false)

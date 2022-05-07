@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import Layout from '../components/layout/Layout'
-import { MdFilterList } from "react-icons/md";
+import { BeakerIcon } from '@heroicons/react/solid'
+
 import CategoryFather from '../components/form/CategoryFather';
 import { brandsAll, categoriesAll, get_pages_products, productsAll, productsHome } from '../hooks/product';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,7 +44,7 @@ const Store = () => {
             <div className="max-w-7xl container mx-auto px-6 pt-7  flex ">
                 <div className='lg:w-1/4 sm:w-1/3 bg-slate-200 rounded-md shadow-md p-5  hidden sm:block'>
                     <div className='text-lg flex space-x-3 text-pri items-center font-semibold'>
-                        <MdFilterList className='h-5 w-5' />
+                        <BeakerIcon className='h-5 w-5' />
                         <p>Categorias</p>
                     </div>
                     {
@@ -78,7 +79,7 @@ const Store = () => {
                                 <div className="flex justify-between">
                                     <button className={`${previous !== null ? navigationOn : navigationOff}  `} onClick={e => previousPage(previous)} >
                                         <div className="flex items-center -mx-1">
-                                            <MdFilterList className="w-6 h-6 mx-1" />
+                                            <BeakerIcon className="w-6 h-6 mx-1" />
                                             <span className="mx-1">
                                                 Anterior
                                             </span>
@@ -93,7 +94,7 @@ const Store = () => {
                                                 Siguiente
                                             </span>
 
-                                            <MdFilterList className="w-6 h-6 mx-1" />
+                                            <BeakerIcon className="w-6 h-6 mx-1" />
                                         </div>
                                     </button>
                                 </div>

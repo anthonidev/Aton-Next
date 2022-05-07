@@ -24,8 +24,11 @@ const Home: NextPage = () => {
         <div className="max-w-7xl container mx-auto px-6 mt-9   ">
           <div className='grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
             {
-              products?.map(product => (
-                <ProductCard product={product} />
+              products?.map((product) => (
+                <div key={product.id}>
+                  <ProductCard product={product} />
+
+                </div>
               ))
             }
           </div>

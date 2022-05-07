@@ -1,5 +1,5 @@
+import { BeakerIcon } from '@heroicons/react/solid';
 import React, { FunctionComponent, useState } from 'react'
-import { AiFillCaretDown } from "react-icons/ai";
 import { Category } from '../../types/insterfaces/Product';
 
 
@@ -26,7 +26,7 @@ const CategoryFat: FunctionComponent<{
                 <div className='text-pri flex justify-between items-center '>
                     <h2 className='font-medium text-lg'>{title}</h2>
                     <button onClick={Drop} className="focus:outline-none">
-                        <AiFillCaretDown className='w-5 h-5 ' />
+                        <BeakerIcon className='w-5 h-5 ' />
                     </button>
                 </div>
                 {
