@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 const NavItenRight: FunctionComponent<{ iten: NavbarIten }> = ({ iten: {
     name,
     to,
-    Icon
 } }) => {
     const { pathname } = useRouter()
     const noSelect = ' text-let-100  border-let '
@@ -21,7 +20,6 @@ const NavItenRight: FunctionComponent<{ iten: NavbarIten }> = ({ iten: {
                 <Link href={to}>
                     <a>
                         <div className={`flex justify-between mx-6  hover:text-white ${pathname === to ? select : noSelect}  `}>
-                            <Icon className='h-6 w-6 ' />
                         </div>
                     </a>
 

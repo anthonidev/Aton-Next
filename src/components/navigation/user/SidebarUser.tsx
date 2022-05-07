@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
-import { TiDelete } from 'react-icons/ti'
+import { BeakerIcon } from '@heroicons/react/solid'
+
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,7 +59,7 @@ const SidebarUser: FunctionComponent<{
                         className="ml-1 flex items-center justify-center  focus:outline-none "
                         onClick={closeUser}
                     >
-                        <TiDelete className="h-10 w-10 text-plo hover:text-pri " aria-hidden="true" />
+                        <BeakerIcon className="h-10 w-10 text-plo hover:text-pri " aria-hidden="true" />
                     </button>
                 </div>
             </div>

@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
 import { Product } from '../../types/insterfaces/Product'
-import { RiShoppingCartFill } from 'react-icons/ri'
-import { FaHeart } from 'react-icons/fa'
+import { BeakerIcon } from '@heroicons/react/solid'
 
 const ProductCard: FunctionComponent<{ product: Product }> = ({ product: {
   id,
@@ -20,7 +19,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product: {
         <div className='bg-ver p-2 text-xs' >
           <span className='text-white'>Disponible</span>
         </div>
-        <FaHeart className='h-4 w-4 mr-3  text-let' />
+        <BeakerIcon className='h-4 w-4 mr-3  text-let' />
 
       </div>
       <div className='m-4'>
@@ -46,7 +45,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product: {
 
         <div className=' flex justify-center items-end mb-2   w-1/5 '>
           <button className='bg-rou p-2 rounded-md'>
-            <RiShoppingCartFill className='h-6 w-6  text-white' />
+            <BeakerIcon className='h-6 w-6  text-white' />
           </button>
 
         </div>

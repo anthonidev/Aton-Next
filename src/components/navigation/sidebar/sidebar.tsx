@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
-import {TiDelete} from 'react-icons/ti'
 import { motion } from 'framer-motion';
+import { BeakerIcon } from '@heroicons/react/solid'
 
 
 const SidebarOpen: FunctionComponent<{
@@ -40,7 +40,7 @@ const SidebarOpen: FunctionComponent<{
                     onClick={closeModal}
                 >
                     <span className="sr-only">Close navbar</span>
-                    <TiDelete className="h-10 w-10 text-white " aria-hidden="true" />
+                    <BeakerIcon className="h-10 w-10 text-white " aria-hidden="true" />
                 </button>
             </div>
         </motion.div>

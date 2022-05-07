@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { NavbarItensIcons, NavbarItensMain } from '../../../helpers/data'
-import { GiHamburgerMenu } from "react-icons/gi";
+import { MenuIcon} from '@heroicons/react/solid'
 import NavItem from './NavItem';
 import NavItenRight from './NavItenRight';
 import NavBarItenIcom from './NavBarItenIcom';
@@ -14,7 +14,7 @@ const navbar: FunctionComponent<{ openModal: () => void, openUser: () => void }>
           onClick={openModal}
           className="px-4 border-gray-200  text-let-100 focus:outline-none hover:text-white  md:hidden"
         >
-          <GiHamburgerMenu className='h-8 w-8 ' />
+          <MenuIcon className='h-8 w-8 ' />
           <span className="sr-only">Open navbar</span>
         </button>
         <h1 className='text-let-100 text-center font-bold'>ATON</h1>

@@ -1,4 +1,4 @@
-import { IconType } from "react-icons";
+
 
 export type Props = {
     title: string,
@@ -8,5 +8,4 @@ export type Props = {
 export interface NavbarIten {
     name:string;
     to:string;
-    Icon: IconType;
 }
