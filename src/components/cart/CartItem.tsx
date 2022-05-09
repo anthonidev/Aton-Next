@@ -49,21 +49,22 @@ const CartItem: FunctionComponent<{
 
 
 
-        <div className="bg-white grid grid-cols-2 sm:grid-cols-3 py-3  md:grid-cols-4   border-b space-x-5 border-gray-100">
-            <div className='flex flex-col justify-center items-start'>
+        <div className="bg-white grid grid-cols-2 sm:grid-cols-3 py-1  md:grid-cols-4   border-b space-x-5 border-gray-100">
+            <div className='flex col-span-2 sm:col-span-1 justify-center items-center'>
 
                 <Image
-                    className="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48"
+                    className="object-center object-cover "
                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.product.photo}`}
                     alt={item.product.slug}
                     layout="intrinsic"
-                    height="150"
-                    width="150"
+                    height="100"
+                    width="100"
+
                 />
             </div>
             <div className='col-span-2  flex flex-col justify-center items-start '>
-                <h2 className='text-lg font-semibold'>{item.product.title}</h2>
-                <div className="my-3 flex text-sm text-gray-500 ">
+                <h2 className='text-base font-semibold'>{item.product.title}</h2>
+                <div className=" flex text-sm text-gray-500 ">
                     <p className="">Marca:</p>
                     <p className="ml-3 ">sony</p>
                 </div>
@@ -72,16 +73,17 @@ const CartItem: FunctionComponent<{
                     <span className="font-bold text-plo line-through ">S/{item.product.compare_price}</span>
                 </div>
             </div>
-            <div className='flex  col-span-2 md:col-span-1  justify-between items-center'>
+            <div className='flex  col-span-3 md:col-span-1  justify-between items-center'>
                 <form onSubmit={e => onSubmit(e)} className='w-16 flex justify-center items-center space-x-3'>
                     <span className='font-bold text-plo'>{item_count}</span>
                     <div className='flex flex-col space-y-3 '>
                         <button className='text-plo hover:text-pri'>
-                            <MinusCircleIcon className='h-6 w-6 ' />
-                        </button>
-                        <button className='text-plo hover:text-pri'>
                             <PlusCircleIcon className='h-6 w-6' />
                         </button>
+                        <button className='text-plo hover:text-pri'>
+                            <MinusCircleIcon className='h-6 w-6 ' />
+                        </button>
+
                     </div>
                 </form>
                 <div className="flex justify-end items-end ">

@@ -24,6 +24,16 @@ export interface CartState {
     amount: number | null
     total_items: number | null
 }
+export interface ShippingState {
+  shipping_options:shipping_option[]| null
+}
+
+export interface shipping_option{
+    id: number
+    name: number 
+    time_to_delivery: string
+    price: string
+}
 export interface itemCart {
     product: Product
     count: number

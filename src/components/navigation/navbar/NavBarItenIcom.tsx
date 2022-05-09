@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React, { FunctionComponent } from 'react'
-import { BeakerIcon } from '@heroicons/react/solid'
+import {  HeartIcon, ShoppingCartIcon, UserIcon } from '@heroicons/react/solid'
 const NavBarItenIcom: FunctionComponent<{ openUser: () => void }> = ({ openUser }) => {
 
 
@@ -9,26 +9,26 @@ const NavBarItenIcom: FunctionComponent<{ openUser: () => void }> = ({ openUser 
             <div className='w-full '>
                 <button onClick={openUser} >
                     <div className={`flex justify-between mx-6  hover:text-white   `}>
-                        <BeakerIcon className='h-6 w-6 ' />
+                        <HeartIcon className='h-6 w-6 ' />
                     </div>
 
                 </button>
             </div>
             <div className='w-full '>
-                <Link href={"/"}>
+                <Link href={"/cart"}>
                     <a>
                         <div className={`flex justify-between mx-6  hover:text-white   `}>
-                            <BeakerIcon className='h-6 w-6 ' />
+                            <ShoppingCartIcon className='h-6 w-6 ' />
                         </div>
                     </a>
 
                 </Link>
             </div>
            
-            <div className='w-full '>
+            <div className='w-full'>
                 <button onClick={openUser} >
                     <div className={`flex justify-between mx-6  hover:text-white   `}>
-                        <BeakerIcon className='h-6 w-6 ' />
+                        <UserIcon className='h-6 w-6 ' />
                     </div>
 
                 </button>
