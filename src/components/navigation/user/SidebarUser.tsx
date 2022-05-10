@@ -5,8 +5,8 @@ import { BeakerIcon } from '@heroicons/react/solid'
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../app/store';
-import { logout } from '../../../hooks/auth';
+import { RootState } from '../../../redux/store';
+import { logout } from '../../../redux/api/auth';
 
 
 const SidebarUser: FunctionComponent<{

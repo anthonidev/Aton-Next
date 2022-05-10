@@ -1,12 +1,11 @@
 import Image from 'next/image'
 import React, { FunctionComponent, useState } from 'react'
-import { Product } from '../../types/insterfaces/Product'
 import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../../app/store'
-import { add_item } from '../../hooks/cart'
-import { setAlert } from '../../hooks/alert'
-import { itemCart } from '../../types/interface'
+import { AppDispatch, RootState } from '../../redux/store'
+import { itemCart, Product } from '../../utils/types/interface'
+import { add_item } from '../../redux/api/cart'
+import { setAlert } from '../../redux/api/alert'
 
 const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   const [loading, setLoading] = useState(false);

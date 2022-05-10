@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../../../app/store'
+import { AppDispatch, RootState } from '../../../redux/store'
 import Layout from '../../../components/layout/Layout';
-import { activate } from '../../../hooks/auth';
+import { activate } from '../../../redux/api/auth';
 
 const token = () => {
     const [activated, setActivated] = useState(false);

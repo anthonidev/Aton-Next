@@ -1,6 +1,5 @@
 import React from 'react'
-import { NavbarItensIcons, NavbarItensMain } from '../../../helpers/data'
-import { GiHamburgerMenu } from "react-icons/gi";
+import { NavbarItensIcons, NavbarItensMain } from '../../../utils/helpers/data'
 import NavItem from './NavItem';
 import NavItenRight from './NavItenRight';
 

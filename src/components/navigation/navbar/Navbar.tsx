@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { NavbarItensIcons, NavbarItensMain } from '../../../helpers/data'
+import { NavbarItensIcons, NavbarItensMain } from '../../../utils/helpers/data'
 import { MenuIcon} from '@heroicons/react/solid'
 import NavItem from './NavItem';
 import NavItenRight from './NavItenRight';

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { CartState, ShippingState, shipping_option } from "../types/interface";
+import { ShippingState, shipping_option } from "../../utils/types/interface";
 
 const initialState: ShippingState = {
     shipping_options:null

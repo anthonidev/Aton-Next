@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { FunctionComponent } from 'react'
-import { NavbarIten } from '../../../types/types'
 import { motion } from 'framer-motion';
+import { NavbarIten } from '../../../utils/types/interface';
 
 const NavItenRight: FunctionComponent<{ iten: NavbarIten }> = ({ iten: {
     name,

@@ -3,55 +3,47 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../../app/store'
-import { setAlert } from '../../hooks/alert'
-import { update_item } from '../../hooks/cart'
-import { itemCart } from '../../types/interface'
+import { AppDispatch } from '../../redux/store'
+import { setAlert } from '../../redux/api/alert'
+import { itemCart } from '../../utils/types/interface'
+import { remove_item, update_item } from '../../redux/api/cart'
+import { get_total_order } from '../../redux/api/order'
 
 const CartItem: FunctionComponent<{
     item: itemCart
 }> = ({ item }) => {
     const dispatch: AppDispatch = useDispatch();
-    const { pathname } = useRouter();
-
-    const [formData, setFormData] = useState({
-        item_count: item.count
-    });
-
-    const { item_count } = formData;
+    const [countItem, setCountItem] = useState<number>(item.count)
 
     useEffect(() => {
-        if (item.count)
-            setFormData({ ...formData, item_count: item.count });
-    }, [item.count]);
+        dispatch(update_item(item.product, countItem));
+    }, [countItem]);
 
-    const onChange = (e: React.FormEvent<HTMLSelectElement>): void => setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
-
-    const onSubmit = (e: React.SyntheticEvent) => {
-        e.preventDefault();
-
-        if (dispatch && dispatch !== null && dispatch !== undefined) {
-            try {
-                if (item.product.quantity >= item_count) {
-                    dispatch(update_item(item.product, item_count));
-                    dispatch(setAlert('Carrito actualizado', 'green'));
-                }
-                else {
-                    dispatch(setAlert('Not enough in stock', 'red'));
-                }
-            } catch (err) {
-
-            }
+    function minus() {
+        if (item.product.quantity >= countItem && countItem - 1 !== 0) {
+            setCountItem(countItem - 1)
+            dispatch(setAlert('Carrito actualizado', 'green'));
+        } else if (countItem - 1 === 0) {
+            dispatch(remove_item(item));
         }
+    }
+    function plus() {
+        if (item.product.quantity >= countItem && countItem + 1 < item.product.quantity) {
+            setCountItem(countItem + 1)
+            dispatch(setAlert('Carrito actualizado', 'green'));
+        } else {
+            dispatch(setAlert('Not enough in stock', 'red'));
+        }
+    }
+    const removeItemHandler = () => {
+        dispatch(remove_item(item));
+        dispatch(get_total_order())
 
     };
     return (
 
-
-
         <div className="bg-white grid grid-cols-2 sm:grid-cols-3 py-1  md:grid-cols-4   border-b space-x-5 border-gray-100">
             <div className='flex col-span-2 sm:col-span-1 justify-center items-center'>
-
                 <Image
                     className="object-center object-cover "
                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.product.photo}`}
@@ -74,27 +66,27 @@ const CartItem: FunctionComponent<{
                 </div>
             </div>
             <div className='flex  col-span-3 md:col-span-1  justify-between items-center'>
-                <form onSubmit={e => onSubmit(e)} className='w-16 flex justify-center items-center space-x-3'>
-                    <span className='font-bold text-plo'>{item_count}</span>
+                <div className='w-16 flex justify-center items-center space-x-3'>
+                    <span className='font-bold text-plo'>{countItem}</span>
                     <div className='flex flex-col space-y-3 '>
-                        <button className='text-plo hover:text-pri'>
+                        <button onClick={plus} className='text-plo hover:text-pri'>
                             <PlusCircleIcon className='h-6 w-6' />
                         </button>
-                        <button className='text-plo hover:text-pri'>
+                        <button onClick={minus} className='text-plo hover:text-pri'>
                             <MinusCircleIcon className='h-6 w-6 ' />
                         </button>
 
                     </div>
-                </form>
+                </div>
                 <div className="flex justify-end items-end ">
-                    <button className='text-plo hover:text-pri'>
+                    <button
+                        className='text-plo hover:text-pri'
+                        onClick={removeItemHandler}
+                    >
                         <XIcon className='h-6 w-6' />
                     </button>
                 </div>
-
-
             </div>
-
 
         </div>
     )

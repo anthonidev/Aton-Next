@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { AppDispatch } from '../app/store';
-import { get_shipping } from '../features/shippingSlice';
+import { get_shipping } from '../slice/shippingSlice';
+import { AppDispatch } from '../store';
 
 
 export const get_shipping_options = () => async (dispatch: AppDispatch) => {
@@ -9,7 +9,6 @@ export const get_shipping_options = () => async (dispatch: AppDispatch) => {
             'Accept': 'application/json',
         }
     };
-
     try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/shipping/get-shipping-options`, config);
         dispatch(get_shipping(res.data.shipping))

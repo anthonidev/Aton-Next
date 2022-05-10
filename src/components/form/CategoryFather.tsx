@@ -1,6 +1,6 @@
 import { BeakerIcon } from '@heroicons/react/solid';
 import React, { FunctionComponent, useState } from 'react'
-import { Category } from '../../types/insterfaces/Product';
+import { Category } from '../../utils/types/interface';
 
 
 const CategoryFat: FunctionComponent<{

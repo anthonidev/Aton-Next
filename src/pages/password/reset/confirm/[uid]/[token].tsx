@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../../app/store';
+import { RootState } from '../../../../../redux/store';
 import Submit from '../../../../../components/button/Submit';
 import InputForm from '../../../../../components/form/InputForm';
 import Layout from '../../../../../components/layout/Layout';
-import { reset_password_confirm } from '../../../../../hooks/auth';
-import { IFormResetPassConfirm } from '../../../../../types/interface';
+import { IFormResetPassConfirm } from '../../../../../utils/types/interface';
+import { reset_password_confirm } from '../../../../../redux/api/auth';
 
 const token = () => {
     const dispatch = useDispatch();

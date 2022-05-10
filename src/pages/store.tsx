@@ -3,11 +3,12 @@ import Layout from '../components/layout/Layout'
 import { BeakerIcon } from '@heroicons/react/solid'
 
 import CategoryFather from '../components/form/CategoryFather';
-import { brandsAll, categoriesAll, get_pages_products, productsAll, productsHome } from '../hooks/product';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../app/store';
+import { RootState } from '../redux/store';
 import ProductCard from '../components/product/ProductCard';
 import Brands from '../components/form/Brands';
+import { brandsAll, categoriesAll, get_pages_products, productsAll } from '../redux/api/product';
+import { Category, Product } from '../utils/types/interface';
 
 const Store = () => {
 
@@ -48,7 +49,7 @@ const Store = () => {
                         <p>Categorias</p>
                     </div>
                     {
-                        categories?.map((category) => (
+                        categories?.map((category:Category) => (
                             <div key={category.id}>
                                 <CategoryFather category={category} />
                                 <div className='border border-plo-200 my-5 '></div>
@@ -70,7 +71,7 @@ const Store = () => {
                     </div>
                     <div className='grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8'>
                         {
-                            products?.map(product => (
+                            products?.map((product:Product) => (
                                 <ProductCard product={product} key={product.id} />
                             ))
                         }

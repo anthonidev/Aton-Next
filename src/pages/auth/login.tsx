@@ -3,12 +3,12 @@ import Layout from '../../components/layout/Layout'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { RootState } from '../../app/store';
-import { IFormLogin } from '../../types/interface';
-import { login } from '../../hooks/auth';
+import { RootState } from '../../redux/store';
 import InputForm from '../../components/form/InputForm';
 import Submit from '../../components/button/Submit';
 import Link from 'next/link';
+import { IFormLogin } from '../../utils/types/interface';
+import { login } from '../../redux/api/auth';
 
 const Login = () => {
     const dispatch = useDispatch();

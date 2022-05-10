@@ -1,8 +1,6 @@
 import Head from "next/head"
-import { Props } from '../../types/types';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux";
-import { check_authenticated, load_user, refresh } from "../../hooks/auth";
 import Alert from "../notifications/Alert";
 import Navbar from "../navigation/navbar/Navbar";
 import NavBartMain from "../navigation/navbar/NavBarMain";
@@ -11,7 +9,10 @@ import NavBartOfert from "../navigation/navbar/NavBartOfert";
 import { motion } from 'framer-motion';
 import SidebarOpen from "../navigation/sidebar/sidebar";
 import SidebarUser from '../navigation/user/SidebarUser';
-import { get_items } from "../../hooks/cart";
+import { Props } from "../../utils/types/types";
+import { check_authenticated, load_user, refresh } from "../../redux/api/auth";
+import { get_items } from "../../redux/api/cart";
+import { get_total_order } from "../../redux/api/order";
 
 const Layout: React.FC<Props> = ({ title, content, children }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     dispatch(load_user());
     dispatch(refresh());
     dispatch(get_items());
+
   }, [dispatch]);
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -50,12 +52,12 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
         <title>{title}</title>
         <meta name='description' content={content} />
       </Head>
-      <main>
+      <main className=" min-h-screen bg-plo-100 ">
         <Navbar openModal={openModal} openUser={openUser} />
         <NavBartMain />
         <NavBartOfert />
 
-        <div className="bg-plo-100">
+        <div className="">
           {children}
         </div>
       </main>

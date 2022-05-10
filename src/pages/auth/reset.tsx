@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
+import { RootState } from '../../redux/store';
 import Submit from '../../components/button/Submit';
 import InputForm from '../../components/form/InputForm';
 import Layout from '../../components/layout/Layout'
-import { reset_password } from '../../hooks/auth';
-import { IFormResetPass } from '../../types/interface';
+import { IFormResetPass } from '../../utils/types/interface';
+import { reset_password } from '../../redux/api/auth';
 
 const reset = () => {
     const dispatch = useDispatch();

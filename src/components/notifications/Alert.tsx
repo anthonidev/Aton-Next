@@ -1,7 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../app/store';
+import { RootState } from '../../redux/store';
 
 const Alert = () => {
     const alert = useSelector((state: RootState) => state.alert);

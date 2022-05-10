@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react'
 import { useRouter } from 'next/router';
-import { IFormSignUp } from '../../types/interface';
 import InputForm from '../../components/form/InputForm';
-import { AppDispatch, RootState } from '../../app/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import Submit from '../../components/button/Submit';
-import { signup } from '../../hooks/auth';
+import { IFormSignUp } from '../../utils/types/interface';
+import { signup } from '../../redux/api/auth';
 
 const Signup = () => {
     const loading = useSelector((state: RootState) => state.auth.loading);

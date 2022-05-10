@@ -1,7 +1,8 @@
 import { BeakerIcon } from '@heroicons/react/solid';
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
+import { RootState } from '../../redux/store';
+import { Brand } from '../../utils/types/interface';
 
 
 const Brands = () => {
@@ -21,7 +22,7 @@ const Brands = () => {
                 </button>
             </div>
             {
-                view && brands?.map(brand => (
+                view && brands?.map((brand:Brand) => (
                     <div className='flex ml-4 mt-2 items-center' key={brand.id}>
                         <input
                             type="checkbox"

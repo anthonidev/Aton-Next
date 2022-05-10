@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainNav, } from '../../../helpers/data'
+import { MainNav, } from '../../../utils/helpers/data'
 import NavItem from './NavItem';
 import { BeakerIcon } from '@heroicons/react/solid'
 
