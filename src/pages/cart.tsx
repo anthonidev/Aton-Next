@@ -71,14 +71,14 @@ const Cart = () => {
                             <div className=' w-full md:w-3/5 '>
                                 <h1 className='font-semibold text-lg my-4'>Orden <span className="text-plo"> ({items?.length})</span></h1>
                                 <div className='h-80 overflow-y-auto'>
-                                {
-                                    items?.map((item: itemCart) => (
-                                        <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded-lg ">
-                                            <CartItem item={item} />
-                                        </div>
-                                    ))
-                                }
-</div>
+                                    {
+                                        items?.map((item: itemCart) => (
+                                            <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded-lg ">
+                                                <CartItem item={item} />
+                                            </div>
+                                        ))
+                                    }
+                                </div>
                             </div>
                             <div className=' my-4 w-full md:w-2/5  '>
                                 <h1 className='font-semibold text-lg my-4'>Servicio de entrega</h1>
@@ -111,7 +111,7 @@ const Cart = () => {
                                         {authenticated && !renderForm &&
                                             (<button onClick={verify} className=' hover:bg-indigo-500 bg-indigo-400 px-5 py-4 w-full mt-5 rounded-md font-semibold text-gray-800 text-lg' >Procesar Pedido</button>)
                                         }
-                                        {!authenticated && 
+                                        {!authenticated &&
                                             (<div className='hover:bg-indigo-500 text-center bg-indigo-400 px-5 py-4 w-full mt-5 rounded-md font-semibold text-gray-800 text-lg'> <Link href={'/auth/login'}  ><a  >Iniciar Sesion</a></Link></div>)
                                         }
                                     </div>
@@ -132,8 +132,8 @@ const Cart = () => {
                                         district={formData.district}
                                     />
                                     <div className="w-full">
-                                    <button onClick={verify} className=' hover:bg-indigo-500 bg-indigo-400 px-5 py-4 w-full mt-5 rounded-md font-semibold text-gray-800 text-lg' >Procesar Pedido</button>
-                                        
+                                        <button onClick={verify} className=' hover:bg-indigo-500 bg-indigo-400 px-5 py-4 w-full mt-5 rounded-md font-semibold text-gray-800 text-lg' >Procesar Pedido</button>
+
                                     </div>
                                 </div>
 

@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '../../redux/store'
 import { itemCart, Product } from '../../utils/types/interface'
 import { add_item } from '../../redux/api/cart'
 import { setAlert } from '../../redux/api/alert'
+import Link from 'next/link'
 
 const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   const [loading, setLoading] = useState(false);
@@ -34,15 +35,20 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
         <HeartIcon className='h-4 w-4 mr-3  text-let' />
 
       </div>
-      <div className='m-4'>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo}`}
-          layout="responsive"
-          height="200"
-          width="200"
-          alt={product.slug}
-        />
-      </div>
+      <Link href={{
+        pathname: '/product/[slug]',
+        query: { slug: product.slug },
+      }}>
+        <a className='m-4'>
+          <Image
+            src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo}`}
+            layout="responsive"
+            height="200"
+            width="200"
+            alt={product.slug}
+          />
+        </a>
+      </Link>
       <div className='flex'>
         <div className='font-bold ml-4 w-4/5 '>
           <h1 className='text-pri '>{product.title}</h1>
@@ -56,7 +62,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
         </div>
 
         <div className=' flex justify-center items-end mb-2   w-1/5 '>
-        {loading ? <button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-indigo-400 dark:text-coolGray-900 hover:bg-indigo-600">Añadir al carrito</button> :
+          {loading ? <button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-indigo-400 dark:text-coolGray-900 hover:bg-indigo-600">Añadir al carrito</button> :
             <button onClick={addToCart} className='bg-rou p-2 rounded-md hover:bg-pri'>
               <ShoppingCartIcon className='h-6 w-6  text-white' />
             </button>

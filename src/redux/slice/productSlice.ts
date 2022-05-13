@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ProductState,  Product, Category, Brand, resultProducts } from '../../utils/types/interface';
+import { ProductState, Product, Category, Brand, resultProducts } from '../../utils/types/interface';
 
 const initialState: ProductState = {
     products: null,
@@ -20,23 +20,23 @@ export const productSlice = createSlice({
     initialState,
     reducers: {
 
-        products_home_ok: (state, action: PayloadAction<Product[]>) => {
+        products_home_ok: (state: ProductState, action: PayloadAction<Product[]>) => {
             state.products = action.payload
         },
-        product_ok: (state, action: PayloadAction<ProductState>) => {
+        product_ok: (state: ProductState, action: PayloadAction<ProductState>) => {
             state.characteristic = action.payload.characteristic,
                 state.images = action.payload.images,
                 state.related = action.payload.related,
                 state.colors = action.payload.colors,
                 state.product = action.payload.product
         },
-        categories_ok: (state, action: PayloadAction<Category[]>) => {
+        categories_ok: (state: ProductState, action: PayloadAction<Category[]>) => {
             state.categories = action.payload
         },
-        brands_ok: (state, action: PayloadAction<Brand[]>) => {
+        brands_ok: (state: ProductState, action: PayloadAction<Brand[]>) => {
             state.brands = action.payload
         },
-        products_ok: (state, action: PayloadAction<resultProducts>) => {
+        products_ok: (state: ProductState, action: PayloadAction<resultProducts>) => {
             state.count = action.payload.count
             state.next = action.payload.next
             state.previous = action.payload.previous

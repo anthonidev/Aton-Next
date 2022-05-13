@@ -102,6 +102,8 @@ export interface Brand {
     title: string
     is_featured: string
     photo: string
+    total: number
+
 }
 export interface Product {
     id: number
@@ -139,4 +141,13 @@ export interface IFormCheckout {
     phone: string;
     coupon_code:string,
     shipping_id:number,
+}
+
+
+export interface FormFilter {
+    brandsform: number[];
+    categoriesform: number[];
+    order: string;
+    sort_by: string;
+    price_range: string;
 }
