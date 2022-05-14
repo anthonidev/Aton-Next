@@ -113,6 +113,8 @@ export interface Product {
     quantity: number
     slug: string
     photo: string
+    get_category:string
+    get_brand:string
 }
 
 export interface Image {
