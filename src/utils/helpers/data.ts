@@ -1,4 +1,4 @@
-import { NavbarIten } from "../types/types";
+import { NavbarIten } from "../types/interface";
 
 export const NavbarItensMain: NavbarIten[] = [
     { name: 'Nosotros', to: '/about'},
@@ -11,8 +11,9 @@ export const NavbarItensIcons: NavbarIten[] = [
     { name: 'usuario', to: '/auth/login'},
 ];
 export const MainNav: NavbarIten[] = [
+    { name: 'Tienda', to: '/store'  },
+
     { name: 'Ofertas especiales', to: '/about'},
     { name: 'Nuevos Productos', to: '/about' },
-    { name: 'Tienda', to: '/store'  },
     { name: 'Categorias', to: '/skills' },
 ];

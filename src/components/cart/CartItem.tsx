@@ -8,6 +8,7 @@ import { setAlert } from '../../redux/api/alert'
 import { itemCart } from '../../utils/types/interface'
 import { remove_item, update_item } from '../../redux/api/cart'
 import { get_total_order } from '../../redux/api/order'
+import { formatterSoles } from '../../utils/helpers/prices'
 
 const CartItem: FunctionComponent<{
     item: itemCart
@@ -61,8 +62,8 @@ const CartItem: FunctionComponent<{
                     <p className="ml-3 ">sony</p>
                 </div>
                 <div className="flex  justify-center items-center space-x-3 ">
-                    <span className="font-bold text-rou">S/{item.product.price}</span>
-                    <span className="font-bold text-plo line-through ">S/{item.product.compare_price}</span>
+                    <span className="font-bold text-rou">{formatterSoles.format(item.product?.price)}</span>
+                    <span className="font-semibold text-plo line-through ">{formatterSoles.format(item.product?.compare_price)}</span>
                 </div>
             </div>
             <div className='flex  col-span-3 md:col-span-1  justify-between items-center'>

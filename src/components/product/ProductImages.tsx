@@ -18,7 +18,7 @@ const ProductImages: FunctionComponent<{
 
     return (
         <div className="bg-white p-5 flex  space-x-2 ">
-             {images && images !== null && images !== undefined &&
+            {images && images !== null && images !== undefined &&
                 (<div className={`m-3 w-3/12 ${images.length === 0 ? " hidden" : " grid grid-rows-3 gap-3 "}`}>
 
                     <button onClick={(e) => ChangePhoto(main)} className={`border p-2 rounded-md shadow ${viewPhoto === main ? " border-plo" : ""}`}>
@@ -54,18 +54,21 @@ const ProductImages: FunctionComponent<{
                 </div>)
             }
             <div className="w-11/12 my-auto">
-                <Image
-                    alt={title}
-                    className="object-cover object-center rounded "
-                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${viewPhoto}`}
-                    layout="responsive"
-                    height="300"
-                    width="300"
-                />
+                {viewPhoto && (
+                    <Image
+                        alt={title}
+                        className="object-cover object-center rounded "
+                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${viewPhoto}`}
+                        layout="responsive"
+                        height="300"
+                        width="300"
+                    />
+                )}
+
             </div>
 
 
-           
+
         </div>
     )
 }

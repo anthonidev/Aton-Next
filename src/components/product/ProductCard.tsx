@@ -7,6 +7,7 @@ import { itemCart, Product } from '../../utils/types/interface'
 import { add_item } from '../../redux/api/cart'
 import { setAlert } from '../../redux/api/alert'
 import Link from 'next/link'
+import { formatterSoles } from '../../utils/helpers/prices'
 
 const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   const [loading, setLoading] = useState(false);
@@ -23,8 +24,6 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
 
     dispatch(add_item(product));
     setLoading(false)
-
-
   }
   return (
     <div className='bg-white  rounded-sm pb-3'>
@@ -53,8 +52,8 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
         <div className='font-bold ml-4 w-4/5 '>
           <h1 className='text-pri '>{product.title}</h1>
           <div className='flex space-x-2 mt-2'>
-            <p className='text-let'>S/{product.compare_price}</p>
-            <p className='text-rou'>S/{product.price}</p>
+            <p className='text-let line-through font-semibold'>{formatterSoles.format(product?.compare_price)}</p>
+            <p className='text-rou'>{formatterSoles.format(product?.price)}</p>
 
           </div>
 

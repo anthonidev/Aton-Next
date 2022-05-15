@@ -1,7 +1,7 @@
 import React from 'react'
 import { MainNav, } from '../../../utils/helpers/data'
 import NavItem from './NavItem';
-import { BeakerIcon } from '@heroicons/react/solid'
+import {SearchIcon } from '@heroicons/react/solid'
 
 
 const NavBartMain = () => {
@@ -20,12 +20,10 @@ const NavBartMain = () => {
                     <div className='flex bg-white  items-center p-2 border border-plo-100'>
                         <label htmlFor=""></label>
                         <input type="text" className='focus:outline-none text-gray-600' placeholder='Buscar' />
-                        <BeakerIcon className='h-4 w-4 text-let ' />
+                        <SearchIcon className='h-4 w-4 text-let ' />
                     </div>
 
                 </form>
-
-
 
 
             </div>

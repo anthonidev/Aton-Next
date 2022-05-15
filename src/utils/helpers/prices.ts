@@ -24,3 +24,5 @@ export const prices = [
         name: 'Más de 120'
     }
 ]
+
+export const formatterSoles = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' });
