@@ -1,7 +1,8 @@
-import { ArrowSmRightIcon, CheckIcon,  MinusIcon,  PlusIcon } from '@heroicons/react/solid'
+import { ArrowSmRightIcon, CheckIcon, MinusIcon, PlusIcon, XIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import ModalCard from '../../components/cart/ModalCard'
 import Layout from '../../components/layout/Layout'
 import ProductCard from '../../components/product/ProductCard'
 import ProductImages from '../../components/product/ProductImages'
@@ -39,24 +40,32 @@ const Product = () => {
         setIsOpen(true)
     }
 
-    const addToCart = async () => {
 
+
+
+    const addToCart = async () => {
         setLoading(true)
         const MoreThatOne = items !== null && items.find((element: itemCart) => element.product.id === product.id);
-    
-        MoreThatOne === undefined ? dispatch(setAlert('Producto Agregado', 'green')) : dispatch(setAlert('Producto actualizado', 'green'))
-    
+
+        if (MoreThatOne === undefined) openModal()
+
+        if (MoreThatOne !== false && MoreThatOne !== undefined) {
+            if (product.quantity !== 1) MoreThatOne.count - product.quantity === 0 ? dispatch(setAlert('No hay stock', 'yellow')) : dispatch(setAlert('Producto actualizado', 'green'))
+            else MoreThatOne.count - product.quantity !== 0 ? dispatch(setAlert('Producto actualizado', 'green')) : dispatch(setAlert('No hay stock', 'red'))
+        }
+
         dispatch(add_item(product));
         setLoading(false)
-
-
-
     }
 
     return (
         <Layout title="Producto | Aton" content='slug'>
             <div className="max-w-7xl  container mx-auto px-6 pt-7  ">
-                <div className=" flex-row md:flex">
+                {
+                    isOpen && total_items !== null && amount !== null && <ModalCard product={product} total_items={total_items} amount={amount} closeModal={closeModal} />
+                }
+
+                <section className=" flex-row md:flex">
                     <div className="w-full md:w-1/2 bg-white  mt-3">
                         <ProductImages main={product?.photo} title={product?.title} images={images} />
                     </div>
@@ -89,19 +98,7 @@ const Product = () => {
 
                                 <span className="text-xl font-bold text-rou">{formatterSoles.format(product?.price)}</span>
                             </div>
-                            <div className='flex  justify-start space-x-3'>
-                                <button className='text-plo  bg-white hover:bg-gray-600 hover:text-white rounded-md p-2 border border-plo'>
 
-                                    <MinusIcon className='h-4 w-4 ' />
-
-                                </button>
-                                <span className='text-lg'>2</span>
-                                <button className='text-plo  bg-white hover:bg-gray-600 hover:text-white rounded-md p-2 border border-plo'>
-                                    <PlusIcon className='h-4 w-4' />
-                                </button>
-
-
-                            </div>
 
                             <div className='flex  justify-start space-x-3 my-3'>
                                 <button onClick={addToCart} className='text-pri  bg-white hover:bg-pri-100 hover:text-white rounded-sm p-2 border-2 border-pri'>
@@ -113,9 +110,9 @@ const Product = () => {
 
 
                     </div>
-                </div>
-                <div className="w-full">
-                    <div className='flex items-center text-lg font-semibold  text-gray-500 my-5'> 
+                </section>
+                <section className="w-full">
+                    <div className='flex items-center text-lg font-semibold  text-gray-500 my-5'>
                         <ArrowSmRightIcon className='h-5 w-5' />
                         <h1 className=''>Productos Relacionados</h1>
                     </div>
@@ -127,7 +124,7 @@ const Product = () => {
                         }
 
                     </div>
-                </div>
+                </section>
 
             </div>
 

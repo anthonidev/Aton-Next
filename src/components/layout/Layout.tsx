@@ -47,6 +47,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
 
 
   return (
+    
     <>
       <Head>
         <title>{title}</title>

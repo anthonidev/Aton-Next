@@ -66,78 +66,34 @@ const Cart = () => {
         <Layout title='Home' content='home content' >
             {
                 items?.length ?
-                    (<div className={`max-w-7xl mx-auto px-2`}>
-                        <div className='flex flex-col md:flex-row'>
-                            <div className=' w-full md:w-3/5 '>
-                                <h1 className='font-semibold text-lg my-4'>Orden <span className="text-plo"> ({items?.length})</span></h1>
-                                <div className='h-80 overflow-y-auto'>
-                                    {
-                                        items?.map((item: itemCart) => (
-                                            <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded-lg ">
-                                                <CartItem item={item} />
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
-                            <div className=' my-4 w-full md:w-2/5  '>
-                                <h1 className='font-semibold text-lg my-4'>Servicio de entrega</h1>
-                                <div className="grid grid-cols-1  gap-x-2 sm:gap-x-2 md:gap-x-5 lg:gap-x-9 gap-y-4">
-                                    {
-                                        shipping_options?.map((item: shipping_option) => (
-                                            <div className="flex justify-center" key={item.id} >
-                                                <ShippingOption item={item} onChange={onChange} shipping_id={formData.shipping_id} />
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
+                    (<div className={`max-w-7xl mx-auto px-2 flex`}>
+                        <div className=' w-full md:w-3/5 '>
+                            <h1 className='font-semibold text-lg my-4'>Orden <span className="text-plo"> ({items?.length})</span></h1>
+                            {
+                                items?.map((item: itemCart) => (
+                                    <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded-lg ">
+                                        <CartItem item={item} />
+                                    </div>
+                                ))
+                            }
                         </div>
 
-                        <div className='flex flex-col md:flex-row md:space-x-7'>
-                            <div className='w-full md:w-1/2'>
-                                <h1 className='font-semibold text-lg my-4'>Suma de la orden</h1>
-                                <div className='bg-white rounded-lg  shadow px-4 py-3'>
-                                    <h1 className='font-semibold text-lg my-4'>Coupon</h1>
 
-                                    <div className='my-4 flex justify-between'>
-                                        <input type="text" className="border rounded-md p-1 w-1/2" placeholder='COUPON CODE' />
-                                        <button className=" bg-blue-300 px-4 py-1 text-pri font-semibold rounded-md">Aplicar</button>
-                                    </div>
+                        <div className='w-full md:w-2/5'>
+                            <h1 className='font-semibold text-lg my-4'>Suma de la orden</h1>
+                            <div className='bg-white rounded-lg  shadow px-4 py-3 '>
 
-                                    <OrdenSumary />
+                                <OrdenSumary />
 
-                                    <div className="w-full">
-                                        {authenticated && !renderForm &&
-                                            (<button onClick={verify} className=' hover:bg-indigo-500 bg-indigo-400 px-5 py-4 w-full mt-5 rounded-md font-semibold text-gray-800 text-lg' >Procesar Pedido</button>)
-                                        }
-                                        {!authenticated &&
-                                            (<div className='hover:bg-indigo-500 text-center bg-indigo-400 px-5 py-4 w-full mt-5 rounded-md font-semibold text-gray-800 text-lg'> <Link href={'/auth/login'}  ><a  >Iniciar Sesion</a></Link></div>)
-                                        }
-                                    </div>
-                                </div>
+                                {authenticated && !renderForm &&
+                                    (<Link href={'/checkout'}  ><a className='mt-3 hover:bg-indigo-500 bg-indigo-400 px-5 py-4 flex   rounded-md font-semibold text-gray-800 text-lg' >Procesar Pedido</a></Link>)
+                                }
+                                {!authenticated &&
+                                    (<Link href={'/auth/login'}  ><a className='mt-3 hover:bg-indigo-500 text-center bg-indigo-400 flex   px-5 py-4 w-full rounded-md font-semibold text-gray-800 text-lg' >Iniciar Sesion</a></Link>)
+                                }
                             </div>
 
-                            {renderForm && (
-                                <div className='w-full md:w-1/2'>
 
-                                    <FormDataCheckout
-                                        onChange={onChange}
-                                        full_name={formData.full_name}
-                                        address_line_1={formData.address_line_1}
-                                        address_line_2={formData.address_line_2}
-                                        zipcode={formData.zipcode}
-                                        phone={formData.phone}
-                                        city={formData.city}
-                                        district={formData.district}
-                                    />
-                                    <div className="w-full">
-                                        <button onClick={verify} className=' hover:bg-indigo-500 bg-indigo-400 px-5 py-4 w-full mt-5 rounded-md font-semibold text-gray-800 text-lg' >Procesar Pedido</button>
-
-                                    </div>
-                                </div>
-
-                            )}
 
                         </div>
 

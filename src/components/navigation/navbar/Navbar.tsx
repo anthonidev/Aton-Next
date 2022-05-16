@@ -33,9 +33,7 @@ const navbar: FunctionComponent<{ openModal: () => void, openUser: () => void }>
             NavbarItensMain.map((iten, index) => (<NavItem key={index} iten={iten} type={"top"} />))
           }
         </div>
-        <div className='flex'>
-          <h1 className='text-plo text-2xl'>ATON</h1>
-        </div>
+       
         <div className='flex text-plo'>
           <NavBarItenIcom openUser={openUser}/>
         </div>
