@@ -12,13 +12,13 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
        
-        get_item_ok: (state, action: PayloadAction<CartState>) => {
+        get_item_ok: (state:CartState, action: PayloadAction<CartState>) => {
             localStorage.setItem('cart', JSON.stringify(action.payload));
             state.items = action.payload.items
             state.amount = action.payload.amount
             state.total_items = action.payload.total_items
         },
-        remove: (state) => {
+        remove: (state:CartState) => {
             
             state.items = null
             state.amount =  null

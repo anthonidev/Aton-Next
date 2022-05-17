@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 
 const OrdenSumary = () => {
-    const estimated_tax = useSelector((state: RootState) => state.order.estimated_tax)
     const original_price = useSelector((state: RootState) => state.order.original_price)
     const shipping_cost = useSelector((state: RootState) => state.order.shipping_cost)
     const total_after_coupon = useSelector((state: RootState) => state.order.total_after_coupon)
@@ -15,15 +14,14 @@ const OrdenSumary = () => {
             <span className='flex justify-end'>S/{original_price}</span>
             <span>Delivery</span>
             <span className='flex justify-end text-pri font-semibold'>S/{shipping_cost}</span>
-            <span >IGV</span>
-            <span className='flex justify-end font-bold'>S/{estimated_tax}</span>
+           
             {total_after_coupon > 0 && (
                 <div className='col-span-2 flex justify-between'>
                     <span >Total antes del coupon</span>
                     <span className='font-bold'>S/{total_after_coupon}</span>
                 </div>
             )}
-            <span >Suma de la orden</span>
+            <span >Total de la orden</span>
             <span className='flex justify-end font-bold'>S/{total_amount}</span>
         </div>
     )

@@ -31,10 +31,10 @@ const FormDataCheckout: FunctionComponent<{
              
                 <h2 className='font-semibold text-lg my-4'>Datos de envio</h2>
 
-                <dl className=" bg-white rounded-lg p-2">
+                <dl className=" bg-white rounded-lg p-1">
 
                     <div className="leading-loose">
-                        <div className="max-w-xl m-4 ">
+                        <div className="max-w-xl m-1 ">
                             <div className="">
                                 <label className="block text-sm text-gray-600" htmlFor="full_name">Nombre completo</label>
                                 <input

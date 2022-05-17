@@ -1,6 +1,6 @@
 export interface NavbarIten {
-    name:string
-    to:string
+    name: string
+    to: string
 }
 import { Product } from "./insterfaces/Product";
 
@@ -9,18 +9,18 @@ export interface IFormLogin {
     password: string
 }
 export interface IFormSignUp {
-    first_name:string
-    last_name:string
-    email:string
-    password:string
-    re_password:string
+    first_name: string
+    last_name: string
+    email: string
+    password: string
+    re_password: string
 }
-export interface IFormResetPass{
-    email:string
+export interface IFormResetPass {
+    email: string
 }
-export interface IFormResetPassConfirm{
-    password:string
-    re_password:string
+export interface IFormResetPassConfirm {
+    password: string
+    re_password: string
 }
 
 export interface CartState {
@@ -29,12 +29,12 @@ export interface CartState {
     total_items: number | null
 }
 export interface ShippingState {
-  shipping_options:shipping_option[]| null
+    shipping_options: shipping_option[] | null
 }
 
-export interface shipping_option{
+export interface shipping_option {
     id: number
-    name: number 
+    name: number
     time_to_delivery: string
     price: string
 }
@@ -54,7 +54,7 @@ export interface AuthState {
     access: (string | null)
     refresh: (string | null)
     isAuthenticated: boolean
-    user: (User|null)
+    user: (User | null)
     loading: boolean
 
 }
@@ -113,8 +113,8 @@ export interface Product {
     quantity: number
     slug: string
     photo: string
-    get_category:string
-    get_brand:string
+    get_category: string
+    get_brand: string
 }
 
 export interface Image {
@@ -130,7 +130,14 @@ export interface OrderState {
     total_after_coupon: number
     total_amount: number
     estimated_tax: number
-    shipping_cost:number
+    shipping_cost: number
+    coupon: Coupon | null
+}
+
+export interface Coupon {
+    code: string,
+    value: string,
+    can_use: boolean
 }
 
 export interface IFormCheckout {
@@ -141,8 +148,8 @@ export interface IFormCheckout {
     district: string;
     zipcode: string;
     phone: string;
-    coupon_code:string,
-    shipping_id:number,
+    coupon_code: string,
+    shipping_id: number,
 }
 
 

@@ -13,6 +13,7 @@ import { Props } from "../../utils/types/types";
 import { check_authenticated, load_user, refresh } from "../../redux/api/auth";
 import { get_items } from "../../redux/api/cart";
 import { get_total_order } from "../../redux/api/order";
+import { Footer } from "../navigation/footer/Footer";
 
 const Layout: React.FC<Props> = ({ title, content, children }) => {
   const dispatch = useDispatch();
@@ -53,12 +54,12 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
         <title>{title}</title>
         <meta name='description' content={content} />
       </Head>
-      <main className=" min-h-screen bg-plo-100 ">
+      <main className="  bg-plo-100 ">
         <Navbar openModal={openModal} openUser={openUser} />
         <NavBartMain />
         <NavBartOfert />
 
-        <div className="">
+        <div className="pb-6">
           {children}
         </div>
       </main>
@@ -69,6 +70,8 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
         userOpen ? (<motion.div ><SidebarUser closeUser={closeUser} /></motion.div>) : (<></>)
       }
       <Alert />
+      <Footer />
+
 
     </>
   )

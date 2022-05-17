@@ -63,11 +63,11 @@ const Cart = () => {
     }
 
     return (
-        <Layout title='Home' content='home content' >
+        <Layout title='Aton | Cart' content='home content' >
             {
                 items?.length ?
-                    (<div className={`max-w-7xl mx-auto px-2 flex`}>
-                        <div className=' w-full md:w-3/5 '>
+                    (<div className={`max-w-7xl mx-auto px-2 flex md:space-x-5`}>
+                        <div className=' w-full md:w-4/6 '>
                             <h1 className='font-semibold text-lg my-4'>Orden <span className="text-plo"> ({items?.length})</span></h1>
                             {
                                 items?.map((item: itemCart) => (
@@ -79,7 +79,7 @@ const Cart = () => {
                         </div>
 
 
-                        <div className='w-full md:w-2/5'>
+                        <div className='w-full md:w-2/6'>
                             <h1 className='font-semibold text-lg my-4'>Suma de la orden</h1>
                             <div className='bg-white rounded-lg  shadow px-4 py-3 '>
 
