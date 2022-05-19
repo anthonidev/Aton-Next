@@ -12,7 +12,7 @@ const NavItem: FunctionComponent<{ iten: NavbarIten, type: string }> = ({ iten: 
     const { pathname } = useRouter()
 
     if (type === "main") {
-        hover = 'hover:text-indigo-700'
+        hover = 'hover:text-rou'
         select = 'text-rou '
         noSelect=' '
 
@@ -29,7 +29,7 @@ const NavItem: FunctionComponent<{ iten: NavbarIten, type: string }> = ({ iten: 
             <div className='md:block hidden'>
                 <Link href={to}>
                     <a>
-                        <div className={`flex justify-center mx-3 font-semibold  ${hover} ${pathname === to ? select : noSelect}     `}>
+                        <div className={`flex justify-center  font-semibold text-white ${hover} ${pathname === to ? select : noSelect}     `}>
                             <span className=' ' >{name}</span>
                         </div>
                     </a>

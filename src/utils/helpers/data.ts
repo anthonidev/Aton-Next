@@ -12,9 +12,5 @@ export const NavbarItensIcons: NavbarIten[] = [
 ];
 export const MainNav: NavbarIten[] = [
     { name: 'Inicio', to: '/'  },
-    { name: 'Tienda', to: '/store'  },
-
-    { name: 'Ofertas especiales', to: '/about'},
-    { name: 'Nuevos Productos', to: '/about' },
-    { name: 'Categorias', to: '/skills' },
+    { name: 'Catálogo', to: '/store'  },
 ];

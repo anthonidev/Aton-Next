@@ -81,6 +81,7 @@ export interface ProductState {
     images: Image[] | null
     related: Product[] | null
     colors: Product[] | null
+    subcategory:Category| null
 }
 export interface resultProducts {
     count: string,

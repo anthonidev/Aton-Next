@@ -15,15 +15,15 @@ const FilterPrice: FunctionComponent<{
     const noselect = "text-gray-900 dark:text-day-200"
     return (
         <div className='mt-2 '>
-            <div className='text-pri flex justify-between items-center '>
-                <h2 className='font-medium text-lg'>Precios</h2>
+            <div className='text-gray-900 text-sm flex justify-between items-center bg-gray-100 px-1 py-3 border-y-2 border-gray-200 '>
+                    <h2 className='font-bold mx-2 '>Precios</h2>
                 <a onClick={Drop} className="focus:outline-none cursor-pointer">
                     <ChevronDownIcon className='w-5 h-5 ' />
                 </a>
             </div>
             {
                 view && (
-                    <div className="grid md:grid-cols-2 rounded-sm   gap-0">
+                    <div className="ml-4 my-3 grid md:grid-cols-2 rounded-sm   gap-0">
                         {
                             prices && prices.map((price, index) => {
                                 return (

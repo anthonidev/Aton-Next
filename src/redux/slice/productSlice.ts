@@ -13,6 +13,7 @@ const initialState: ProductState = {
     images: null,
     related: null,
     colors: null,
+    subcategory:null
 }
 
 export const productSlice = createSlice({
@@ -42,6 +43,9 @@ export const productSlice = createSlice({
             state.previous = action.payload.previous
             state.products = action.payload.results
         },
+        subcategoty_ok: (state: ProductState, action: PayloadAction<Category>) => {
+            state.subcategory = action.payload
+        },
 
     }
 });
@@ -52,7 +56,8 @@ export const {
     product_ok,
     categories_ok,
     brands_ok,
-    products_ok
+    products_ok,
+    subcategoty_ok
 } = productSlice.actions
 
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { brands_ok, categories_ok, products_home_ok, products_ok, product_ok } from "../slice/productSlice";
+import { brands_ok, categories_ok, products_home_ok, products_ok, product_ok, subcategoty_ok } from "../slice/productSlice";
 import { AppDispatch } from "../store";
 import { setAlert } from "./alert";
 
@@ -114,5 +114,35 @@ export const product_detail = (slug:string) => async  (dispatch: AppDispatch) =>
             
         })
 
+
+}
+export const category_products = (slug:string) => async  (dispatch: AppDispatch) => {
+
+      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            dispatch(products_ok(res.data));
+
+        }).catch(err => {
+            console.log(err);
+            
+        })
+
+}
+export const get_subcategory = (slug:string) => async  (dispatch: AppDispatch) => {
+
+      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            dispatch(subcategoty_ok(res.data));
+
+        }).catch(err => {
+            console.log(err);
+            
+        })
 
 }

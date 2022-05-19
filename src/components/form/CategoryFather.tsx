@@ -24,12 +24,13 @@ const CategoryFat: FunctionComponent<{
 
         return (
             <div className='mt-3 '>
-                <div className='text-pri flex justify-between items-center '>
-                    <h2 className='font-medium text-lg'>{title}</h2>
+                <div className='text-gray-900 text-sm flex justify-between items-center bg-gray-100 px-1 py-3 border-y-2 border-gray-200 '>
+                    <h2 className='font-bold mx-2 '>{title}</h2>
                     <a onClick={()=>setView(!view)} className="focus:outline-none cursor-pointer">
                         <ChevronDownIcon className='w-5 h-5 ' />
                     </a>
                 </div>
+                <div className="ml-4 my-3">
                 {
                     view && sub_categories?.map(category => (
 
@@ -37,6 +38,8 @@ const CategoryFat: FunctionComponent<{
                     
                     ))
                 }
+                </div>
+              
 
             </div>
         )

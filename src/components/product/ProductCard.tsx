@@ -76,7 +76,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
             <h1 className='text-pri '>{product.title}</h1>
             <div className='flex space-x-2 mt-2'>
               <p className='text-let line-through font-semibold'>{formatterSoles.format(product?.compare_price)}</p>
-              <p className='text-rou'>{formatterSoles.format(product?.price)}</p>
+              <p className='text-black'>{formatterSoles.format(product?.price)}</p>
 
             </div>
 
@@ -85,7 +85,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
 
           <div className=' flex justify-center items-end mb-2   w-1/5 '>
             {loading ? <button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-indigo-400 dark:text-coolGray-900 hover:bg-indigo-600">Añadir al carrito</button> :
-              <button onClick={addToCart} className='bg-rou p-2 rounded-md hover:bg-pri'>
+              <button onClick={addToCart} className='bg-black p-2 rounded-md hover:bg-pri'>
                 <ShoppingCartIcon className='h-6 w-6  text-white' />
               </button>
             }

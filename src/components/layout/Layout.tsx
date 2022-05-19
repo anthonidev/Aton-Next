@@ -48,15 +48,16 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
 
 
   return (
-    
+
     <>
       <Head>
         <title>{title}</title>
         <meta name='description' content={content} />
       </Head>
-      <main className="  bg-plo-100 ">
-        <Navbar openModal={openModal} openUser={openUser} />
+      <main className="  bg-gray-50">
         <NavBartMain />
+
+        <Navbar openModal={openModal} openUser={openUser} />
         <NavBartOfert />
 
         <div className="pb-6">

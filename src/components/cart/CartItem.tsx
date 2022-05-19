@@ -1,7 +1,6 @@
-import { MinusCircleIcon, PlusCircleIcon, PlusIcon, RefreshIcon, XIcon } from '@heroicons/react/solid'
+import { MinusCircleIcon, PlusCircleIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FunctionComponent, useEffect,  useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
 import { setAlert } from '../../redux/api/alert'
@@ -15,15 +14,19 @@ const CartItem: FunctionComponent<{
 }> = ({ item }) => {
     const dispatch: AppDispatch = useDispatch();
     const [countItem, setCountItem] = useState<number>(item.count)
-
+    const [add, setAdd] = useState<boolean>(false)
     useEffect(() => {
-        dispatch(update_item(item.product, countItem));
-    }, [countItem]);
+        if (add) {
+            dispatch(update_item(item.product, countItem));
+            setAdd(false)
+        }
+    }, [countItem, add]);
 
     function minus() {
         if (item.product.quantity >= countItem && countItem - 1 !== 0) {
             setCountItem(countItem - 1)
             dispatch(setAlert('Carrito actualizado', 'green'));
+            setAdd(true)
         } else if (countItem - 1 === 0) {
             dispatch(remove_item(item));
         }
@@ -32,6 +35,8 @@ const CartItem: FunctionComponent<{
         if (item.product.quantity >= countItem && countItem + 1 < item.product.quantity) {
             setCountItem(countItem + 1)
             dispatch(setAlert('Carrito actualizado', 'green'));
+            setAdd(true)
+
         } else {
             dispatch(setAlert('Not enough in stock', 'red'));
         }

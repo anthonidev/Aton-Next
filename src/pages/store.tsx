@@ -12,6 +12,7 @@ import { Category, FormFilter, Product } from '../utils/types/interface';
 import MoreFilters from '../components/store/MoreFilters';
 import FilterPrice from '../components/store/FilterPrice';
 import { FilterIcon } from '@heroicons/react/solid';
+import { ButtonWithIcon } from '../components/button/ButtonWithIcon';
 
 const Store = () => {
 
@@ -70,8 +71,8 @@ const Store = () => {
     return (
         <Layout title='Tienda' content='tienda de aton productos de tecnologia ' >
             <div className="max-w-7xl container mx-auto px-6 pt-7  flex ">
-                <form onSubmit={e => onSubmit(e)} className='lg:w-1/4 sm:w-1/3 bg-slate-200 rounded-md shadow-md p-5  hidden sm:block'>
-                    <div className='text-lg flex space-x-3 text-pri items-center font-semibold'>
+                <form onSubmit={e => onSubmit(e)} className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
+                    <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold'>
                         <FilterIcon className='h-5 w-5' />
                         <p>Categorias</p>
                     </div>
@@ -79,30 +80,28 @@ const Store = () => {
                         categories?.map((category: Category) => (
                             <div key={category.id}>
                                 <CategoryFather category={category} formdata={formData.categoriesform} />
-                                <div className='border border-plo-200 my-5 '></div>
+                                <div className='my-5 '></div>
                             </div>
 
                         ))
                     }
 
                     <Brands formdata={formData.brandsform} />
-                    <div className='border border-plo-200 my-5 '></div>
+                    <div className=' my-5 '></div>
 
                     <FilterPrice price_range={formData.price_range} onChange={onChange} />
-                    <div className='border border-plo-200 my-5 '></div>
+                    <div className=' my-5 '></div>
 
                     <MoreFilters sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
-                    <div className='border border-plo-200 my-5 '></div>
+                    <div className=' my-5 '></div>
 
                     <div className='flex space-x-2'>
-                        <button onClick={clearForm} className="flex ml-auto mt-3  text-plo bg-white border-2 border-pri-100 hover:bg-pri-100 hover:text-white    w-full h-10 items-center justify-around  ">
+                        <ButtonWithIcon Icom={TrashIcon} funtion={clearForm}>
                             <span>Limpiar</span>
-                            <TrashIcon className='w-6 h-6' />
-                        </button>
-                        <button type="submit" className="flex ml-auto mt-3  text-white bg-pri-100 border-2 border-pri hover:bg-pri  w-full h-10 items-center justify-around  ">
+                        </ButtonWithIcon>
+                        <ButtonWithIcon Icom={SearchIcon} funtion={clearForm}>
                             <span>Filtrar</span>
-                            <SearchIcon className='w-6 h-6' />
-                        </button>
+                        </ButtonWithIcon>
 
                     </div>
 
@@ -154,14 +153,14 @@ const Store = () => {
                 </div>
                 {
                     mobileFilter && (
-                        <div className=" overflow-auto">
-                            <form onSubmit={e => onSubmit(e)}  className=" fixed bg-plo-100 border-pri border-2 left-0 p-8 bottom-0">
-                                <div className='text-lg flex space-x-3 justify-between text-pri items-center font-semibold'>
+                        <div className="fixed inset-0 flex z-40  ">
+                            <form onSubmit={e => onSubmit(e)} className=" ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
+                                <div className='text-lg flex space-x-3 justify-between text-gray-800 items-center font-semibold'>
                                     <FilterIcon className='h-5 w-5 ' />
 
                                     <p>Categorias</p>
                                     <a className='cursor-pointer'>
-                                    <XIcon className='h-5 w-5'  onClick={e => SetMobileFilter(false)}/>
+                                        <XIcon className='h-5 w-5' onClick={e => SetMobileFilter(false)} />
 
                                     </a>
 
@@ -171,20 +170,20 @@ const Store = () => {
                                     categories?.map((category: Category) => (
                                         <div key={category.id}>
                                             <CategoryFather category={category} formdata={formData.categoriesform} />
-                                            <div className='border border-plo-200 my-5 '></div>
+                                            <div className=' my-5 '></div>
                                         </div>
 
                                     ))
                                 }
 
                                 <Brands formdata={formData.brandsform} />
-                                <div className='border border-plo-200 my-5 '></div>
+                                <div className=' my-5 '></div>
 
                                 <FilterPrice price_range={formData.price_range} onChange={onChange} />
-                                <div className='border border-plo-200 my-5 '></div>
+                                <div className=' my-5 '></div>
 
                                 <MoreFilters sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
-                                <div className='border border-plo-200 my-5 '></div>
+                                <div className=' my-5 '></div>
 
                                 <div className='flex space-x-2'>
                                     <button onClick={clearForm} className="flex ml-auto mt-3  text-plo bg-white border-2 border-pri-100 hover:bg-pri-100 hover:text-white    w-full h-10 items-center justify-around  ">
