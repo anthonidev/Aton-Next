@@ -7,22 +7,28 @@ const Check: FunctionComponent<{
         total: number | undefined
     }
     formdata: number[]
-
+    setFilter:(arg:boolean) =>void
 }> = ({
     option: {
         id,
         title,
         total
     },
-    formdata
+    formdata,
+    setFilter
 }) => {
         const i = formdata.indexOf(id);
         let state = i !== -1 ? true : false
 
 
         const AddCheck = (id: number) => {
+            if (i !== -1) {
+                formdata.splice(i, 1)
+            } else{
+                formdata.push(id)
+            } 
+            setFilter(true)
 
-            i !== -1 ? formdata.splice(i, 1) : formdata.push(id)
         }
         return (
             <div className=' className="flex items-center"'>

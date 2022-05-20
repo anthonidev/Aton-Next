@@ -50,7 +50,12 @@ const Store = () => {
     });
 
     const [mobileFilter, SetMobileFilter] = useState(false)
-    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>): void => setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
+    const [filter, setFilter] = useState(false)
+
+    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
+        setFilter(true)
+    }
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (dispatch && dispatch !== null && dispatch !== undefined)
@@ -58,6 +63,17 @@ const Store = () => {
         SetMobileFilter(false)
 
     };
+
+
+    useEffect(() => {
+        if (filter) {
+            dispatch(get_filtered_products(formData.brandsform, formData.categoriesform, formData.order, formData.sort_by, formData.price_range));
+        }
+        setFilter(false)
+
+    }, [filter])
+
+
     const clearForm = () => {
         formData.brandsform = []
         formData.categoriesform = []
@@ -74,19 +90,19 @@ const Store = () => {
                 <form onSubmit={e => onSubmit(e)} className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
                     <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold'>
                         <FilterIcon className='h-5 w-5' />
-                        <p>Categorias</p>
+                        <p>Categorias </p>
                     </div>
                     {
                         categories?.map((category: Category) => (
                             <div key={category.id}>
-                                <CategoryFather category={category} formdata={formData.categoriesform} />
+                                <CategoryFather category={category} formdata={formData.categoriesform} setFilter={setFilter} />
                                 <div className='my-5 '></div>
                             </div>
 
                         ))
                     }
 
-                    <Brands formdata={formData.brandsform} />
+                    <Brands formdata={formData.brandsform} setFilter={setFilter} />
                     <div className=' my-5 '></div>
 
                     <FilterPrice price_range={formData.price_range} onChange={onChange} />
@@ -95,15 +111,7 @@ const Store = () => {
                     <MoreFilters sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
                     <div className=' my-5 '></div>
 
-                    <div className='flex space-x-2'>
-                        <ButtonWithIcon Icom={TrashIcon} funtion={clearForm}>
-                            <span>Limpiar</span>
-                        </ButtonWithIcon>
-                        <ButtonWithIcon Icom={SearchIcon} funtion={clearForm}>
-                            <span>Filtrar</span>
-                        </ButtonWithIcon>
 
-                    </div>
 
                 </form>
                 <div className='lg:w-3/4 sm:w-2/3 p-6 w-full'>
@@ -169,14 +177,14 @@ const Store = () => {
                                 {
                                     categories?.map((category: Category) => (
                                         <div key={category.id}>
-                                            <CategoryFather category={category} formdata={formData.categoriesform} />
+                                            <CategoryFather category={category} formdata={formData.categoriesform} setFilter={setFilter} />
                                             <div className=' my-5 '></div>
                                         </div>
 
                                     ))
                                 }
 
-                                <Brands formdata={formData.brandsform} />
+                                <Brands formdata={formData.brandsform} setFilter={setFilter} />
                                 <div className=' my-5 '></div>
 
                                 <FilterPrice price_range={formData.price_range} onChange={onChange} />

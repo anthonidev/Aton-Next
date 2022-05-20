@@ -97,6 +97,8 @@ export interface Category {
     description: string
     total: number
     sub_categories: Category[] | null
+    get_parent: string | null
+    get_parent_slug: string | null
 }
 export interface Brand {
     id: number

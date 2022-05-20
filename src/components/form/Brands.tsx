@@ -9,7 +9,8 @@ import Check from './Check';
 
 const Brands: FunctionComponent<{
     formdata: number[]
-}> = ({ formdata }) => {
+    setFilter:(arg:boolean) =>void
+}> = ({ formdata,setFilter }) => {
     const brands = useSelector((state: RootState) => state.product.brands);
 
     const [view, setView] = useState(false)
@@ -25,7 +26,7 @@ const Brands: FunctionComponent<{
             <div className="ml-4 my-3">
                 {
                     view && brands?.map((brand: Brand) => (
-                        <Check option={brand} formdata={formdata} key={brand.id} />
+                        <Check option={brand} formdata={formdata} key={brand.id} setFilter={setFilter} />
 
 
                     ))

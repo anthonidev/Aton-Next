@@ -6,6 +6,7 @@ import Check from './Check';
 const CategoryFat: FunctionComponent<{
     category: Category
     formdata: number[]
+    setFilter:(arg:boolean) =>void
 
 }> = ({
     category: {
@@ -17,7 +18,8 @@ const CategoryFat: FunctionComponent<{
         title,
         total
     },
-    formdata
+    formdata,
+    setFilter
 }) => {
         const [view, setView] = useState(true)
     
@@ -34,7 +36,7 @@ const CategoryFat: FunctionComponent<{
                 {
                     view && sub_categories?.map(category => (
 
-                        <Check option={category} formdata={formdata} key={category.id} />
+                        <Check option={category} formdata={formdata} key={category.id} setFilter={setFilter}/>
                     
                     ))
                 }
