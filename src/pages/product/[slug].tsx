@@ -21,7 +21,7 @@ const Product = () => {
     useEffect(() => {
         if (slug !== undefined)
             dispatch(product_detail(router.asPath));
-    }, [router.asPath, slug]);
+    }, [router.asPath, slug,dispatch]);
     const product: Product = useSelector((state: RootState) => state.product.product)
     const related = useSelector((state: RootState) => state.product.related)
     const characteristic = useSelector((state: RootState) => state.product.characteristic)
@@ -39,9 +39,6 @@ const Product = () => {
     function openModal() {
         setIsOpen(true)
     }
-
-
-
 
     const addToCart = async () => {
         setLoading(true)
@@ -64,7 +61,6 @@ const Product = () => {
                 {
                     isOpen && total_items !== null && amount !== null && <ModalCard product={product} total_items={total_items} amount={amount} closeModal={closeModal} />
                 }
-
                 <section className=" flex-row md:flex">
                     <div className="w-full md:w-1/2 bg-white  mt-3">
                         <ProductImages main={product?.photo} title={product?.title} images={images} />
@@ -80,7 +76,6 @@ const Product = () => {
 
                             <span className="text-xs text-gray-700 ">{product?.get_category} | {product?.get_brand}</span>
                             <h1 className="text-xl font-semibold my-4">{product?.title}</h1>
-
                             <h2 className="my-2 border-b border-plo w-10 text-gray-800">Caracteristicas</h2>
                             <ul>
                                 {

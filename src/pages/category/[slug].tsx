@@ -11,29 +11,30 @@ import FilterPrice from '../../components/store/FilterPrice';
 import MoreFilters from '../../components/store/MoreFilters';
 import { category_products, get_filtered_products, get_pages_products } from '../../redux/api/product';
 import { RootState } from '../../redux/store';
-import { FormFilter, Product } from '../../utils/types/interface';
+import { Category, FormFilter, Product } from '../../utils/types/interface';
 
-const Category = () => {
+const CategoryPage = () => {
     const router = useRouter()
     const { slug } = router.query
     const dispatch = useDispatch();
-
+   
     useEffect(() => {
         if (slug !== undefined)
             dispatch(category_products(router.asPath));
-    }, [router.asPath, slug]);
+    }, [router.asPath, slug,dispatch]);
+
 
     const products = useSelector((state: RootState) => state.product.products);
     const count = useSelector((state: RootState) => state.product.count)
     const next = useSelector((state: RootState) => state.product.next)
     const previous = useSelector((state: RootState) => state.product.previous)
+    const categories = useSelector((state: RootState) => state.product.categories);
     const navigationOn = 'bg-white rounded-md  hover:bg-blue-500  hover:text-white px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform'
     const navigationOff = 'bg-gray-200 cursor-not-allowed px-4 py-2 mx-1 text-gray-500 capitalize  rounded-md '
-    const categories = useSelector((state: RootState) => state.product.categories);
 
+    const cat= categories?.find(element => element.slug == slug)
 
-    const cat = categories?.find(element => element.slug == slug)
-
+  
     function nextPage(next: string) {
         dispatch(get_pages_products(next))
         window.scrollTo(0, 0);
@@ -43,6 +44,7 @@ const Category = () => {
         dispatch(get_pages_products(previous))
         window.scrollTo(0, 0);
     }
+    const [filter, setFilter] = useState(false)
 
     const [formData, setFormData] = useState<FormFilter>({
         brandsform: [],
@@ -51,23 +53,37 @@ const Category = () => {
         order: 'desc',
         sort_by: 'created'
     });
+
     const [mobileFilter, SetMobileFilter] = useState(false)
 
-    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>): void => setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
-    const onSubmit = (e: React.SyntheticEvent) => {
-        e.preventDefault();
-        if (dispatch && dispatch !== null && dispatch !== undefined)
+    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
+        setFilter(true)
+    }
+  
+    useEffect(() => {
+        if (filter) {
             dispatch(get_filtered_products(formData.brandsform, formData.categoriesform, formData.order, formData.sort_by, formData.price_range));
+        }
+        setFilter(false)
         SetMobileFilter(false)
 
-    };
+    }, [filter,dispatch,formData])
+
+    useEffect(() => {
+        if (cat?.sub_categories!==null &&cat!==undefined) 
+            cat.sub_categories.map(({id})=>{
+                formData.categoriesform.push(id)
+            })
+    }, [cat,formData]);
+  
     return (
         <Layout title='Aton | Categoria' content='tienda de aton productos de tecnologia ' >
             <div className="max-w-7xl container mx-auto px-6 pt-7  ">
 
 
                 <div className="flex">
-                    <form onSubmit={e => onSubmit(e)} className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
+                    <div className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
                         <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold'>
                             <FilterIcon className='h-5 w-5' />
                             <p>{cat?.title}</p>
@@ -76,7 +92,7 @@ const Category = () => {
                             <h1 className="font-bold my-2">Subcategorias</h1>
                             {
                                 cat?.sub_categories?.map(category => (
-                                    <Link href={'/category/subcategory/' + category.slug}>
+                                    <Link key={category.id} href={'/category/subcategory/' + category.slug}>
 
                                         <a className="text-plo my-2 flex justify-start items-center hover:text-rou" >
                                             <ChevronRightIcon className='h-4 w-4' />
@@ -88,18 +104,18 @@ const Category = () => {
                         </div>
 
 
-                        <Brands formdata={formData.brandsform} />
+                        <Brands state={true} formdata={formData.brandsform} setFilter={setFilter} />
                         <div className=' my-5 '></div>
 
-                        <FilterPrice price_range={formData.price_range} onChange={onChange} />
+                        <FilterPrice state={false} price_range={formData.price_range} onChange={onChange} />
                         <div className=' my-5 '></div>
 
-                        <MoreFilters sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
+                        <MoreFilters  state={false} sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
                         <div className=' my-5 '></div>
 
 
 
-                    </form>
+                    </div>
                     <div className='lg:w-3/4 sm:w-2/3 p-6 w-full'>
                         <div className='mb-4 text-pri flex justify-between items-center w-full'>
                             <p className='text-xl font-semibold w-1/2'>{count} productos</p>
@@ -149,18 +165,14 @@ const Category = () => {
                                         </button>
                                     )
                                 }
-
                             </div>
                         </div>
 
                     </div>
                 </div>
-
-
-
             </div>
         </Layout>
     )
 }
 
-export default Category
+export default CategoryPage

@@ -48,14 +48,14 @@ const Checkout = () => {
     useEffect(() => {
         if (amount !== 0 && amount !== null)
             dispatch(get_total_order())
-    }, [amount])
+    }, [amount,dispatch])
 
     useEffect(() => {
         if (coupon?.can_use)
             dispatch(get_total_order(formData.shipping_id, codeCoupon));
         else
             dispatch(get_total_order(formData.shipping_id, ''));
-    }, [formData.shipping_id, codeCoupon, coupon?.can_use]);
+    }, [formData.shipping_id, codeCoupon, coupon?.can_use,dispatch]);
 
     const verify = (e: React.SyntheticEvent) => {
         e.preventDefault();

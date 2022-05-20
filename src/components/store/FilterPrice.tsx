@@ -4,9 +4,11 @@ import { prices } from "../../utils/helpers/prices"
 const FilterPrice: FunctionComponent<{
     price_range: string,
     onChange: (e: React.FormEvent<HTMLInputElement>) => void,
+    state:boolean
 
-}> = ({ price_range, onChange }) => {
-    const [view, setView] = useState(false)
+
+}> = ({ price_range, onChange ,state}) => {
+    const [view, setView] = useState(state)
 
     function Drop() {
         setView(!view)

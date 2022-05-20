@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
 import CartItem from '../components/cart/CartItem'
-import ShippingOption from '../components/cart/ShippingOption'
 import Layout from '../components/layout/Layout'
 import { get_shipping_options } from '../redux/api/shipping'
-import { IFormCheckout, itemCart, shipping_option } from '../utils/types/interface'
+import { IFormCheckout, itemCart } from '../utils/types/interface'
 import { get_total_order } from '../redux/api/order'
 import Link from 'next/link'
 import { setAlert } from '../redux/api/alert'
-import FormDataCheckout from '../components/cart/FormDataCheckout'
 import OrdenSumary from '../components/cart/OrdenSumary'
 
 const Cart = () => {
@@ -17,12 +15,8 @@ const Cart = () => {
     const dispatch: AppDispatch = useDispatch()
     const items = useSelector((state: RootState) => state.cart.items)
     const amount = useSelector((state: RootState) => state.cart.amount)
-    const shipping_options = useSelector((state: RootState) => state.shipping.shipping_options)
     const authenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
     const [renderForm, setRenderForm] = useState(false)
-
-
-
 
     const [codeCoupon, setCoupon] = useState('')
     const [formData, setFormData] = useState<IFormCheckout>({
@@ -44,14 +38,15 @@ const Cart = () => {
     };
     useEffect(() => {
         dispatch(get_shipping_options())
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(get_total_order())
-    }, [amount])
+    }, [amount,dispatch])
+
     useEffect(() => {
         dispatch(get_total_order(formData.shipping_id, codeCoupon));
-    }, [formData.shipping_id, codeCoupon]);
+    }, [formData.shipping_id, codeCoupon,dispatch]);
 
     const verify = () => {
         if (formData.shipping_id !== 0) {

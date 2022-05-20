@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../../redux/store';
+import { AppDispatch, RootState } from '../../../../../redux/store';
 import Submit from '../../../../../components/button/Submit';
 import InputForm from '../../../../../components/form/InputForm';
 import Layout from '../../../../../components/layout/Layout';
 import { IFormResetPassConfirm } from '../../../../../utils/types/interface';
 import { reset_password_confirm } from '../../../../../redux/api/auth';
 
-const token = () => {
-    const dispatch = useDispatch();
+const Token = () => {
+    const dispatch: AppDispatch= useDispatch();
     const loading = useSelector((state: RootState) => state.auth.loading);
     const router = useRouter()
     const { uid, token } = router.query
@@ -33,7 +33,7 @@ const token = () => {
                 <div className="container sm:mt-40 mt-24 my-auto max-w-md border-2 border-gray-200 p-3 bg-white">
                     <div className="text-center m-6">
                         <h1 className="text-3xl font-semibold text-gray-700">Cambiar Password</h1>
-                        <p className="text-gray-500">Just enter your email address below and we'll send you a link to reset your password!</p>
+                        <p className="text-gray-500">Just enter your email address below and weall send you a link to reset your password!</p>
                     </div>
                     <div className="m-6">
                         <form onSubmit={onSubmit} className="mb-4" >
@@ -55,8 +55,8 @@ const token = () => {
                                 <Submit loading={loading} text='Cambiar password' />
                             </div>
                             <p className="text-sm text-center text-gray-400">
-                                Don&#x27;t have an account yet?
-                                <a href="#!" className="font-semibold text-indigo-500 focus:text-indigo-600 focus:outline-none focus:underline">Sign up</a>.
+                                Donsad;t have an account yet?
+                                <p  className="font-semibold text-indigo-500 focus:text-indigo-600 focus:outline-none focus:underline">Sign up</p>.
                             </p>
                         </form>
 
@@ -68,4 +68,4 @@ const token = () => {
     )
 }
 
-export default token
+export default Token

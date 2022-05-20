@@ -1,6 +1,6 @@
 import { MinusCircleIcon, PlusCircleIcon, XIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
-import React, { FunctionComponent, useEffect,  useState } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../redux/store'
 import { setAlert } from '../../redux/api/alert'
@@ -20,7 +20,7 @@ const CartItem: FunctionComponent<{
             dispatch(update_item(item.product, countItem));
             setAdd(false)
         }
-    }, [countItem, add]);
+    }, [countItem, add, dispatch, item.product]);
 
     function minus() {
         if (item.product.quantity >= countItem && countItem - 1 !== 0) {

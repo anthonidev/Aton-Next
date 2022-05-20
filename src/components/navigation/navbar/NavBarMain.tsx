@@ -24,7 +24,7 @@ const NavBartMain = () => {
 
                 <form>
                     <div className='flex bg-white  items-center p-2 border border-plo-100'>
-                        <label htmlFor=""></label>
+                        <label></label>
                         <input type="text" className='focus:outline-none text-gray-600' placeholder='Busqueda en catálogo' />
                         <SearchIcon className='h-4 w-4 text-let ' />
                     </div>

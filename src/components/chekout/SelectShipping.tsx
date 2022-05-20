@@ -13,7 +13,7 @@ const SelectShipping: FunctionComponent<{
 
     useEffect(() => {
         dispatch(get_shipping_options())
-    }, [])
+    }, [dispatch])
     const shipping_options = useSelector((state: RootState) => state.shipping.shipping_options)
 
     return (

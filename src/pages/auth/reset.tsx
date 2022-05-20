@@ -8,7 +8,7 @@ import Layout from '../../components/layout/Layout'
 import { IFormResetPass } from '../../utils/types/interface';
 import { reset_password } from '../../redux/api/auth';
 
-const reset = () => {
+const Reset = () => {
     const dispatch = useDispatch();
     const loading = useSelector((state: RootState) => state.auth.loading);
 
@@ -59,4 +59,4 @@ const reset = () => {
     )
 }
 
-export default reset
+export default Reset

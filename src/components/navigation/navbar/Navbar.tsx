@@ -1,22 +1,21 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { MainNav, NavbarItensIcons, NavbarItensMain } from '../../../utils/helpers/data'
-import { ChevronLeftIcon, ChevronRightIcon, MenuIcon } from '@heroicons/react/solid'
+import { MainNav, NavbarItensIcons } from '../../../utils/helpers/data'
+import { ChevronRightIcon, MenuIcon } from '@heroicons/react/solid'
 import NavItem from './NavItem';
 import NavItenRight from './NavItenRight';
 import NavBarItenIcom from './NavBarItenIcom';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { brandsAll, categoriesAll } from '../../../redux/api/product';
-import { RootState } from '../../../redux/store';
+import { AppDispatch, RootState } from '../../../redux/store';
 
-const navbar: FunctionComponent<{ openModal: () => void, openUser: () => void }> = ({ openModal, openUser }) => {
+const Navbar: FunctionComponent<{ openModal: () => void, openUser: () => void }> = ({ openModal, openUser }) => {
 
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   useEffect(() => {
     dispatch(categoriesAll())
     dispatch(brandsAll())
-
-  }, [])
+  }, [dispatch])
   const [viewCategories, setViewCategories] = useState<boolean>(false)
   const [viewBrands, setViewBrands] = useState<boolean>(false)
   const categories = useSelector((state: RootState) => state.product.categories);
@@ -134,4 +133,4 @@ const navbar: FunctionComponent<{ openModal: () => void, openUser: () => void }>
   )
 }
 
-export default navbar
+export default Navbar

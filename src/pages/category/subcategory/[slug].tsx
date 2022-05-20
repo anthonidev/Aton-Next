@@ -17,7 +17,6 @@ const Category = () => {
     const router = useRouter()
     const { slug } = router.query
     const dispatch = useDispatch();
-    console.log(router.asPath);
 
     useEffect(() => {
         if (slug !== undefined) {
@@ -25,7 +24,7 @@ const Category = () => {
             dispatch(get_subcategory(router.asPath));
         }
 
-    }, [router.asPath, slug]);
+    }, [router.asPath, slug, dispatch]);
 
     const products = useSelector((state: RootState) => state.product.products);
     const count = useSelector((state: RootState) => state.product.count)
@@ -34,6 +33,7 @@ const Category = () => {
     const navigationOn = 'bg-white rounded-md  hover:bg-blue-500  hover:text-white px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform'
     const navigationOff = 'bg-gray-200 cursor-not-allowed px-4 py-2 mx-1 text-gray-500 capitalize  rounded-md '
     const subCat = useSelector((state: RootState) => state.product.subcategory);
+    const [filter, setFilter] = useState(false)
 
 
     function nextPage(next: string) {
@@ -55,14 +55,22 @@ const Category = () => {
     });
     const [mobileFilter, SetMobileFilter] = useState(false)
 
-    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>): void => setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
-    const onSubmit = (e: React.SyntheticEvent) => {
-        e.preventDefault();
-        if (dispatch && dispatch !== null && dispatch !== undefined)
+    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
+        setFilter(true)
+    }
+    useEffect(() => {
+        if (filter) {
             dispatch(get_filtered_products(formData.brandsform, formData.categoriesform, formData.order, formData.sort_by, formData.price_range));
+        }
+        setFilter(false)
         SetMobileFilter(false)
 
-    };
+    }, [filter, dispatch, formData])
+    useEffect(() => {
+        if (subCat !== null)
+            formData.categoriesform.push(subCat.id)
+    }, [subCat, formData]);
     return (
         <Layout title='Aton | Categoria' content='tienda de aton productos de tecnologia ' >
 
@@ -70,25 +78,25 @@ const Category = () => {
 
 
                 <div className="flex">
-                    <form onSubmit={e => onSubmit(e)} className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
+                    <div className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
 
                         <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold'>
                             <FilterIcon className='h-5 w-5' />
                             <p>{subCat?.title}</p>
                         </div>
 
-                        <Brands formdata={formData.brandsform} />
+                        <Brands state={true} formdata={formData.brandsform} setFilter={setFilter} />
                         <div className=' my-5 '></div>
 
-                        <FilterPrice price_range={formData.price_range} onChange={onChange} />
+                        <FilterPrice state={false} price_range={formData.price_range} onChange={onChange} />
                         <div className=' my-5 '></div>
 
-                        <MoreFilters sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
+                        <MoreFilters state={false} sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
                         <div className=' my-5 '></div>
 
 
 
-                    </form>
+                    </div>
                     <div className='lg:w-3/4 sm:w-2/3 p-6 w-full'>
                         <div className='mb-4 text-pri flex justify-between items-center w-full'>
                             <p className='text-xl font-semibold w-1/2'>{count} productos</p>

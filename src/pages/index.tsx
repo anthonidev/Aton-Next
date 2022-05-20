@@ -8,7 +8,6 @@ import ProductCard from '../components/product/ProductCard';
 import { Product } from '../utils/types/interface';
 import { productsHome } from '../redux/api/product';
 
-
 const Home: NextPage = () => {
 
   const dispatch = useDispatch()

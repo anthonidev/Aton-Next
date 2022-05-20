@@ -6,9 +6,10 @@ const MoreFilters: FunctionComponent<{
     order: string,
     sort_by: string,
     onChange: (e: React.FormEvent<HTMLSelectElement>) => void,
+    state:boolean
 
-}> = ({ order, sort_by, onChange }) => {
-    const [view, setView] = useState(false)
+}> = ({ order, sort_by, onChange ,state}) => {
+    const [view, setView] = useState(state)
 
     function Drop() {
         setView(!view)

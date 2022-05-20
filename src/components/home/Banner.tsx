@@ -9,6 +9,7 @@ const Banner = () => {
             <Image
               src={`/assets/images/controlPortada.jpg`}
               layout="fill"
+              alt={`logo`}
             />
           </div>
           <div className="w-full    md:hidden">
@@ -17,6 +18,8 @@ const Banner = () => {
               layout="responsive"
               width="100"
               height="100"
+              alt={`logo`}
+
             />
           </div>
           <div className="w-full md:w-1/2 md:py-36 py-4  ">

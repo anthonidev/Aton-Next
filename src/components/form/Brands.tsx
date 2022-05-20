@@ -10,10 +10,11 @@ import Check from './Check';
 const Brands: FunctionComponent<{
     formdata: number[]
     setFilter:(arg:boolean) =>void
-}> = ({ formdata,setFilter }) => {
-    const brands = useSelector((state: RootState) => state.product.brands);
+    state:boolean
 
-    const [view, setView] = useState(false)
+}> = ({ formdata,setFilter,state}) => {
+    const brands = useSelector((state: RootState) => state.product.brands);
+    const [view, setView] = useState(state)
 
     return (
         <div className='mt-3 '>

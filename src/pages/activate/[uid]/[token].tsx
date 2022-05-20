@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from '../../../redux/store'
 import Layout from '../../../components/layout/Layout';
 import { activate } from '../../../redux/api/auth';
 
-const token = () => {
+const Token = () => {
     const [activated, setActivated] = useState(false);
     const loading = useSelector((state: RootState) => state.auth.loading);
 
@@ -48,4 +48,4 @@ const token = () => {
     )
 }
 
-export default token
+export default Token

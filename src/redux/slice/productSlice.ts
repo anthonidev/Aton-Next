@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { useSelector } from "react-redux";
 import { ProductState, Product, Category, Brand, resultProducts } from '../../utils/types/interface';
+import { RootState } from "../store";
 
 const initialState: ProductState = {
     products: null,
@@ -13,7 +15,7 @@ const initialState: ProductState = {
     images: null,
     related: null,
     colors: null,
-    subcategory:null
+    subcategory: null
 }
 
 export const productSlice = createSlice({
@@ -62,3 +64,7 @@ export const {
 
 
 export default productSlice.reducer
+
+export function Product() {
+    const products = useSelector((state: RootState) => state.product.products);
+}

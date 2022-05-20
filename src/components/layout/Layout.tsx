@@ -12,22 +12,23 @@ import SidebarUser from '../navigation/user/SidebarUser';
 import { Props } from "../../utils/types/types";
 import { check_authenticated, load_user, refresh } from "../../redux/api/auth";
 import { get_items } from "../../redux/api/cart";
-import { get_total_order } from "../../redux/api/order";
 import { Footer } from "../navigation/footer/Footer";
+import { AppDispatch } from "../../redux/store";
 
 const Layout: React.FC<Props> = ({ title, content, children }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch= useDispatch();
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
+  const [userOpen, setUserOpen] = useState<boolean>(false)
+
 
   useEffect(() => {
     dispatch(check_authenticated());
     dispatch(load_user());
     dispatch(refresh());
     dispatch(get_items());
-
   }, [dispatch]);
 
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [userOpen, setUserOpen] = useState(false)
+  
   function closeModal() {
     setSidebarOpen(false)
   }
@@ -45,12 +46,11 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     setUserOpen(!userOpen)
   }
 
-
-
   return (
 
     <>
-      <Head>
+     
+     <Head>
         <title>{title}</title>
         <meta name='description' content={content} />
       </Head>
@@ -64,7 +64,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
           {children}
         </div>
       </main>
-      {
+       {
         sidebarOpen ? (<motion.div ><SidebarOpen closeModal={closeModal} /></motion.div>) : (<></>)
       }
       {
@@ -72,8 +72,6 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
       }
       <Alert />
       <Footer />
-
-
     </>
   )
 }
