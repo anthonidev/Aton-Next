@@ -7,9 +7,10 @@ export const ButtonWithIcon: FunctionComponent<{
     children: (JSX.Element | null)
 }> = ({ Icom, funtion, children }) => {
     return (
-        <button onClick={funtion} className="flex ml-auto mt-3  text-gray-500 bg-white border-2 border-gray-800 hover:bg-gray-700 hover:text-white    w-full h-10 items-center justify-around  ">
+        <button onClick={funtion} className="flex px-3 rounded  text-gray-500 bg-white border border-gray-800 hover:bg-gray-700 hover:text-white   h-10 items-center justify-around  ">
+            <Icom className='w-5 h-5' />
+
             {children}
-            <Icom className='w-6 h-6' />
         </button>
     )
 }

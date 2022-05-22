@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { brandsAll, categoriesAll } from '../../../redux/api/product';
 import { AppDispatch, RootState } from '../../../redux/store';
 
-const Navbar: FunctionComponent<{ openModal: () => void, openUser: () => void }> = ({ openModal, openUser }) => {
+const Navbar: FunctionComponent<{  openUser: () => void }> = ({ openUser }) => {
 
   const dispatch: AppDispatch = useDispatch()
   useEffect(() => {
@@ -21,29 +21,10 @@ const Navbar: FunctionComponent<{ openModal: () => void, openUser: () => void }>
   const categories = useSelector((state: RootState) => state.product.categories);
   const brands = useSelector((state: RootState) => state.product.brands);
 
-
   return (
     <div>
 
-      <div className="sticky   m-auto top-0 z-10 flex-shrink-0 flex h-12 bg-gray-900">
-
-        <div className='md:hidden flex justify-between items-center w-full  '>
-          <button
-            type="button"
-            onClick={openModal}
-            className="px-4 border-gray-200  text-let-100 focus:outline-none hover:text-white  md:hidden"
-          >
-            <MenuIcon className='h-8 w-8 ' />
-            <span className="sr-only">Open navbar</span>
-          </button>
-          <h1 className='text-let-100 text-center font-bold'>ATON</h1>
-          <div className='flex  '>
-            {
-              NavbarItensIcons.map((iten, index) => (<NavItenRight key={index} iten={iten} />))
-            }
-          </div>
-
-        </div>
+      <div className="sticky md:flex md:flex-shrink-0 hidden  m-auto top-0 z-10   h-12 bg-gray-900">
 
         <div className="  hidden   flex-1  md:flex items-center justify-between space-x-2 z-40 bg-gray-900 max-w-7xl mx-auto px-6">
           <div className='flex  text-lg text-pri space-x-10 justify-between items-center'>

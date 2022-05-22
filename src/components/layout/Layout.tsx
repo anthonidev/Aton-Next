@@ -14,9 +14,11 @@ import { check_authenticated, load_user, refresh } from "../../redux/api/auth";
 import { get_items } from "../../redux/api/cart";
 import { Footer } from "../navigation/footer/Footer";
 import { AppDispatch } from "../../redux/store";
+import NavbarMovile from "../navigation/navbar/NavbarMovile";
+import NavBartMainMovile from "../navigation/navbar/NavBartMainMovile";
 
 const Layout: React.FC<Props> = ({ title, content, children }) => {
-  const dispatch: AppDispatch= useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
   const [userOpen, setUserOpen] = useState<boolean>(false)
 
@@ -28,7 +30,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     dispatch(get_items());
   }, [dispatch]);
 
-  
+
   function closeModal() {
     setSidebarOpen(false)
   }
@@ -49,22 +51,22 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
   return (
 
     <>
-     
-     <Head>
+
+      <Head>
         <title>{title}</title>
         <meta name='description' content={content} />
       </Head>
-      <main className="  bg-gray-50">
+      <main className="  bg-white">
         <NavBartMain />
-
-        <Navbar openModal={openModal} openUser={openUser} />
-        <NavBartOfert />
+        <NavBartMainMovile />
+        <NavbarMovile openModal={openModal} />
+        <Navbar openUser={openUser} />
 
         <div className="pb-6">
           {children}
         </div>
       </main>
-       {
+      {
         sidebarOpen ? (<motion.div ><SidebarOpen closeModal={closeModal} /></motion.div>) : (<></>)
       }
       {

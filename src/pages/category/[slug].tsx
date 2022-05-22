@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { ButtonWithIcon } from '../../components/button/ButtonWithIcon';
 import Brands from '../../components/form/Brands';
 import Layout from '../../components/layout/Layout';
 import { Breadcrumb } from '../../components/navigation/Breadcrumb';
@@ -17,11 +18,11 @@ const CategoryPage = () => {
     const router = useRouter()
     const { slug } = router.query
     const dispatch = useDispatch();
-   
+
     useEffect(() => {
         if (slug !== undefined)
             dispatch(category_products(router.asPath));
-    }, [router.asPath, slug,dispatch]);
+    }, [router.asPath, slug, dispatch]);
 
 
     const products = useSelector((state: RootState) => state.product.products);
@@ -32,9 +33,9 @@ const CategoryPage = () => {
     const navigationOn = 'bg-white rounded-md  hover:bg-blue-500  hover:text-white px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform'
     const navigationOff = 'bg-gray-200 cursor-not-allowed px-4 py-2 mx-1 text-gray-500 capitalize  rounded-md '
 
-    const cat= categories?.find(element => element.slug == slug)
+    const cat = categories?.find(element => element.slug == slug)
 
-  
+
     function nextPage(next: string) {
         dispatch(get_pages_products(next))
         window.scrollTo(0, 0);
@@ -60,7 +61,7 @@ const CategoryPage = () => {
         setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
         setFilter(true)
     }
-  
+
     useEffect(() => {
         if (filter) {
             dispatch(get_filtered_products(formData.brandsform, formData.categoriesform, formData.order, formData.sort_by, formData.price_range));
@@ -68,20 +69,56 @@ const CategoryPage = () => {
         setFilter(false)
         SetMobileFilter(false)
 
-    }, [filter,dispatch,formData])
+    }, [filter, dispatch, formData])
 
     useEffect(() => {
-        if (cat?.sub_categories!==null &&cat!==undefined) 
-            cat.sub_categories.map(({id})=>{
+        if (cat?.sub_categories !== null && cat !== undefined)
+            cat.sub_categories.map(({ id }) => {
                 formData.categoriesform.push(id)
             })
-    }, [cat,formData]);
-  
+    }, [cat, formData]);
+
     return (
         <Layout title='Aton | Categoria' content='tienda de aton productos de tecnologia ' >
-            <div className="max-w-7xl container mx-auto px-6 pt-7  ">
+            <div className="max-w-7xl container mx-auto px-6  ">
 
+                <div className='flex-col md:flex-row flex justify-between  px-5 space-y-4'>
+                    <Breadcrumb >
+                            <li className="flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor" className="w-2 h-2 mt-1 transform rotate-90 fill-current ">
+                                    <path d="M32 30.031h-32l16-28.061z"></path>
+                                </svg>
+                                <a rel="noopener noreferrer" href="#" className="flex items-center px-1 capitalize  cursor-default">{cat?.title}</a>
+                            </li>
+                    </Breadcrumb>
 
+                    <MoreFilters state={false} sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
+                    <div className="flex justify-between ">
+                        <p className='text-sm  font-semibold  '>Hay {count} productos</p>
+                        <div className="md:hidden ">
+                            <ButtonWithIcon Icom={FilterIcon} funtion={() => SetMobileFilter(!mobileFilter)}>
+                                <span className='uppercase text-sm'>Filtrar</span>
+                            </ButtonWithIcon>
+                        </div>
+                    </div>
+                </div>
+{
+                    mobileFilter && (
+                        <div className="mx-4 md:hidden">
+                            <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold '>
+                                <FilterIcon className='h-5 w-5' />
+                                <p>Categorias </p>
+                            </div>
+
+                            <Brands state={true} formdata={formData.brandsform} setFilter={setFilter} />
+                            <div className=' my-5 '></div>
+
+                            <FilterPrice state={false} price_range={formData.price_range} onChange={onChange} />
+                            <div className=' my-5 '></div>
+
+                        </div>
+                    )
+                }
                 <div className="flex">
                     <div className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
                         <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold'>
@@ -110,26 +147,12 @@ const CategoryPage = () => {
                         <FilterPrice state={false} price_range={formData.price_range} onChange={onChange} />
                         <div className=' my-5 '></div>
 
-                        <MoreFilters  state={false} sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
-                        <div className=' my-5 '></div>
 
 
 
                     </div>
                     <div className='lg:w-3/4 sm:w-2/3 p-6 w-full'>
-                        <div className='mb-4 text-pri flex justify-between items-center w-full'>
-                            <p className='text-xl font-semibold w-1/2'>{count} productos</p>
-                            <Breadcrumb >
-                                <>
-                                    <li className="flex items-center space-x-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" fill="currentColor" className="w-2 h-2 mt-1 transform rotate-90 fill-current ">
-                                            <path d="M32 30.031h-32l16-28.061z"></path>
-                                        </svg>
-                                        <a rel="noopener noreferrer" href="#" className="flex items-center px-1 capitalize  cursor-default">{cat?.title}</a>
-                                    </li>
-                                </>
-                            </Breadcrumb>
-                        </div>
+
                         <div>
                             <div className='grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8'>
                                 {
