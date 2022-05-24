@@ -9,7 +9,7 @@ const NavbarMovile: FunctionComponent<{ openModal: () => void }> = ({ openModal 
 
     return (
 
-        <div className="bg-gray-900 py-1 flex justify-between px-2 sticky top-0 z-30 ">
+        <div className="bg-gray-900 md:hidden py-1 flex justify-between px-2 sticky top-0 z-30 ">
             <button
                 type="button"
                 onClick={openModal}

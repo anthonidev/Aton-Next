@@ -131,6 +131,21 @@ export const category_products = (slug:string) => async  (dispatch: AppDispatch)
         })
 
 }
+export const brand_products = (slug:string) => async  (dispatch: AppDispatch) => {
+
+      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            dispatch(products_ok(res.data));
+
+        }).catch(err => {
+            console.log(err);
+            
+        })
+
+}
 export const get_subcategory = (slug:string) => async  (dispatch: AppDispatch) => {
 
       await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {

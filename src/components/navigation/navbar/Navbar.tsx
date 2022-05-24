@@ -77,7 +77,7 @@ const Navbar: FunctionComponent<{  openUser: () => void }> = ({ openUser }) => {
                         {
                           brands?.map((brand) => (
                             <div key={brand.id}>
-                              <Link href={'/' + brand}>
+                              <Link href={'/brand/' + brand.id}>
 
                                 <a className="text-plo  flex justify-start items-center hover:text-rou" >
                                   <ChevronRightIcon className='h-4 w-4' />
