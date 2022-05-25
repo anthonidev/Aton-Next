@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { brandsAll, categoriesAll } from '../../../redux/api/product';
 import { AppDispatch, RootState } from '../../../redux/store';
 
-const Navbar: FunctionComponent<{  openUser: () => void }> = ({ openUser }) => {
+const Navbar: FunctionComponent<{ openUser: () => void }> = ({ openUser }) => {
 
   const dispatch: AppDispatch = useDispatch()
   useEffect(() => {
@@ -61,14 +61,12 @@ const Navbar: FunctionComponent<{  openUser: () => void }> = ({ openUser }) => {
                 }
 
 
-
               </div>
 
             </div>
             <div className='md:block hidden'>
               <div className={`   font-semibold text-plo  `} onMouseOver={() => setViewBrands(true)} onMouseLeave={() => setViewBrands(false)}>
                 <span className='text-white cursor-pointer ' >Marcas</span>
-
                 {
                   viewBrands && (
                     <div className='absolute   pt-4 left-0 right-0 xl:mx-96 md:mx-0 '>

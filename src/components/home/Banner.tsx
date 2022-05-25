@@ -7,14 +7,14 @@ const Banner = () => {
           
           <div className="w-full md:w-1/2 relative hidden md:block">
             <Image
-              src={`/assets/images/controlPortada.jpg`}
+              src={`/assets/images/Portada.jpg`}
               layout="fill"
               alt={`logo`}
             />
           </div>
           <div className="w-full    md:hidden">
             <Image
-              src={`/assets/images/controlPortada.jpg`}
+              src={`/assets/images/Portada.jpg`}
               layout="responsive"
               width="100"
               height="100"

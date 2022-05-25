@@ -7,8 +7,8 @@ const Stock: React.FC<{
     return (
         <>
             {quantity > 0 ?
-                (< div className='bg-green-600 p-2 text-xs' >
-                    <span className='text-green-200 font-semibold'>Disponible</span>
+                (< div className='bg-gray-700 p-2 text-xs' >
+                    <span className='text-gray-200 font-semibold'>Disponible</span>
                 </div>) : (
                     < div className='bg-red-600 p-2 text-xs' >
                         <span className='text-red-200 font-semibold'>Sin Stock</span>

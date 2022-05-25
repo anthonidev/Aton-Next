@@ -2,9 +2,13 @@ import React from 'react'
 import { SearchIcon, UserIcon } from '@heroicons/react/solid'
 import Image from 'next/image';
 import Link from 'next/link';
+import { RootState } from '../../../redux/store';
+import { useSelector } from 'react-redux';
 
 const NavBartMain = () => {
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     return (
+
         <div className="  hidden    m-auto top-0 z-10 flex-shrink-0 md:flex h-20 bg-white  ">
 
             <div className="  flex-1  md:flex items-center justify-between  z-40 max-w-7xl mx-auto px-6">
@@ -30,11 +34,33 @@ const NavBartMain = () => {
                     </div>
 
                 </form>
+                {
+                    isAuthenticated && (
+                        <div className='flex justify-end '>
+                            <div className='flex  '>
 
-                <button className=" px-2 py-1 flex  justify-center items-center space-x-2 text-plo border-pri/70 border-2 hover:bg-pri-100 hover:text-white">
-                    <UserIcon className='h-4 w-4 ' />
-                    <span>Iniciar sesión</span>
-                </button>
+                                <Link href="/auth/login">
+                                    <a className=" flex mt-1 mr-2 border p-1 border-gray-700 rounded hover:text-red-600 focus:text-red-600 text-gray-700">
+                                        <UserIcon className='h-4 w-4 ' />
+                                        <span className='text-sm' >Iniciar sesión</span>
+                                    </a>
+
+                                </Link>
+                            </div>
+                            <div className='flex justify-end  '>
+
+                                <Link href="/auth/signup">
+                                    <a className=" flex mt-1 mr-2 border p-1 border-gray-700 rounded hover:text-red-600 focus:text-red-600 text-gray-700">
+                                        <UserIcon className='h-4 w-4 ' />
+                                        <span className='text-sm' >Registrarce</span>
+                                    </a>
+
+                                </Link>
+                            </div>
+                        </div>
+                    )
+                }
+
 
 
             </div>

@@ -58,7 +58,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
       </Head>
       <main className="  bg-white">
         <NavBartMain />
-        <NavBartMainMovile />
+        <NavBartMainMovile  openUser={openUser}/>
         <NavbarMovile openModal={openModal} />
         <Navbar openUser={openUser} />
 

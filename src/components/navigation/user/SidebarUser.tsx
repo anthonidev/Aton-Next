@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
-import { BeakerIcon } from '@heroicons/react/solid'
+import { BeakerIcon, XIcon } from '@heroicons/react/solid'
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ const SidebarUser: FunctionComponent<{
     return (
 
         <motion.div animate={{ x: [150, 0], opacity: [0, 1], }} 
-            transition={{ duration: 0.4, type: 'spring', delay: 0.1 }} className={`bg-plo-300  -mx-9 w-2/12  right-0 top-12 z-40 fixed  h-1/3 rounded-md `} >
+            transition={{ duration: 0.4, type: 'spring', delay: 0.1 }} className={`bg-plo-300 md:w-1/3 w-full  -mx-9 lg:w-3/12 right-0 top-0 z-40 fixed h-full rounded-md `} >
             <div className='  flex h-full'>
 
                 {isAuthenticated ? (
@@ -59,7 +59,7 @@ const SidebarUser: FunctionComponent<{
                         className="ml-1 flex items-center justify-center  focus:outline-none "
                         onClick={closeUser}
                     >
-                        <BeakerIcon className="h-10 w-10 text-plo hover:text-pri " aria-hidden="true" />
+                        <XIcon className="h-10 w-10 text-red-600 hover:text-pri " aria-hidden="true" />
                     </button>
                 </div>
             </div>

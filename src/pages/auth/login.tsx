@@ -9,6 +9,7 @@ import Submit from '../../components/button/Submit';
 import Link from 'next/link';
 import { IFormLogin } from '../../utils/types/interface';
 import { login } from '../../redux/api/auth';
+import Image from 'next/image';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,21 @@ const Login = () => {
         password: '123',
     });
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+        setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
+        const item = e.currentTarget.classList
+        const esValido = e.currentTarget.validity.valid
+
+        if (esValido) {
+            item.replace("border-gray-300", "border-green-300")
+            item.replace("border-red-300", "border-green-300")
+        } else {
+            item.replace("border-gray-300", "border-red-300")
+            item.replace("border-green-300", "border-red-300")
+
+        }
+
+    }
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         dispatch(login(formData.email, formData.password));
@@ -32,59 +47,67 @@ const Login = () => {
 
     return (
         <Layout title='Ingresar | ATON' content="Iniciar sesion en aton">
-            <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-                <div className="max-w-md w-full space-y-8">
-                    <div>
+            <div className=" max-w-7xl flex mx-auto items-center  m-auto bg-gradient-to-br from-gray-100  to-gray-300/50 my-10 shadow ">
+                <div className="w-1/2 hidden md:block ">
+                    <Image
+                        className="object-cover"
+                        src={`/assets/images/loginPortada.jpg`}
+                        layout="responsive"
+                        width="100"
+                        height="100"
+                        alt={`logo`}
 
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-pri">Inicia sesión con tu cuenta</h2>
-                        <p className="mt-2 text-center text-sm text-gray-600">
-                            O{' '}
-                            <Link href="/auth/signup" >
-                                <a className='className="font-medium text-pri hover:text-indigo-500"'>crea una cuenta gratuitamente.</a>
-                            </Link>
-                        </p>
-                    </div>
-                    <form onSubmit={onSubmit} className="mt-8 space-y-6">
-                        <div className="rounded-md shadow-sm -space-y-px">
-                            <InputForm
-                                name={'email'}
-                                type='text'
-                                onChange={onChange}
-                                value={formData.email}
-                                placeholder="Email"
-                            />
-                            <InputForm
-                                name={'password'}
-                                type='password'
-                                onChange={onChange}
-                                value={formData.password}
-                                placeholder="Password"
-                            />
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 text-pri focus:ring-indigo-500 border-gray-300 rounded"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
-                                </label>
-                            </div>
-                            <div className="text-sm">
-                                <Link href="/auth/reset">
-                                    <a className="font-medium text-pri hover:text-indigo-500">
-                                        Olvidaste tu contraseña?
-                                    </a>
-                                </Link>
-                            </div>
-                        </div>
+                    />
+                </div >
+
+                <div className="md:w-1/2 w-full">
+                    <div className="lg:w-1/2 mx-auto w-3/4 ">
                         <div>
-                            <Submit loading={loading} text='Ingresar' />
+
+                            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-800">Inicia sesión con tu cuenta</h2>
+                            <p className="mt-2 text-center text-sm text-gray-600">
+                                O{' '}
+                                <Link href="/auth/signup" >
+                                    <a className='className="font-medium text-blue-700 hover:text-indigo-500"'>crea una cuenta gratuitamente.</a>
+                                </Link>
+                            </p>
                         </div>
-                    </form>
+                        <form onSubmit={onSubmit} className="mt-8 space-y-6">
+                            <div className="rounded-md shadow-sm -space-y-px">
+                             
+                                <InputForm
+                                    name={'email'}
+                                    type='text'
+                                    onChange={onChange}
+                                    value={formData.email}
+                                    placeholder="Email"
+
+                                />
+                                <InputForm
+                                    name={'password'}
+                                    type='password'
+                                    onChange={onChange}
+                                    value={formData.password}
+                                    placeholder="Password"
+
+                                />
+                            </div>
+                            <div className="flex items-center justify-between">
+
+                                <div className="text-sm">
+                                    <Link href="/auth/reset">
+                                        <a className="font-medium text-pri hover:text-indigo-500">
+                                            Olvidaste tu contraseña?
+                                        </a>
+                                    </Link>
+                                </div>
+                            </div>
+                            <div>
+                                <Submit loading={loading} text='Ingresar' />
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </Layout>

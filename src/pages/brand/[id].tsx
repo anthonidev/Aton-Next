@@ -11,7 +11,7 @@ import FilterPrice from '../../components/store/FilterPrice';
 import MoreFilters from '../../components/store/MoreFilters';
 import { brand_products, get_filtered_products, get_pages_products } from '../../redux/api/product';
 import { RootState } from '../../redux/store';
-import { Category, FormFilter, Product } from '../../utils/types/interface';
+import { Category, FormFilter, Product, Brand } from '../../utils/types/interface';
 import CategoryFather from '../../components/form/CategoryFather';
 import CategoryBrand from '../../components/form/BrandCategory';
 
@@ -52,10 +52,9 @@ const BrandPage = () => {
             return result.indexOf(item) === index;
         })
 
-        console.log(result2);
         setCat(result2)
 
-    }, [ categories, products])
+    }, [categories, products])
 
 
 
@@ -95,10 +94,16 @@ const BrandPage = () => {
     }, [filter, dispatch, formData])
 
     useEffect(() => {
-        if (id !== undefined && typeof (id) === 'string')
-            formData.brandsform.push(parseInt(id))
+        const result: number[] = []
+
+        if (id !== undefined && typeof (id) === 'string') {
+            result.push(parseInt(id))
+            formData.brandsform = result
+        }
+
     }, [id, formData]);
- 
+
+
 
     return (
         <Layout title='Aton | Categoria' content='tienda de aton productos de tecnologia ' >
@@ -129,7 +134,7 @@ const BrandPage = () => {
                         <div className="mx-4 md:hidden">
                             <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold '>
                                 <FilterIcon className='h-5 w-5' />
-                                <p>Categorias </p>
+                                <p>{products !== null ? products[0].get_brand : "No hay productos"}</p>
                             </div>
 
                             {
@@ -149,7 +154,12 @@ const BrandPage = () => {
                     )
                 }
                 <div className="flex">
+
                     <div className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
+                        <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold mb-3'>
+                            <FilterIcon className='h-5 w-5' />
+                            <p>{products !== null ? products[0].get_brand : "No hay productos"}</p>
+                        </div>
                         {
                             cat?.map((category: Category) => (
                                 <div key={category.id}>
@@ -159,14 +169,8 @@ const BrandPage = () => {
 
                             ))
                         }
-                        <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold'>
-                            <FilterIcon className='h-5 w-5' />
-                            <p>{products!==null?products[0].get_brand:"No hay productos"}</p>
-                        </div>
-                        <div className="flex flex-col">
-                            <h1 className="font-bold my-2">Subcategorias</h1>
 
-                        </div>
+
                         <FilterPrice state={false} price_range={formData.price_range} onChange={onChange} />
                         <div className=' my-5 '></div>
 

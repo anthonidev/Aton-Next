@@ -7,6 +7,7 @@ import Layout from '../components/layout/Layout'
 import ProductCard from '../components/product/ProductCard';
 import { Product } from '../utils/types/interface';
 import { productsHome } from '../redux/api/product';
+import DemoCarousel from '../components/home/Carrocel';
 
 const Home: NextPage = () => {
 
@@ -20,11 +21,15 @@ const Home: NextPage = () => {
   return (
     <Layout title='Home' content='home content' >
       <div>
-        <Banner />
+        <div >
+          <DemoCarousel />
+        </div>
+
+        {/* <Banner /> */}
         <div className="max-w-7xl container mx-auto px-6 mt-9   ">
           <div className='grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
             {
-              products?.map((product:Product) => (
+              products?.map((product: Product) => (
                 <div key={product.id}>
                   <ProductCard product={product} />
 
