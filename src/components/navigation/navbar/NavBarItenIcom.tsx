@@ -3,7 +3,10 @@ import React, { FunctionComponent } from 'react'
 import { HeartIcon, ShoppingCartIcon, UserIcon } from '@heroicons/react/solid'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
-const NavBarItenIcom: FunctionComponent<{ openUser: () => void }> = ({ openUser }) => {
+const NavBarItenIcom: FunctionComponent<{
+    openUser: () => void
+    openCart: () => void
+}> = ({ openUser, openCart }) => {
 
     const total_items = useSelector((state: RootState) => state.cart.total_items)
 
@@ -18,18 +21,16 @@ const NavBarItenIcom: FunctionComponent<{ openUser: () => void }> = ({ openUser 
                 </button>
             </div>
             <div className='w-full '>
-                <Link href={"/cart"}>
-                    <a>
+                    <button onClick={openCart}>
                         <div className={`flex justify-between mx-6  hover:text-white relative px-3 `}>
                             <ShoppingCartIcon className='h-6 w-6 ' />
                             {
-                                total_items!==0 && <span className="bg-rou text-white absolute right-0 top-0 rounded-full px-1 text-xs ">{total_items}</span>
+                                total_items !== 0 && <span className="bg-rou text-white absolute right-0 top-0 rounded-full px-1 text-xs ">{total_items}</span>
                             }
 
                         </div>
-                    </a>
+                    </button>
 
-                </Link>
             </div>
 
             <div className='w-full'>

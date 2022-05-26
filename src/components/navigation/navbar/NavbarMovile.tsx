@@ -1,10 +1,13 @@
-import { MenuIcon, SearchIcon, ShoppingCartIcon} from '@heroicons/react/solid'
+import { MenuIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import React, { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 
-const NavbarMovile: FunctionComponent<{ openModal: () => void }> = ({ openModal }) => {
+const NavbarMovile: FunctionComponent<{
+    openModal: () => void
+    openCart: () => void
+}> = ({ openModal, openCart }) => {
     const total_items = useSelector((state: RootState) => state.cart.total_items)
 
     return (
@@ -26,18 +29,14 @@ const NavbarMovile: FunctionComponent<{ openModal: () => void }> = ({ openModal 
 
             </form>
             <div className=' flex items-center'>
-                <Link href={"/cart"}>
-                    <a>
-                        <div className={`flex justify-between  text-white relative pr-3 `}>
-                            <ShoppingCartIcon className='h-5 w-5 ' />
-                            {
-                                total_items !== 0 && <span className="bg-rou text-white absolute right-0 top-0 rounded-full px-1 text-xs ">{total_items}</span>
-                            }
+                <button onClick={openCart} className={`flex justify-between  text-white relative pr-3 `}>
+                    <ShoppingCartIcon className='h-5 w-5 ' />
+                    {
+                        total_items !== 0 && <span className="bg-rou text-white absolute right-0 top-0 rounded-full px-1 text-xs ">{total_items}</span>
+                    }
 
-                        </div>
-                    </a>
+                </button>
 
-                </Link>
             </div>
         </div>
 

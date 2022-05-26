@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react'
 import { useRouter } from 'next/router';
-import InputForm from '../../components/form/InputForm';
 import { AppDispatch, RootState } from '../../redux/store';
 import Submit from '../../components/button/Submit';
 import { IFormSignUp } from '../../utils/types/interface';

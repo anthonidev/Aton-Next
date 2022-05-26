@@ -1,11 +1,9 @@
 import Head from "next/head"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from "react-redux";
 import Alert from "../notifications/Alert";
 import Navbar from "../navigation/navbar/Navbar";
 import NavBartMain from "../navigation/navbar/NavBarMain";
-import NavBartOfert from "../navigation/navbar/NavBartOfert";
-
 import { motion } from 'framer-motion';
 import SidebarOpen from "../navigation/sidebar/sidebar";
 import SidebarUser from '../navigation/user/SidebarUser';
@@ -16,11 +14,13 @@ import { Footer } from "../navigation/footer/Footer";
 import { AppDispatch } from "../../redux/store";
 import NavbarMovile from "../navigation/navbar/NavbarMovile";
 import NavBartMainMovile from "../navigation/navbar/NavBartMainMovile";
+import SidebarCart from "../cart/SidebarCart";
 
 const Layout: React.FC<Props> = ({ title, content, children }) => {
   const dispatch: AppDispatch = useDispatch();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
   const [userOpen, setUserOpen] = useState<boolean>(false)
+  const [cartOpen, setCartOpen] = useState<boolean>(false)
 
 
   useEffect(() => {
@@ -39,7 +39,6 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     setSidebarOpen(true)
   }
 
-
   function closeUser() {
     setUserOpen(false)
   }
@@ -47,33 +46,45 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
   function openUser() {
     setUserOpen(!userOpen)
   }
+  function closeCart() {
+    setCartOpen(false)
+  }
+
+  function openCart() {
+    setCartOpen(!cartOpen)
+  }
+
+  
 
   return (
-
     <>
-
       <Head>
         <title>{title}</title>
         <meta name='description' content={content} />
       </Head>
-      <main className="  bg-white">
+      <main className="  bg-white min-h-screen">
         <NavBartMain />
-        <NavBartMainMovile  openUser={openUser}/>
-        <NavbarMovile openModal={openModal} />
-        <Navbar openUser={openUser} />
-
+        <NavBartMainMovile openUser={openUser} />
+        <NavbarMovile openModal={openModal} openCart={openCart} />
+        <Navbar openUser={openUser} openCart={openCart} />
         <div className="pb-6">
           {children}
         </div>
+        <div className="relative bottom-0 lg:mt-28 md:mt-16 mt-10">
+          <Footer />
+        </div>
+
       </main>
       {
-        sidebarOpen ? (<motion.div ><SidebarOpen closeModal={closeModal} /></motion.div>) : (<></>)
+        sidebarOpen && (<motion.div ><SidebarOpen closeModal={closeModal} /></motion.div>)
       }
       {
-        userOpen ? (<motion.div ><SidebarUser closeUser={closeUser} /></motion.div>) : (<></>)
+        cartOpen && (<motion.div ><SidebarCart close={closeCart} /></motion.div>)
+      }
+      {
+        userOpen && (<motion.div ><SidebarUser closeUser={closeUser} /></motion.div>)
       }
       <Alert />
-      <Footer />
     </>
   )
 }

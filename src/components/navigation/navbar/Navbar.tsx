@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { brandsAll, categoriesAll } from '../../../redux/api/product';
 import { AppDispatch, RootState } from '../../../redux/store';
 
-const Navbar: FunctionComponent<{ openUser: () => void }> = ({ openUser }) => {
+const Navbar: FunctionComponent<{
+  openUser: () => void 
+  openCart: () => void 
+ }> = ({ openUser ,openCart}) => {
 
   const dispatch: AppDispatch = useDispatch()
   useEffect(() => {
@@ -22,9 +25,9 @@ const Navbar: FunctionComponent<{ openUser: () => void }> = ({ openUser }) => {
   const brands = useSelector((state: RootState) => state.product.brands);
 
   return (
-    <div>
+    <div className="sticky top-0 z-30 ">
 
-      <div className="sticky md:flex md:flex-shrink-0 hidden  m-auto top-0 z-10   h-12 bg-gray-900">
+      <div className=" md:flex md:flex-shrink-0 hidden  m-auto  h-12 bg-gray-900">
 
         <div className="  hidden   flex-1  md:flex items-center justify-between space-x-2 z-40 bg-gray-900 max-w-7xl mx-auto px-6">
           <div className='flex  text-lg text-pri space-x-10 justify-between items-center'>
@@ -101,7 +104,7 @@ const Navbar: FunctionComponent<{ openUser: () => void }> = ({ openUser }) => {
 
 
           <div className='flex text-plo'>
-            <NavBarItenIcom openUser={openUser} />
+            <NavBarItenIcom openUser={openUser} openCart={openCart} />
           </div>
         </div>
       </div>

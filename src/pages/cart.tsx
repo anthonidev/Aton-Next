@@ -4,11 +4,11 @@ import { AppDispatch, RootState } from '../redux/store'
 import CartItem from '../components/cart/CartItem'
 import Layout from '../components/layout/Layout'
 import { get_shipping_options } from '../redux/api/shipping'
-import { IFormCheckout, itemCart } from '../utils/types/interface'
+import { itemCart } from '../utils/types/interface'
 import { get_total_order } from '../redux/api/order'
 import Link from 'next/link'
-import { setAlert } from '../redux/api/alert'
 import OrdenSumary from '../components/cart/OrdenSumary'
+import { HomeIcon, LockClosedIcon } from '@heroicons/react/solid'
 
 const Cart = () => {
 
@@ -18,70 +18,55 @@ const Cart = () => {
     const authenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
     const [renderForm, setRenderForm] = useState(false)
 
-    const [codeCoupon, setCoupon] = useState('')
-    const [formData, setFormData] = useState<IFormCheckout>({
-        full_name: '',
-        address_line_1: '',
-        address_line_2: '',
-        city: '',
-        district: '',
-        zipcode: '',
-        phone: '',
-        coupon_code: '',
-        shipping_id: 0,
-    });
-
-    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>): void => setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
-    const onSubmit = (e: React.SyntheticEvent) => {
-        e.preventDefault();
-        console.log("good")
-    };
-    useEffect(() => {
-        dispatch(get_shipping_options())
-    }, [dispatch])
 
     useEffect(() => {
         dispatch(get_total_order())
-    }, [amount,dispatch])
+    }, [amount, dispatch])
 
-    useEffect(() => {
-        dispatch(get_total_order(formData.shipping_id, codeCoupon));
-    }, [formData.shipping_id, codeCoupon,dispatch]);
-
-    const verify = () => {
-        if (formData.shipping_id !== 0) {
-            dispatch(setAlert("good", "green"))
-            setRenderForm(true)
-        } else {
-            dispatch(setAlert("Debe seleccionar un metodo de entrega", "yellow"))
-        }
-    }
 
     return (
         <Layout title='Aton | Cart' content='home content' >
             {
                 items?.length ?
-                    (<div className={`max-w-7xl mx-auto px-2 flex md:space-x-5`}>
+                    (<div className={`max-w-7xl mx-auto px-2 flex flex-col md:flex-row  md:space-x-5 `}>
                         <div className=' w-full md:w-4/6 '>
-                            <h1 className='font-semibold text-lg my-4'>Orden <span className="text-plo"> ({items?.length})</span></h1>
+                            <h1 className='font-semibold text-lg my-4 ml-5 uppercase tracking-wider text-gray-700'>Carrito </h1>
                             {
                                 items?.map((item: itemCart) => (
-                                    <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded-lg ">
+                                    <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded-lg shadow ">
                                         <CartItem item={item} />
                                     </div>
                                 ))
                             }
+                            <Link href="/store">
+                                <button className="flex bg-gray-700 hover:bg-gray-900 text-white px-4 py-3 mt-4 rounded justify-center items-center space-x-2">
+                                    <HomeIcon className="h-5 w-5" />
+                                    <span>Continuar Comprando</span>
+                                </button>
+                            </Link>
                         </div>
 
 
                         <div className='w-full md:w-2/6'>
-                            <h1 className='font-semibold text-lg my-4'>Suma de la orden</h1>
+                            <h1 className='font-semibold text-lg my-4 uppercase tracking-wider  ml-5 text-gray-700'>Suma de la orden</h1>
                             <div className='bg-white rounded-lg  shadow px-4 py-3 '>
 
                                 <OrdenSumary />
 
                                 {authenticated && !renderForm &&
-                                    (<Link href={'/checkout'}  ><a className='mt-3 hover:bg-indigo-500 bg-indigo-400 px-5 py-4 flex   rounded-md font-semibold text-gray-800 text-lg' >Procesar Pedido</a></Link>)
+                                    (
+                                        <Link href='/checkout'>
+                                            <a
+                                                type="submit"
+                                                className="group mt-5 relative w-full flex justify-center py-2 px-4 border border-transparent text-lg font-medium rounded text-gray-900 uppercase hover:text-white bg-white border-indigo-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                            >
+                                                <div className="absolute left-0 inset-y-0 flex items-center pl-3">
+                                                    <span className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"><LockClosedIcon /></span>
+                                                </div>
+                                                Pasar por caja
+                                            </a>
+                                        </Link>
+                                    )
                                 }
                                 {!authenticated &&
                                     (<Link href={'/auth/login'}  ><a className='mt-3 hover:bg-indigo-500 text-center bg-indigo-400 flex   px-5 py-4 w-full rounded-md font-semibold text-gray-800 text-lg' >Iniciar Sesion</a></Link>)
