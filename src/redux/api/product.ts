@@ -1,5 +1,5 @@
 import axios from "axios";
-import { brands_ok, categories_ok, products_home_ok, products_ok, product_ok, subcategoty_ok } from "../slice/productSlice";
+import { brands_ok, categories_ok, products_fail, products_home_ok, products_ok, product_ok, subcategoty_ok } from "../slice/productSlice";
 import { AppDispatch } from "../store";
 import { setAlert } from "./alert";
 
@@ -12,12 +12,11 @@ export const productsHome = () => async (dispatch: AppDispatch) => {
 
     try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product/products_homepage`, config);
-        dispatch(products_home_ok(res.data.results));
+        dispatch(products_home_ok(res.data.home));
     } catch (err) {
         dispatch(setAlert('Error con el servidor', 'red'));
     }
 }
-
 export const categoriesAll = () => async (dispatch: AppDispatch) => {
     const config = {
         headers: {
@@ -33,7 +32,6 @@ export const categoriesAll = () => async (dispatch: AppDispatch) => {
         dispatch(setAlert('Error con el servidor', 'red'));
     }
 }
-
 export const brandsAll = () => async (dispatch: AppDispatch) => {
     const config = {
         headers: {
@@ -48,7 +46,6 @@ export const brandsAll = () => async (dispatch: AppDispatch) => {
         dispatch(setAlert('Error con el servidor', 'red'));
     }
 }
-
 export const productsAll = () => async (dispatch: AppDispatch) => {
 
     await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product/products`,
@@ -77,7 +74,6 @@ export const get_pages_products = (url: string) => async (dispatch: AppDispatch)
         dispatch(setAlert('Error con el servidor', 'red'));
     }
 }
-
 export const get_filtered_products = (brands: number[], categories: number[], order: string, sort_by: string, price_range: string) => async (dispatch: AppDispatch) => {
 
     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/product/filter`,
@@ -96,10 +92,10 @@ export const get_filtered_products = (brands: number[], categories: number[], or
         }).then(res => {
             dispatch(products_ok(res.data));
         }).catch(err => {
+            dispatch(products_fail());
 
         })
 }
-
 export const product_detail = (slug:string) => async  (dispatch: AppDispatch) => {
 
       await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api${slug}`, {
@@ -126,7 +122,7 @@ export const category_products = (slug:string) => async  (dispatch: AppDispatch)
             dispatch(products_ok(res.data));
 
         }).catch(err => {
-            console.log(err);
+            dispatch(products_fail());
             
         })
 
@@ -141,7 +137,8 @@ export const brand_products = (slug:string) => async  (dispatch: AppDispatch) =>
             dispatch(products_ok(res.data));
 
         }).catch(err => {
-            console.log(err);
+            dispatch(products_fail());
+
             
         })
 

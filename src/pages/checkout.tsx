@@ -32,13 +32,13 @@ const Checkout = () => {
     const [success, setSuccess] = useState(false)
     const [codeCoupon, setCoupon] = useState('')
     const [formData, setFormData] = useState<IFormCheckout>({
-        full_name: 'anthoni',
-        address_line_1: 'dir1',
-        address_line_2: 'dir2',
-        city: 'Lima',
-        district: 'lima',
-        zipcode: '234',
-        phone: '4325324534',
+        full_name: '',
+        address_line_1: '',
+        address_line_2: '',
+        city: '',
+        district: '',
+        zipcode: '',
+        phone: '',
         coupon_code: '',
         shipping_id: 0,
     });

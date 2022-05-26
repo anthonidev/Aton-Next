@@ -147,9 +147,9 @@ const Category = () => {
                         <div>
                             <div className='grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8'>
                                 {
-                                    products?.map((product: Product) => (
+                                    products ? products.map((product: Product) => (
                                         <ProductCard product={product} key={product.id} />
-                                    ))
+                                    )) : <h1>No hay productos</h1>
                                 }
 
                             </div>

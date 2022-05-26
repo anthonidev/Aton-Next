@@ -35,7 +35,7 @@ const NavBartMain = () => {
 
                 </form>
                 {
-                    isAuthenticated && (
+                    !isAuthenticated && (
                         <div className='flex justify-end '>
                             <div className='flex  '>
 

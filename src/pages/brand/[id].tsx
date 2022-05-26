@@ -134,7 +134,7 @@ const BrandPage = () => {
                         <div className="mx-4 md:hidden">
                             <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold '>
                                 <FilterIcon className='h-5 w-5' />
-                                <p>{products !== null ? products[0].get_brand : "No hay productos"}</p>
+                                <p>{products !== undefined && products !== null && products?.length > 0 ? products[0].get_brand : "No hay productos"}</p>
                             </div>
 
                             {
@@ -158,7 +158,9 @@ const BrandPage = () => {
                     <div className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
                         <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold mb-3'>
                             <FilterIcon className='h-5 w-5' />
-                            <p>{products !== null ? products[0].get_brand : "No hay productos"}</p>
+                            <p>{products !== undefined && products !== null && products?.length > 0 ? products[0].get_brand : "No hay productos"}</p>
+
+
                         </div>
                         {
                             cat?.map((category: Category) => (
@@ -180,9 +182,9 @@ const BrandPage = () => {
                         <div>
                             <div className='grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8'>
                                 {
-                                    products?.map((product: Product) => (
+                                    products ? products.map((product: Product) => (
                                         <ProductCard product={product} key={product.id} />
-                                    ))
+                                    )) : <h1>No hay productos</h1>
                                 }
 
                             </div>

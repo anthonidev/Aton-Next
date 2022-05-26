@@ -59,6 +59,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
         }}>
           <a >
             <Image
+              className="aspect-video object-cover"
               src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo}`}
               layout="responsive"
               height="200"

@@ -70,6 +70,7 @@ export interface User {
 
 
 export interface ProductState {
+    home: HomeProducts| null
     products: Product[] | null
     product: Product | null
     categories: Category[] | null
@@ -81,7 +82,13 @@ export interface ProductState {
     images: Image[] | null
     related: Product[] | null
     colors: Product[] | null
-    subcategory:Category| null
+    subcategory: Category | null
+}
+export interface HomeProducts {
+    products_featured: Product[] | null
+    products_news: Product[] | null
+    products_views: Product[] | null
+    products_sold: Product[] | null
 }
 export interface resultProducts {
     count: string,
