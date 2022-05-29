@@ -8,7 +8,6 @@ import { add_item } from '../../redux/api/cart'
 import { setAlert } from '../../redux/api/alert'
 import Link from 'next/link'
 import { formatterSoles } from '../../utils/helpers/prices'
-import ModalCard from '../cart/ModalCard'
 import Stock from './Stock'
 
 const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
@@ -30,23 +29,12 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
 
   const addToCart = async () => {
     setLoading(true)
-    const MoreThatOne = items !== null && items.find((element: itemCart) => element.product.id === product.id);
-
-    if (MoreThatOne === undefined) openModal()
-    else if (MoreThatOne !== false && MoreThatOne !== undefined) {
-      if (product.quantity !== 1) MoreThatOne.count - product.quantity === 0 ? dispatch(setAlert('No hay stock', 'yellow')) : dispatch(setAlert('Producto actualizado', 'green'))
-      else MoreThatOne.count - product.quantity !== 0 ? dispatch(setAlert('Producto actualizado', 'green')) : dispatch(setAlert('No hay stock', 'red'))
-    }
-
     dispatch(add_item(product));
     setLoading(false)
   }
-
   return (
     <div>
-      {
-        isOpen && total_items !== null && amount !== null && <ModalCard product={product} total_items={total_items} amount={amount} closeModal={closeModal} />
-      }
+    
       <div className='bg-white  rounded-sm  hover:border-black border shadow-sm'>
         <div className='flex justify-between items-center ' >
           <Stock quantity={product.quantity} />

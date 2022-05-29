@@ -27,6 +27,7 @@ export interface CartState {
     items: itemCart[] | null
     amount: number | null
     total_items: number | null
+    sidebar: boolean
 }
 export interface ShippingState {
     shipping_options: shipping_option[] | null
@@ -70,7 +71,7 @@ export interface User {
 
 
 export interface ProductState {
-    home: HomeProducts| null
+    home: HomeProducts | null
     products: Product[] | null
     product: Product | null
     categories: Category[] | null

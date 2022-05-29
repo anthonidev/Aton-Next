@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getStoreLocal } from '../../utils/helpers/helpRedux';
+import { cart_sidebar } from '../slice/cartSlice';
 import { coupon_get, fail_coupon, fail_get_total, get_total_view } from '../slice/orderSlice';
 import { AppDispatch } from '../store';
 import { setAlert } from './alert';
@@ -15,6 +16,7 @@ export const get_total_order = (shipping_id: number | undefined = undefined, cou
             }
         }).then(res => {
             dispatch(get_total_view(res.data))
+
         }).catch(err => {
             dispatch(fail_get_total())
 

@@ -9,6 +9,7 @@ import { get_total_order } from '../redux/api/order'
 import Link from 'next/link'
 import OrdenSumary from '../components/cart/OrdenSumary'
 import { HomeIcon, LockClosedIcon } from '@heroicons/react/solid'
+import { cart_sidebar_off } from '../redux/slice/cartSlice'
 
 const Cart = () => {
 
@@ -18,10 +19,14 @@ const Cart = () => {
     const authenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
     const [renderForm, setRenderForm] = useState(false)
 
+    useEffect(() => {
+        dispatch(cart_sidebar_off())
 
+    }, [dispatch])
     useEffect(() => {
         dispatch(get_total_order())
     }, [amount, dispatch])
+
 
 
     return (

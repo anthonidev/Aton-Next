@@ -103,7 +103,6 @@ const Checkout = () => {
                         {
                             modulo && (<Steps modulo={modulo} />)
                         }
-
                         {
                             modulo === Modulo.SHIPPING && (
                                 <div>

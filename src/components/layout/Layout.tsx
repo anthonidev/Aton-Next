@@ -1,6 +1,6 @@
 import Head from "next/head"
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Alert from "../notifications/Alert";
 import Navbar from "../navigation/navbar/Navbar";
 import NavBartMain from "../navigation/navbar/NavBarMain";
@@ -11,7 +11,7 @@ import { Props } from "../../utils/types/types";
 import { check_authenticated, load_user, refresh } from "../../redux/api/auth";
 import { get_items } from "../../redux/api/cart";
 import { Footer } from "../navigation/footer/Footer";
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import NavbarMovile from "../navigation/navbar/NavbarMovile";
 import NavBartMainMovile from "../navigation/navbar/NavBartMainMovile";
 import SidebarCart from "../cart/SidebarCart";
@@ -20,8 +20,6 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
   const dispatch: AppDispatch = useDispatch();
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
   const [userOpen, setUserOpen] = useState<boolean>(false)
-  const [cartOpen, setCartOpen] = useState<boolean>(false)
-
 
   useEffect(() => {
     dispatch(check_authenticated());
@@ -29,6 +27,8 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     dispatch(refresh());
     dispatch(get_items());
   }, [dispatch]);
+
+
 
 
   function closeModal() {
@@ -46,15 +46,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
   function openUser() {
     setUserOpen(!userOpen)
   }
-  function closeCart() {
-    setCartOpen(false)
-  }
 
-  function openCart() {
-    setCartOpen(!cartOpen)
-  }
-
-  
 
   return (
     <>
@@ -65,8 +57,8 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
       <main className="  bg-white min-h-screen">
         <NavBartMain />
         <NavBartMainMovile openUser={openUser} />
-        <NavbarMovile openModal={openModal} openCart={openCart} />
-        <Navbar openUser={openUser} openCart={openCart} />
+        <NavbarMovile openModal={openModal} />
+        <Navbar openUser={openUser} />
         <div className="pb-6">
           {children}
         </div>
@@ -78,9 +70,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
       {
         sidebarOpen && (<motion.div ><SidebarOpen closeModal={closeModal} /></motion.div>)
       }
-      {
-        cartOpen && (<motion.div ><SidebarCart close={closeCart} /></motion.div>)
-      }
+      <SidebarCart />
       {
         userOpen && (<motion.div ><SidebarUser closeUser={closeUser} /></motion.div>)
       }

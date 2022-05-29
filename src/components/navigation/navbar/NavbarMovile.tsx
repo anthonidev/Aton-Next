@@ -1,15 +1,17 @@
 import { MenuIcon, SearchIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import React, { FunctionComponent } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { cart_sidebar_on } from '../../../redux/slice/cartSlice'
+import { AppDispatch, RootState } from '../../../redux/store'
 
 const NavbarMovile: FunctionComponent<{
     openModal: () => void
-    openCart: () => void
-}> = ({ openModal, openCart }) => {
+}> = ({ openModal }) => {
     const total_items = useSelector((state: RootState) => state.cart.total_items)
-
+    const dispatch: AppDispatch = useDispatch()
+    
+ 
     return (
 
         <div className="bg-gray-900 md:hidden py-1 flex justify-between px-2 sticky top-0 z-30 ">
@@ -29,7 +31,7 @@ const NavbarMovile: FunctionComponent<{
 
             </form>
             <div className=' flex items-center'>
-                <button onClick={openCart} className={`flex justify-between  text-white relative pr-3 `}>
+                <button onClick={()=> dispatch(cart_sidebar_on())} className={`flex justify-between  text-white relative pr-3 `}>
                     <ShoppingCartIcon className='h-5 w-5 ' />
                     {
                         total_items !== 0 && <span className="bg-rou text-white absolute right-0 top-0 rounded-full px-1 text-xs ">{total_items}</span>

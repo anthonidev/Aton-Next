@@ -10,9 +10,8 @@ import { brandsAll, categoriesAll } from '../../../redux/api/product';
 import { AppDispatch, RootState } from '../../../redux/store';
 
 const Navbar: FunctionComponent<{
-  openUser: () => void 
-  openCart: () => void 
- }> = ({ openUser ,openCart}) => {
+  openUser: () => void
+}> = ({ openUser }) => {
 
   const dispatch: AppDispatch = useDispatch()
   useEffect(() => {
@@ -104,7 +103,7 @@ const Navbar: FunctionComponent<{
 
 
           <div className='flex text-plo'>
-            <NavBarItenIcom openUser={openUser} openCart={openCart} />
+            <NavBarItenIcom openUser={openUser} />
           </div>
         </div>
       </div>

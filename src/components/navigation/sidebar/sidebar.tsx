@@ -23,7 +23,7 @@ const SidebarOpen: FunctionComponent<{
             transition={{ duration: 0.4, type: 'spring', delay: 0.1 }} className={` bg-gray-200 min-h-screen  w-5/6  top-0 fixed inset-0 flex z-40 md:hidden overflow-y-auto`} >
             <div className="relative mt-3 w-full">
                 <div className="mt-3  ml-3 flex justify-between">
-                    <Link href={'/'}>
+                    <Link href={'/'} >
                         <a >
                             <Image
                                 className="h-8 w-auto sm:h-10"

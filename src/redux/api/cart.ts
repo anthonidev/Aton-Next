@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getStoreLocal } from "../../utils/helpers/helpRedux";
 import { CartState, itemCart, Product } from "../../utils/types/interface";
-import { get_item_ok, remove } from "../slice/cartSlice";
+import { cart_sidebar, get_item_ok, remove } from "../slice/cartSlice";
 import { AppDispatch } from "../store";
 import { setAlert } from "./alert";
 
@@ -20,7 +20,9 @@ export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
         try {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/add-item`, body, config);
             dispatch(get_item_ok(res.data));
+            dispatch(cart_sidebar());
         } catch (err) {
+            dispatch(setAlert("Ocurrio un error inesperado","red"));
 
         }
     } else {
@@ -67,7 +69,8 @@ export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
             dispatch(get_item_ok({
                 items: cartNew,
                 amount: item.price,
-                total_items: 1
+                total_items: 1,
+                sidebar: false
             }));
         }
     }
@@ -169,7 +172,8 @@ export const remove_item = (item: itemCart) => async (dispatch: AppDispatch) => 
             new_cart = {
                 items: [],
                 amount: 0,
-                total_items: 0
+                total_items: 0,
+                sidebar:false
             }
             cart.items?.map((product_item: itemCart) => {
                 if (product_item.product.id === item.product.id) {
@@ -197,3 +201,4 @@ export const clear = () => async (dispatch: AppDispatch) => {
     dispatch(setAlert(`El carrito esta vacio`, "green"));
 
 }
+
