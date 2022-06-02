@@ -38,6 +38,7 @@ export interface shipping_option {
     name: number
     time_to_delivery: string
     price: string
+    photo: string
 }
 export interface itemCart {
     product: Product
@@ -82,6 +83,7 @@ export interface ProductState {
     characteristic: Characteristic[] | null
     images: Image[] | null
     related: Product[] | null
+    products_views: Product[] | null
     colors: Product[] | null
     subcategory: Category | null
 }
@@ -134,6 +136,7 @@ export interface Image {
 }
 export interface Characteristic {
     title: string
+    description: string
 }
 
 export interface OrderState {
@@ -153,8 +156,7 @@ export interface Coupon {
 
 export interface IFormCheckout {
     full_name: string,
-    address_line_1: string;
-    address_line_2: string;
+    address: string;
     city: string;
     district: string;
     zipcode: string;

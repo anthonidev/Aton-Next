@@ -13,6 +13,7 @@ const initialState: ProductState = {
     characteristic: null,
     images: null,
     related: null,
+    products_views:null,
     colors: null,
     subcategory: null
 }
@@ -30,6 +31,7 @@ export const productSlice = createSlice({
                 state.images = action.payload.images,
                 state.related = action.payload.related,
                 state.colors = action.payload.colors,
+                state.products_views = action.payload.products_views,
                 state.product = action.payload.product
         },
         products_fail: (state: ProductState) => {

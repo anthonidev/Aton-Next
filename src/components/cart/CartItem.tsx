@@ -73,7 +73,7 @@ const CartItem: FunctionComponent<{
             </div>
             <div className='flex  col-span-3 md:col-span-1  justify-between items-center'>
                 <div className='w-16 flex justify-center items-center space-x-3'>
-                    <span className='font-bold text-plo'>{countItem}</span>
+                    <span className='font-bold text-plo'>{item.count}</span>
                     <div className='flex flex-col space-y-3 '>
                         <button onClick={plus} className='text-plo hover:text-pri'>
                             <PlusCircleIcon className='h-6 w-6' />

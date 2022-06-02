@@ -9,6 +9,7 @@ import { setAlert } from '../../redux/api/alert'
 import Link from 'next/link'
 import { formatterSoles } from '../../utils/helpers/prices'
 import Stock from './Stock'
+import { cart_sidebar_on } from '../../redux/slice/cartSlice'
 
 const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   const dispatch: AppDispatch = useDispatch()
@@ -30,6 +31,8 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   const addToCart = async () => {
     setLoading(true)
     dispatch(add_item(product));
+    dispatch(cart_sidebar_on());
+
     setLoading(false)
   }
   return (
@@ -63,7 +66,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
               pathname: '/product/[slug]',
               query: { slug: product.slug },
             }}>
-              <a className='text-gray-800  '>{product.title}</a>
+              <a className='text-gray-800  '>{product.title.substr(0, 40)}...</a>
             </Link>
           </div>
 

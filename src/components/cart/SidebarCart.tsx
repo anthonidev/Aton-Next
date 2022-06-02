@@ -21,8 +21,10 @@ const SidebarCart = () => {
 
 
     useEffect(() => {
-        dispatch(get_total_order())
-    }, [amount, dispatch])
+        if (items!==null && items.length > 0) {
+            dispatch(get_total_order())
+        }
+    }, [amount, dispatch, items])
 
     return (
         <div>

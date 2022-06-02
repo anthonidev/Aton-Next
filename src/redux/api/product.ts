@@ -74,7 +74,7 @@ export const get_pages_products = (url: string) => async (dispatch: AppDispatch)
         dispatch(setAlert('Error con el servidor', 'red'));
     }
 }
-export const get_filtered_products = (brands: number[], categories: number[], order: string, sort_by: string, price_range: string) => async (dispatch: AppDispatch) => {
+export const get_filtered_products = (brands: number[], categories: number[], order: string, sort_by: string, price_range: string, query: string="") => async (dispatch: AppDispatch) => {
 
     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/product/filter`,
         JSON.stringify({
@@ -83,6 +83,7 @@ export const get_filtered_products = (brands: number[], categories: number[], or
             order,
             sort_by,
             price_range,
+            query,
         }),
         {
             headers: {

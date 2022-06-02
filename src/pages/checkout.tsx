@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
-import CartItem from '../components/cart/CartItem'
 import Layout from '../components/layout/Layout'
-import { IFormCheckout, itemCart } from '../utils/types/interface';
+import { IFormCheckout } from '../utils/types/interface';
 import { get_total_order, process_payment } from '../redux/api/order'
-import Link from 'next/link'
 import { setAlert } from '../redux/api/alert'
 import FormDataCheckout from '../components/cart/FormDataCheckout'
 import OrdenSumary from '../components/cart/OrdenSumary'
@@ -26,19 +24,16 @@ const Checkout = () => {
     const router = useRouter();
     const dispatch: AppDispatch = useDispatch()
 
-    const items = useSelector((state: RootState) => state.cart.items)
     const amount = useSelector((state: RootState) => state.cart.amount)
-    const authenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
     const coupon = useSelector((state: RootState) => state.order.coupon)
 
     const [modulo, setModulo] = useState<Modulo>(Modulo.SHIPPING)
-    const [renderForm, setRenderForm] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [chekTC, setChekTC] = useState(false)
     const [codeCoupon, setCoupon] = useState('')
     const [formData, setFormData] = useState<IFormCheckout>({
         full_name: '',
-        address_line_1: '',
-        address_line_2: '',
+        address: '',
         city: '',
         district: '',
         zipcode: '',
@@ -47,8 +42,21 @@ const Checkout = () => {
         shipping_id: 0,
     });
 
-    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>): void => setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
+    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>) => {
+        setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
+        const item = e.currentTarget.classList
+        const esValido = e.currentTarget.validity.valid
+        console.log(esValido);
 
+        if (esValido) {
+            item.replace("border-gray-300", "border-green-300")
+            item.replace("border-red-300", "border-green-300")
+        } else {
+            item.replace("border-gray-300", "border-red-300")
+            item.replace("border-green-300", "border-red-300")
+        }
+
+    }
     useEffect(() => {
         if (amount !== 0 && amount !== null)
             dispatch(get_total_order())
@@ -65,29 +73,38 @@ const Checkout = () => {
         e.preventDefault();
 
         if (formData.shipping_id !== 0) {
-            dispatch(setAlert("good", "green"))
-            setRenderForm(true)
             setModulo(Modulo.PERSONAL_DATES)
         } else {
             dispatch(setAlert("Debe seleccionar un metodo de entrega", "yellow"))
         }
-
         if (modulo === Modulo.PERSONAL_DATES) {
-            setModulo(Modulo.MAKEORDER)
+            if (formData.full_name !== '' && formData.address !== '' && formData.city !== '' && formData.district !== '' && formData.zipcode !== '' && formData.phone !== '') {
+                setModulo(Modulo.MAKEORDER)
+
+            } else {
+                dispatch(setAlert("Debe llenar todos los campos", "yellow"))
+            }
+
         } else if (modulo === Modulo.MAKEORDER) {
-            dispatch(process_payment(formData.shipping_id,
-                formData.coupon_code,
-                formData.full_name,
-                formData.address_line_1,
-                formData.address_line_2,
-                formData.district,
-                formData.city,
-                formData.zipcode,
-                formData.phone
-            )
-            )
-            dispatch(setAlert("good", "green"))
-            setSuccess(true)
+            if (chekTC) {
+
+                dispatch(process_payment(formData.shipping_id,
+                    formData.coupon_code,
+                    formData.full_name,
+                    formData.address,
+                    formData.district,
+                    formData.city,
+                    formData.zipcode,
+                    formData.phone
+                )
+                )
+                dispatch(setAlert("Gracias por su compra", "green"))
+                setSuccess(true)
+            } else {
+                dispatch(setAlert("Debe aceptar los terminos y condiciones", "yellow"))
+                setModulo(Modulo.MAKEORDER)
+
+            }
         }
     }
 
@@ -126,8 +143,7 @@ const Checkout = () => {
                                     <FormDataCheckout
                                         onChange={onChange}
                                         full_name={formData.full_name}
-                                        address_line_1={formData.address_line_1}
-                                        address_line_2={formData.address_line_2}
+                                        address={formData.address}
                                         zipcode={formData.zipcode}
                                         phone={formData.phone}
                                         city={formData.city}
@@ -137,8 +153,36 @@ const Checkout = () => {
                                 </div>
                             )
                         }
+                        {
+                            modulo === Modulo.MAKEORDER && (
+                                <div className='w-full '>
+                                    <div className='flex items-center justify-center'>
+                                        <input
+                                            type="checkbox"
+                                            className="h-4 w-4 border-gray-300 rounded  focus:outline-none checkbox checkbox-primary "
+                                            onClick={() => setChekTC(!chekTC)}
+                                            defaultChecked={chekTC}
 
+                                        />
+                                        <label
+                                            htmlFor={`filter`}
+                                            className="ml-3 text-sm dark:text-day-500 text-gray-600 "
+                                        >
+                                            Acepto los <a href='/terms' className='text-blue-600'>terminos y condiciones</a>
+                                        </label>
+                                    </div>
+                                </div>
+                            )
 
+                        }
+                        {
+                            modulo === Modulo.CONFIRM && (
+                                <div className='w-full '>
+                                    <h1 className='font-semibold text-lg my-4'>...</h1>
+                                </div>
+                            )
+
+                        }
 
                         <div className="flex justify-end mt-5 md:mt-10  ">
                             <button
@@ -158,15 +202,9 @@ const Checkout = () => {
 
                         <div className='bg-white rounded-lg  shadow px-4 py-3'>
                             <OrdenSumary />
-
-
-
-
-
                         </div>
                     </div>
                 </div>
-
 
             </div>
 

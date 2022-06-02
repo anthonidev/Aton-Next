@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getStoreLocal } from "../../utils/helpers/helpRedux";
 import { CartState, itemCart, Product } from "../../utils/types/interface";
-import { cart_sidebar, get_item_ok, remove } from "../slice/cartSlice";
+import { get_item_ok, remove } from "../slice/cartSlice";
 import { AppDispatch } from "../store";
 import { setAlert } from "./alert";
 
@@ -20,7 +20,6 @@ export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
         try {
             const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/add-item`, body, config);
             dispatch(get_item_ok(res.data));
-            dispatch(cart_sidebar());
         } catch (err) {
             dispatch(setAlert("Ocurrio un error inesperado","red"));
 

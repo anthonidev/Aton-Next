@@ -19,8 +19,8 @@ const Login = () => {
     const loading = useSelector((state: RootState) => state.auth.loading);
 
     const [formData, setFormData] = useState<IFormLogin>({
-        email: 'admin@gmail.com',
-        password: '123',
+        email: '',
+        password: '',
     });
 
     const onChange = (e: React.FormEvent<HTMLInputElement>) => {
