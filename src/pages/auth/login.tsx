@@ -3,7 +3,7 @@ import Layout from '../../components/layout/Layout'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import InputForm from '../../components/form/InputForm';
 import Submit from '../../components/button/Submit';
 import Link from 'next/link';
@@ -12,7 +12,7 @@ import { login } from '../../redux/api/auth';
 import Image from 'next/image';
 
 const Login = () => {
-    const dispatch = useDispatch();
+    const dispatch:AppDispatch = useDispatch();
     const router = useRouter();
 
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);

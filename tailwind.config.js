@@ -6,7 +6,7 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      'frank': ['Frank Ruhl Libre'],
+      'roboto': ['Roboto'],
     },
     extend: {
       colors: {

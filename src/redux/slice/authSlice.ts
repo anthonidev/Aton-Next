@@ -21,14 +21,14 @@ export const authSlice = createSlice({
     name: "authenticated",
     initialState,
     reducers: {
-        login_ok: (state, action: PayloadAction<AuthState>) => {
+        login_ok: (state:AuthState, action: PayloadAction<AuthState>) => {
             setStoreLocal('access', action.payload.access ? action.payload.access : '');
             setStoreLocal('refresh', action.payload.refresh ? action.payload.refresh : '');
             state.isAuthenticated = true
             state.access = getStoreLocal('access')
             state.refresh = getStoreLocal('refresh')
         },
-        fail_clear: (state) => {
+        fail_clear: (state:AuthState) => {
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
             state.isAuthenticated = false
@@ -36,23 +36,23 @@ export const authSlice = createSlice({
             state.refresh = null
             state.user = null
         },
-        on_loading: (state) => {
+        on_loading: (state:AuthState) => {
             state.loading = true
         },
-        off_loading: (state) => {
+        off_loading: (state:AuthState) => {
             state.loading = false
         },
-        loaded_user: (state, action: PayloadAction<User>) => {
+        loaded_user: (state:AuthState, action: PayloadAction<User>) => {
             state.user = action.payload
         },
-        fail_user: (state) => {
+        fail_user: (state:AuthState) => {
             state.user = null
         },
-        authenticated_ok: (state) => {
+        authenticated_ok: (state:AuthState) => {
             state.isAuthenticated = true
         },
     
-        refresh_ok: (state, action: PayloadAction<AuthState>) => {
+        refresh_ok: (state:AuthState, action: PayloadAction<AuthState>) => {
             setStoreLocal('access', action.payload.access ? action.payload.access : '');
             state.access = getStoreLocal('access')
         },

@@ -15,9 +15,19 @@ export interface IFormSignUp {
     password: string
     re_password: string
 }
+
+export interface IFormUpdateInfo {
+    user: number
+    first_name: string
+    last_name: string
+    treatment: string
+    dob: string
+    dni: string
+}
 export interface IFormResetPass {
     email: string
 }
+
 export interface IFormResetPassConfirm {
     password: string
     re_password: string
@@ -29,6 +39,28 @@ export interface CartState {
     total_items: number | null
     sidebar: boolean
 }
+
+export interface Account {
+    id: number | null
+    treatment: string | null
+    dob: string | null
+    dni: string | null
+    user: number | null
+    address:Address[]|null
+}
+
+export interface Address {
+    id: number 
+    first_name: string 
+    last_name: string
+    enterprice: string
+    address: string
+    zipcode: string
+    district: string
+    city: string
+    phone: string
+}
+
 export interface ShippingState {
     shipping_options: shipping_option[] | null
 }
@@ -45,11 +77,9 @@ export interface itemCart {
     count: number
 }
 
-
 export interface AlertState {
     msg: (string | null)
     type: (string | null)
-
 }
 
 export interface AuthState {
@@ -58,7 +88,6 @@ export interface AuthState {
     isAuthenticated: boolean
     user: (User | null)
     loading: boolean
-
 }
 
 export interface User {
@@ -69,7 +98,6 @@ export interface User {
     get_full_name: string
     get_short_name: string
 }
-
 
 export interface ProductState {
     home: HomeProducts | null
@@ -87,18 +115,21 @@ export interface ProductState {
     colors: Product[] | null
     subcategory: Category | null
 }
+
 export interface HomeProducts {
     products_featured: Product[] | null
     products_news: Product[] | null
     products_views: Product[] | null
     products_sold: Product[] | null
 }
+
 export interface resultProducts {
     count: string,
     next: string,
     previous: string,
     results: Product[]
 }
+
 export interface Category {
     id: number
     title: string
@@ -110,6 +141,7 @@ export interface Category {
     get_parent: string | null
     get_parent_slug: string | null
 }
+
 export interface Brand {
     id: number
     title: string
@@ -118,6 +150,7 @@ export interface Brand {
     total: number
 
 }
+
 export interface Product {
     id: number
     title: string
@@ -134,6 +167,7 @@ export interface Image {
     id: number
     photo: string
 }
+
 export interface Characteristic {
     title: string
     description: string
@@ -164,7 +198,6 @@ export interface IFormCheckout {
     coupon_code: string,
     shipping_id: number,
 }
-
 
 export interface FormFilter {
     brandsform: number[];

@@ -9,10 +9,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <AnimatePresence exitBeforeEnter>
-
         <Component {...pageProps} />
       </AnimatePresence>
-
     </Provider>
   )
 }

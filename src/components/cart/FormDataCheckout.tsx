@@ -21,7 +21,6 @@ const FormDataCheckout: FunctionComponent<{
     district
 }) => {
 
-
         return (
 
 
