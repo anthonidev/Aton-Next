@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Account, Address } from '../../utils/types/interface';
+import { Account, Address, Orders } from '../../utils/types/interface';
 
 const initialState: Account = {
     id: null,
@@ -7,7 +7,8 @@ const initialState: Account = {
     dob: null,
     dni: null,
     user: null,
-    address: null
+    address: null,
+    orders:null
 
 }
 export const accountSlice = createSlice({
@@ -23,6 +24,9 @@ export const accountSlice = createSlice({
         },
         get_address: (state: Account, action: PayloadAction<Address[]>) => {
             state.address = action.payload
+        },
+        get_my_orders: (state: Account, action: PayloadAction<Orders>) => {
+            state.orders = action.payload
         }
     }
 });
@@ -30,7 +34,8 @@ export const accountSlice = createSlice({
 
 export const {
     get_account,
-    get_address
+    get_address,
+    get_my_orders
 } = accountSlice.actions
 
 

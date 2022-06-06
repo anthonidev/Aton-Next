@@ -47,13 +47,46 @@ export interface Account {
     dni: string | null
     user: number | null
     address:Address[]|null
+    orders:Orders|null
+}
+
+export interface Orders{
+    count:number
+    next:string
+    previous:string
+    results:Order[]
+}
+export interface Order{
+    id:number
+    status:string
+    transaction_id:string
+    amount:string
+    full_name:string
+    address:string
+    district:string
+    city:string
+    postal_zip_code:string
+    orders:OrderItem[]
+    date_issued:string
+}
+export interface OrderItem{
+    id:number,
+    product:{
+        id:number,
+        title:string,
+        price:string,
+        slug:string,
+        photo:string,
+    },
+    count:number,
+    date_added:string,
 }
 
 export interface Address {
     id: number 
     first_name: string 
     last_name: string
-    enterprice: string
+    enterprise: string
     address: string
     zipcode: string
     district: string

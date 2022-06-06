@@ -1,16 +1,12 @@
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { LockClosedIcon, UserCircleIcon, PlusIcon } from '@heroicons/react/solid';
+import { PlusIcon } from '@heroicons/react/solid';
 import AccountLayout from '../../components/layout/LayoutAccount';
-import { Address, IFormUpdateInfo } from '../../utils/types/interface';
-import Submit from '../../components/button/Submit';
+import { Address } from '../../utils/types/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
-import { update_profile, get_address_profile } from '../../redux/api/account';
-import { SpinnerCircularFixed } from 'spinners-react';
-import { setAlert } from '../../redux/api/alert';
 import AddressCard from '../../components/account/AddressCard';
 import AdressAdd from '../../components/account/AdressAdd';
+import { add_account, get_address_profile, remove_address } from '../../redux/api/account';
 
 const AccountAddress = () => {
 
@@ -32,7 +28,7 @@ const AccountAddress = () => {
     const [formData, setFormData] = useState<Address>({
         first_name: '',
         last_name: '',
-        enterprice: '',
+        enterprise: '',
         address: '',
         zipcode: '',
         district: '',
@@ -57,33 +53,49 @@ const AccountAddress = () => {
     }
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        console.log(formData);
-        
-        // dispatch(signup(formData.first_name, formData.last_name, formData.email, formData.password, formData.re_password))
+        dispatch(add_account(formData.id, formData.first_name, formData.last_name, formData.enterprise, formData.address, formData.zipcode, formData.district, formData.city, formData.phone));
         setView(true);
+        setFormData({
+            first_name: '',
+            last_name: '',
+            enterprise: '',
+            address: '',
+            zipcode: '',
+            district: '',
+            city: '',
+            phone: '',
+            id: 0
+        })
         window.scrollTo(0, 0)
     }
 
     const AddAdress = (address: Address) => {
         setFormData(address)
         setView(false);
+
     }
 
+    const RemoveAddress = (id: number) => {
+        dispatch(remove_address(id));
+    }
     return (
         <AccountLayout title='Mi Cuenta | ATON' content='cuenta de usuario de aton' >
-            <div>
+            <section>
                 <h2 className='font-semibold text-lg'>Mis direcciones  </h2>
-                {
-                    view && addresses && addresses.length > 0 && addresses.map((address) => (
-                        <AddressCard key={address.id} address={address} AddAdress={AddAdress} />
-                    ))
-                }
+                <ul className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+                    {
+                        view && addresses && addresses.length > 0 && addresses.map((address) => (
+                            <AddressCard key={address.id} address={address} AddAdress={AddAdress} RemoveAddress={RemoveAddress} />
+                        ))
+                    }
+                </ul>
+
                 {
                     addresses?.length == 0 && <div className='my-5 text-gray-700'>No tienes direcciones!</div>
                 }
                 {
                     !view && (
-                        <AdressAdd formData={formData} onChange={onChange} />
+                        <AdressAdd formData={formData} onChange={onChange} onSubmit={onSubmit} />
                     )
                 }
                 {
@@ -95,7 +107,7 @@ const AccountAddress = () => {
                     )
                 }
 
-            </div>
+            </section>
 
         </AccountLayout>
 
