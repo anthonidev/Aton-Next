@@ -3,7 +3,7 @@ import React from 'react'
 import { HeartIcon, LocationMarkerIcon, ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/solid';
 import AccountLayout from '../../components/layout/LayoutAccount';
 
-const AccountMain = [
+export const AccountMain = [
     { "url": "/account/info", "text": "Información", "icon": <UserCircleIcon className='h-12 w-12' /> },
     { "url": "/account/address", "text": "Direcciones", "icon": <LocationMarkerIcon className='h-12 w-12' /> },
     { "url": "/account/order", "text": "Pedidos", "icon": <ShoppingBagIcon className='h-12 w-12' /> },

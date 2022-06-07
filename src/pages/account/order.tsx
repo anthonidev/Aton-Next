@@ -1,13 +1,12 @@
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { LockClosedIcon, UserCircleIcon, PlusIcon } from '@heroicons/react/solid';
+import React, { useEffect } from 'react'
 import AccountLayout from '../../components/layout/LayoutAccount';
-import { IFormUpdateInfo, Order } from '../../utils/types/interface';
-import Submit from '../../components/button/Submit';
+import { Order } from '../../utils/types/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
-import { get_orders, update_profile } from '../../redux/api/account';
-import { setAlert } from '../../redux/api/alert';
+import { get_orders } from '../../redux/api/account';
+import { EyeIcon } from '@heroicons/react/solid';
+import ModelOrder from '../../components/account/ModelOrder';
 
 const AccountOrders = () => {
 
@@ -23,10 +22,29 @@ const AccountOrders = () => {
 	const previous = useSelector((state: RootState) => state.account.orders?.previous)
 	const orders = useSelector((state: RootState) => state.account.orders?.results)
 
+	const [modal, setModal] = React.useState(false)
+	const [oderData, setOderData] = React.useState<Order>()
+	function closeModal() {
+		setModal(false)
+	}
+	function openModal() {
+		setModal(true)
+	}
+
+	const viewOrder = (order: Order) => {
+		setOderData(order)
+		openModal()
+	}
+
+	const closeOrder = () => {
+		setOderData(undefined)
+		closeModal()
+	}
+
 	const ItemTable = (order: Order) => {
 
 		return (
-			<tr key={order.id} className="border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-900">
+			<tr key={order.id} className="border-b border-opacity-20  hover:bg-gray-100">
 				<td className="p-3">
 					<p>{order.transaction_id}</p>
 				</td>
@@ -42,23 +60,31 @@ const AccountOrders = () => {
 				<td className="p-3 text-right">
 					<p>{order.amount}</p>
 				</td>
-				<td className="p-3 text-right">
-					<span className="px-3 py-1 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">
+				<td className="p-3 text-left">
+					<span className="px-3 py-1 font-semibold rounded-md ">
 						<span>{order.status}</span>
 					</span>
+				</td>
+				<td className="p-3 text-left">
+					<button onClick={() => viewOrder(order)} className='flex text-gray-600 hover:text-rou '>
+						<EyeIcon className='h-5 w-5 ' />
+					</button>
 				</td>
 			</tr>
 		)
 	}
 
 
-
-
 	return (
 		<AccountLayout title='Mi Cuenta | ATON' content='cuenta de usuario de aton' >
 			<div>
+				{
+					modal && oderData && (
+						<ModelOrder order={oderData} close={closeOrder} />
+					)
+				}
 				<h2 className='font-semibold text-lg'>Mis Pedidos  </h2>
-				<div className="container p-2 mx-auto sm:p-4 dark:text-gray-100">
+				<div className="container p-2 mx-auto sm:p-4 shadow">
 					<div className="overflow-x-auto">
 						<table className="min-w-full text-sm">
 							<thead className="">
@@ -69,16 +95,13 @@ const AccountOrders = () => {
 									<th className="p-3">Fecha</th>
 									<th className="p-3">Total</th>
 									<th className="p-3">Estado</th>
+									<th className="p-3"></th>
 								</tr>
 							</thead>
 							<tbody>
 								{
-									orders?.map((order: Order) => {
-										return ItemTable(order)
-									}
-									)
+									orders?.map((order: Order) => { return ItemTable(order) })
 								}
-
 							</tbody>
 						</table>
 					</div>
