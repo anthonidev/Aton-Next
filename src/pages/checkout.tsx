@@ -12,6 +12,7 @@ import SelectShipping from '../components/chekout/SelectShipping'
 import CouponApply from '../components/chekout/CouponApply'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import Steps from '../components/chekout/Steps'
+import { get_address_profile } from '../redux/api/account';
 
 export enum Modulo {
     SHIPPING = "SHIPPING",
@@ -24,6 +25,7 @@ const Checkout = () => {
     const router = useRouter();
     const dispatch: AppDispatch = useDispatch()
 
+
     const amount = useSelector((state: RootState) => state.cart.amount)
     const coupon = useSelector((state: RootState) => state.order.coupon)
 
@@ -32,13 +34,8 @@ const Checkout = () => {
     const [chekTC, setChekTC] = useState(false)
     const [codeCoupon, setCoupon] = useState('')
     const [formData, setFormData] = useState<IFormCheckout>({
-        full_name: '',
-        address: '',
-        city: '',
-        district: '',
-        zipcode: '',
-        phone: '',
         coupon_code: '',
+        address_id: 0,
         shipping_id: 0,
     });
 
@@ -78,24 +75,20 @@ const Checkout = () => {
             dispatch(setAlert("Debe seleccionar un metodo de entrega", "yellow"))
         }
         if (modulo === Modulo.PERSONAL_DATES) {
-            if (formData.full_name !== '' && formData.address !== '' && formData.city !== '' && formData.district !== '' && formData.zipcode !== '' && formData.phone !== '') {
+            if (formData.address_id !== 0) {
                 setModulo(Modulo.MAKEORDER)
 
             } else {
-                dispatch(setAlert("Debe llenar todos los campos", "yellow"))
+                dispatch(setAlert("Debe seleccionar una dirección", "yellow"))
             }
 
         } else if (modulo === Modulo.MAKEORDER) {
             if (chekTC) {
 
-                dispatch(process_payment(formData.shipping_id,
+                dispatch(process_payment(
+                    formData.shipping_id,
                     formData.coupon_code,
-                    formData.full_name,
-                    formData.address,
-                    formData.district,
-                    formData.city,
-                    formData.zipcode,
-                    formData.phone
+                    formData.address_id
                 )
                 )
                 dispatch(setAlert("Gracias por su compra", "green"))
@@ -142,12 +135,7 @@ const Checkout = () => {
 
                                     <FormDataCheckout
                                         onChange={onChange}
-                                        full_name={formData.full_name}
-                                        address={formData.address}
-                                        zipcode={formData.zipcode}
-                                        phone={formData.phone}
-                                        city={formData.city}
-                                        district={formData.district}
+                                        address_id={formData.address_id}
                                     />
 
                                 </div>

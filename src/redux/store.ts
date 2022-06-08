@@ -6,16 +6,18 @@ import cartReducer from "./slice/cartSlice";
 import shippingReducer from "./slice/shippingSlice";
 import orderReducer from "./slice/orderSlice";
 import accountReducer from "./slice/accountSlice";
+import wishlistReducer from "./slice/wishlistSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authReducer,
-        alert:alertReducer,
-        product:productReducer,
-        cart:cartReducer,
-        shipping:shippingReducer,
-        order:orderReducer,
-        account:accountReducer
+        alert: alertReducer,
+        product: productReducer,
+        cart: cartReducer,
+        shipping: shippingReducer,
+        order: orderReducer,
+        account: accountReducer,
+        wishlist: wishlistReducer
     },
 });
 

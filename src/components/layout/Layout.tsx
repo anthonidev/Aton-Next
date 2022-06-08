@@ -15,6 +15,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import NavbarMovile from "../navigation/navbar/NavbarMovile";
 import NavBartMainMovile from "../navigation/navbar/NavBartMainMovile";
 import SidebarCart from "../cart/SidebarCart";
+import { getWishlist } from "../../redux/api/wishlist";
 
 const Layout: React.FC<Props> = ({ title, content, children }) => {
   const dispatch: AppDispatch = useDispatch();
@@ -26,6 +27,7 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     dispatch(load_user());
     dispatch(refresh());
     dispatch(get_items());
+    dispatch(getWishlist())
   }, [dispatch]);
 
 

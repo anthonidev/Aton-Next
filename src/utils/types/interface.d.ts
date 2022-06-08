@@ -40,51 +40,62 @@ export interface CartState {
     sidebar: boolean
 }
 
+export interface WishListState {
+    count: number | null
+    next: string | null
+    previous: string | null
+    results: itemWish[] | null
+
+}
+export interface itemWish {
+    id: number
+    product: Product
+}
 export interface Account {
     id: number | null
     treatment: string | null
     dob: string | null
     dni: string | null
     user: number | null
-    address:Address[]|null
-    orders:Orders|null
+    address: Address[] | null
+    orders: Orders | null
 }
 
-export interface Orders{
-    count:number
-    next:string
-    previous:string
-    results:Order[]
+export interface Orders {
+    count: number
+    next: string
+    previous: string
+    results: Order[]
 }
-export interface Order{
-    id:number
-    status:string
-    transaction_id:string
-    amount:string
-    full_name:string
-    address:string
-    district:string
-    city:string
-    postal_zip_code:string
-    orders:OrderItem[]
-    date_issued:string
+export interface Order {
+    id: number
+    status: string
+    transaction_id: string
+    amount: string
+    full_name: string
+    address: string
+    district: string
+    city: string
+    postal_zip_code: string
+    orders: OrderItem[]
+    date_issued: string
 }
-export interface OrderItem{
-    id:number,
-    product:{
-        id:number,
-        title:string,
-        price:string,
-        slug:string,
-        photo:string,
+export interface OrderItem {
+    id: number,
+    product: {
+        id: number,
+        title: string,
+        price: string,
+        slug: string,
+        photo: string,
     },
-    count:number,
-    date_added:string,
+    count: number,
+    date_added: string,
 }
 
 export interface Address {
-    id: number 
-    first_name: string 
+    id: number
+    first_name: string
     last_name: string
     enterprise: string
     address: string
@@ -222,12 +233,7 @@ export interface Coupon {
 }
 
 export interface IFormCheckout {
-    full_name: string,
-    address: string;
-    city: string;
-    district: string;
-    zipcode: string;
-    phone: string;
+    address_id: number;
     coupon_code: string,
     shipping_id: number,
 }

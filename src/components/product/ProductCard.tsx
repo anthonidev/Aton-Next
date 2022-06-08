@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
@@ -10,24 +10,23 @@ import Link from 'next/link'
 import { formatterSoles } from '../../utils/helpers/prices'
 import Stock from './Stock'
 import { cart_sidebar_on } from '../../redux/slice/cartSlice'
+import { addToWishlist, removeFromWishlist } from '../../redux/api/wishlist'
 
 const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   const dispatch: AppDispatch = useDispatch()
-
-  const items = useSelector((state: RootState) => state.cart.items)
-  const total_items = useSelector((state: RootState) => state.cart.total_items)
-  const amount = useSelector((state: RootState) => state.cart.amount)
-
-  let [isOpen, setIsOpen] = useState(false)
+  const items = useSelector((state: RootState) => state.wishlist.results)
   const [loading, setLoading] = useState(false);
 
-  function closeModal() {
-    setIsOpen(false)
-  }
-  function openModal() {
-    setIsOpen(true)
-  }
+  const [isPresent, setIsPresent] = useState(false);
 
+  useEffect(() => {
+    items?.map(item => {
+      if (item.product.id === product.id) setIsPresent(true)
+    }
+    )
+  }, [items, product])
+
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
   const addToCart = async () => {
     setLoading(true)
     dispatch(add_item(product));
@@ -35,13 +34,34 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
 
     setLoading(false)
   }
+
+  const wishListAction = async () => {
+    console.log(isPresent, isAuthenticated);
+
+    if (isAuthenticated) {
+      if (isPresent) {
+        dispatch(removeFromWishlist(product.id))
+        dispatch(setAlert('Se elimino el producto de la lista de deseos', 'green'))
+        setIsPresent(false)
+      } else {
+        dispatch(addToWishlist(product.id))
+        dispatch(setAlert('Se agrego el producto a la lista de deseos', 'green'))
+
+      }
+    }
+  }
   return (
     <div>
-    
+
       <div className='bg-white  rounded-sm  hover:border-black border shadow-sm'>
         <div className='flex justify-between items-center ' >
           <Stock quantity={product.quantity} />
-          <HeartIcon className='h-4 w-4 mr-3  text-let' />
+          <button onClick={wishListAction}>
+            <HeartIcon className={`h-4 w-4 mr-3   ${isPresent ? "text-rou" : "text-plo"}`} />
+
+
+          </button>
+
 
         </div>
         <Link href={{

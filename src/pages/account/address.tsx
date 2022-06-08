@@ -72,7 +72,6 @@ const AccountAddress = () => {
     const AddAdress = (address: Address) => {
         setFormData(address)
         setView(false);
-
     }
 
     const RemoveAddress = (id: number) => {
