@@ -30,9 +30,6 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
     dispatch(getWishlist())
   }, [dispatch]);
 
-
-
-
   function closeModal() {
     setSidebarOpen(false)
   }
@@ -48,7 +45,6 @@ const Layout: React.FC<Props> = ({ title, content, children }) => {
   function openUser() {
     setUserOpen(!userOpen)
   }
-
 
   return (
     <>

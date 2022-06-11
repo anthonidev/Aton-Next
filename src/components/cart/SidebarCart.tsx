@@ -21,7 +21,7 @@ const SidebarCart = () => {
 
 
     useEffect(() => {
-        if (items!==null && items.length > 0) {
+        if (items !== null && items.length > 0) {
             dispatch(get_total_order())
         }
     }, [amount, dispatch, items])
@@ -32,16 +32,16 @@ const SidebarCart = () => {
                 <motion.div
                     animate={{ x: [150, 0], opacity: [0, 1], }}
                     transition={{ duration: 0.4, type: 'spring', delay: 0.2 }}
-                    className={`bg-gray-300 md:w-2/5 w-5/6  xl:w-3/12 lg:w-4/12 right-0 top-0 z-40 fixed h-full rounded-md  overflow-y-auto `}
+                    className={`bg-slate-300 md:w-2/5 w-5/6  xl:w-3/12 lg:w-4/12 right-0 top-0 z-40 fixed h-full rounded-md  overflow-y-auto `}
 
                 >
-                    <div className=' mx-2'>
+                    <div className=' mx-2 '>
 
                         {
                             items?.length ?
-                                (<div className={``}>
+                                (<div className={`mt-10`}>
                                     <div className=' w-full '>
-                                        <h1 className='font-semibold text-center text-lg my-4'>Carrito <span className="text-plo"> ({items?.length})</span></h1>
+                                        <h1 className='font-semibold text-center text-xl my-4'>Carrito </h1>
                                         {
                                             items?.map((item: itemCart) => (
                                                 <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded ">
@@ -77,7 +77,7 @@ const SidebarCart = () => {
                                 className="ml-1 flex items-center justify-center  focus:outline-none "
                                 onClick={() => dispatch(cart_sidebar_off())}
                             >
-                                <XIcon className="h-10 w-10 text-red-600 hover:text-pri " aria-hidden="true" />
+                                <XIcon className="h-10 w-10 text-red-600 hover:text-gray-700 " aria-hidden="true" />
                             </button>
                         </div>
                     </div>

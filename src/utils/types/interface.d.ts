@@ -157,7 +157,7 @@ export interface ProductState {
     related: Product[] | null
     products_views: Product[] | null
     colors: Product[] | null
-    subcategory: Category | null
+    subcategory: CategoryChildren | null
 }
 
 export interface HomeProducts {
@@ -179,13 +179,17 @@ export interface Category {
     title: string
     photo: string
     slug: string
-    description: string
-    total: number
-    sub_categories: Category[] | null
-    get_parent: string | null
-    get_parent_slug: string | null
+    children: CategoryChildren[] | null
 }
 
+export interface CategoryChildren {
+    id: number
+    title: string
+    slug: string
+    get_parent_slug: string
+    get_parent: string
+    get_total: number
+}
 export interface Brand {
     id: number
     title: string

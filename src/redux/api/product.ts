@@ -27,7 +27,7 @@ export const categoriesAll = () => async (dispatch: AppDispatch) => {
     try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product/categories`, config)
         axios.defaults.headers.common['Accept'] = 'application/json'
-        dispatch(categories_ok(res.data.categories));
+        dispatch(categories_ok(res.data));
     } catch (err) {
         dispatch(setAlert('Error con el servidor', 'red'));
     }

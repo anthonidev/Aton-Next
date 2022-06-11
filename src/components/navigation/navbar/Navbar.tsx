@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { brandsAll, categoriesAll } from '../../../redux/api/product';
 import { AppDispatch, RootState } from '../../../redux/store';
+import Image from 'next/image';
 
 const Navbar: FunctionComponent<{
   openUser: () => void
@@ -39,7 +40,7 @@ const Navbar: FunctionComponent<{
 
                 {
                   viewCategories && (
-                    <div className='absolute   pt-4 left-0 right-0 xl:mx-96 md:mx-0'>
+                    <div className='absolute   pt-4 left-0 right-0 xl:mx-96 md:mx-0 p-1'>
                       <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow'>
 
                         {
@@ -47,8 +48,17 @@ const Navbar: FunctionComponent<{
                             <div key={category.id}>
                               <Link href={'/category/' + category.slug}>
 
-                                <a className="text-plo  flex justify-start items-center hover:text-rou" >
-                                  <ChevronRightIcon className='h-4 w-4' />
+                                <a className="text-gray-600 hover:text-gray-900 flex-col flex justify-start items-center  border p-4 " >
+                                  <Image
+                                    className="aspect-video object-cover "
+                                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
+                                    layout="fixed"
+                                    height="100"
+                                    width="100"
+                                    quality={50}
+                                    alt={category.slug}
+                                  />
+
                                   <span className='uppercase'>  {category.title}</span>
                                 </a>
                               </Link>
@@ -71,7 +81,7 @@ const Navbar: FunctionComponent<{
                 <span className='text-white cursor-pointer ' >Marcas</span>
                 {
                   viewBrands && (
-                    <div className='absolute   pt-4 left-0 right-0 xl:mx-96 md:mx-0 '>
+                    <div className='absolute   pt-4 left-0 right-0 xl:mx-96 md:mx-0 p-2 '>
                       <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow'>
 
                         {

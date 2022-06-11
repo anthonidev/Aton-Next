@@ -47,13 +47,13 @@ const AccountInfo = () => {
 
         })
 
-    }, [firstName, lastName, dniNow, Dob, Treatment,  IdUser])
+    }, [firstName, lastName, dniNow, Dob, Treatment, IdUser])
 
 
 
 
 
-    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement> ) => {
+    const onChange = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>) => {
         setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
         const item = e.currentTarget.classList
         const esValido = e.currentTarget.validity.valid
@@ -71,8 +71,6 @@ const AccountInfo = () => {
 
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        console.log(chekTC);
-
         if (chekTC) {
             window.scrollTo(0, 0)
             dispatch(update_profile(formData.first_name, formData.last_name, formData.dni, formData.dob, formData.treatment))
@@ -81,7 +79,7 @@ const AccountInfo = () => {
         }
 
     }
-   
+
     return (
         <AccountLayout title='Mi Cuenta | ATON' content='cuenta de usuario de aton' >
             <div className='shadow p-3'>
@@ -175,7 +173,7 @@ const AccountInfo = () => {
 
                             />
                         </div>
-                        
+
                         <div className='flex flex-col md:flex-row  items-start md:items-center max-w-lg space-x-4'>
                             <label htmlFor={'dob'} className="block w-1/2 text-sm font-medium text-gray-700 capitalize">
                                 Fecha de nacimiento

@@ -1,23 +1,16 @@
 import React, { FunctionComponent, useEffect } from 'react'
+import { CategoryChildren } from '../../utils/types/interface'
 
 const Check: FunctionComponent<{
-    option: {
-        id: number,
-        title: string
-        total: number | undefined
-    }
+    option:CategoryChildren
     formdata: number[]
     setFilter:(arg:boolean) =>void
 }> = ({
-    option: {
-        id,
-        title,
-        total
-    },
+    option,
     formdata,
     setFilter
 }) => {
-        const i = formdata.indexOf(id);
+        const i = formdata.indexOf(option.id);
         let state = i !== -1 ? true : false
 
 
@@ -33,22 +26,22 @@ const Check: FunctionComponent<{
         return (
             <div className=' className="flex items-center"'>
                 <input
-                    id={`filter-${id}-${title}`}
-                    name={`${id}`}
+                    id={`filter-${option.id}-${option.title}`}
+                    name={`${option.id}`}
                     type="checkbox"
-                    onClick={() => AddCheck(id)}
+                    onClick={() => AddCheck(option.id)}
                     defaultChecked={state}
                     className="h-4 w-4 border-gray-300 rounded  focus:outline-none checkbox checkbox-primary "
 
                 />
                 <label
-                    htmlFor={`filter-${id}-${title}`}
+                    htmlFor={`filter-${option.id}-${option.title}`}
                     className="ml-3 text-sm dark:text-day-500 text-gray-600 "
                 >
-                    {title}
+                    {option.title}
                 </label>
                 {
-                    total !==0&& total&&( <span className='text-plo mx-2'>({total})</span>)
+                    option.get_total !==0&& option.get_total&&( <span className='text-plo mx-2'>({option.get_total})</span>)
                 }
                
 

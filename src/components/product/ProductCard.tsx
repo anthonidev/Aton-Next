@@ -36,8 +36,6 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   }
 
   const wishListAction = async () => {
-    console.log(isPresent, isAuthenticated);
-
     if (isAuthenticated) {
       if (isPresent) {
         dispatch(removeFromWishlist(product.id))

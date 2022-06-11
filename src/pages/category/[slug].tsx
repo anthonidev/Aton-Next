@@ -72,8 +72,8 @@ const CategoryPage = () => {
     }, [filter, dispatch, formData])
 
     useEffect(() => {
-        if (cat?.sub_categories !== null && cat !== undefined)
-            cat.sub_categories.map(({ id }) => {
+        if (cat?.children !== null && cat !== undefined)
+            cat.children.map(({ id }) => {
                 formData.categoriesform.push(id)
             })
     }, [cat, formData]);
@@ -128,7 +128,7 @@ const CategoryPage = () => {
                         <div className="flex flex-col">
                             <h1 className="font-bold my-2">Subcategorias</h1>
                             {
-                                cat?.sub_categories?.map(category => (
+                                cat?.children?.map(category => (
                                     <Link key={category.id} href={'/category/subcategory/' + category.slug}>
 
                                         <a className="text-plo my-2 flex justify-start items-center hover:text-rou" >

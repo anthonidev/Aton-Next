@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
-import { BeakerIcon, ChevronRightIcon, XIcon } from '@heroicons/react/solid'
+import { BeakerIcon, ChevronRightIcon, UserCircleIcon, XIcon } from '@heroicons/react/solid'
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -23,16 +23,17 @@ const SidebarUser: FunctionComponent<{
     return (
 
         <motion.div animate={{ x: [150, 0], opacity: [0, 1], }}
-            transition={{ duration: 0.4, type: 'spring', delay: 0.1 }} className={`bg-gray-300 md:w-1/3 w-full  -mx-9 lg:w-3/12 right-0 top-0 z-40 fixed h-full rounded-md `} >
+            transition={{ duration: 0.4, type: 'spring', delay: 0.1 }} className={`bg-slate-300 md:w-1/3 w-full  md:-mx-4 -mx-9 lg:w-3/12 right-0 top-0 z-40 fixed h-full rounded-md `} >
             <div className='  flex h-full'>
 
                 {isAuthenticated ? (
-                    <div className="  flex-1 flex flex-col items-center   mt-5 justify-around space-y-4 ">
+                    <div className="  flex-1 flex flex-col items-center   mt-5 justify-evenly space-y-4 ">
                         <div className=''>
-                            <div className='my-4' >
+                            <div className='my-6' >
                                 <Link href={'/account/main'}>
-                                    <a className='hover:text-gray-900 text-gray-600 text-lg ' >
-                                        <span >Mi cuenta</span>
+                                    <a className='hover:text-rou text-gray-600 font-bol text-lg flex justify-start items-center  border-2 border-gray-400 bg-white rounded py-2 px-4 ' >
+                                        <UserCircleIcon className='h-6 w-6' />
+                                        <span className='ml-4' >Mi cuenta</span>
                                     </a>
                                 </Link>
                             </div>
@@ -40,10 +41,13 @@ const SidebarUser: FunctionComponent<{
                             {
                                 AccountMain.map((item, index) => {
                                     return (
-                                        <div className='my-4' key={index}>
+                                        <div className='my-6' key={index}>
                                             <Link href={item.url}>
-                                                <a className='hover:text-gray-900 text-gray-600 text-lg' >
-                                                    <span >{item.text}</span>
+                                                <a className='hover:text-rou  text-gray-600 font-bol text-lg flex justify-start items-center border-2 border-gray-400 bg-white rounded py-2 px-4 ' >
+                                                    <div className='h-6 w-6'>
+                                                        {item.icon}
+                                                    </div>
+                                                    <span className='ml-4' >{item.text}</span>
                                                 </a>
 
                                             </Link>
@@ -57,7 +61,7 @@ const SidebarUser: FunctionComponent<{
 
                         <button onClick={logoutHandler}
                         >
-                            <span className="font-bold text-lg border-2 border-rou text-rou hover:text-red-500 p-3 rounded-md ">
+                            <span className="font-bold text-lg border-2 border-red-200 hover:text-white transition-colors bg-red-600 hover:bg-red-800 text-red-300 p-3 rounded-md ">
                                 Cerrar sesión
                             </span>
                         </button>
@@ -87,7 +91,7 @@ const SidebarUser: FunctionComponent<{
                         className="ml-1 flex items-center justify-center  focus:outline-none "
                         onClick={closeUser}
                     >
-                        <XIcon className="h-10 w-10 text-red-600 hover:text-pri " aria-hidden="true" />
+                        <XIcon className="h-10 w-10 text-red-600 hover:text-gray-700 " aria-hidden="true" />
                     </button>
                 </div>
             </div>

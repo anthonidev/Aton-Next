@@ -4,10 +4,10 @@ import { HeartIcon, LocationMarkerIcon, ShoppingBagIcon, UserCircleIcon } from '
 import AccountLayout from '../../components/layout/LayoutAccount';
 
 export const AccountMain = [
-    { "url": "/account/info", "text": "Información", "icon": <UserCircleIcon className='h-12 w-12' /> },
-    { "url": "/account/address", "text": "Direcciones", "icon": <LocationMarkerIcon className='h-12 w-12' /> },
-    { "url": "/account/order", "text": "Pedidos", "icon": <ShoppingBagIcon className='h-12 w-12' /> },
-    { "url": "/account/wishlist", "text": "Lista de deseos", "icon": <HeartIcon className='h-12 w-12' /> },
+    { "url": "/account/info", "text": "Información", "icon": <UserCircleIcon /> },
+    { "url": "/account/address", "text": "Direcciones", "icon": <LocationMarkerIcon /> },
+    { "url": "/account/order", "text": "Pedidos", "icon": <ShoppingBagIcon /> },
+    { "url": "/account/wishlist", "text": "Lista de deseos", "icon": <HeartIcon /> },
 ]
 
 
@@ -25,7 +25,7 @@ const Account = () => {
                             <li className='border flex justify-center  py-6 ' key={index}>
                                 <Link href={item.url}>
                                     <a className='flex-col justify-center flex hover:text-rou '>
-                                        <span className='flex justify-center'>
+                                        <span className='flex justify-center h-12 w-12 mx-auto'>
                                             {item.icon}
                                         </span>
                                         <span className='font-semibold uppercase'>{item.text}</span>

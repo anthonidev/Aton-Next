@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ProductState,Category, Brand, resultProducts, HomeProducts } from '../../utils/types/interface';
+import { ProductState,Category, Brand, resultProducts, HomeProducts, CategoryChildren } from '../../utils/types/interface';
 
 const initialState: ProductState = {
     home:null,
@@ -49,7 +49,7 @@ export const productSlice = createSlice({
             state.previous = action.payload.previous
             state.products = action.payload.results
         },
-        subcategoty_ok: (state: ProductState, action: PayloadAction<Category>) => {
+        subcategoty_ok: (state: ProductState, action: PayloadAction<CategoryChildren>) => {
             state.subcategory = action.payload
         },
 
