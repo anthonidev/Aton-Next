@@ -11,28 +11,21 @@ const NavBarItenIcom: FunctionComponent<{
 
     const total_items = useSelector((state: RootState) => state.cart.total_items)
 
-    
-    
+
+
     return (
         <div className='flex'>
+
             <div className='w-full '>
-                <button onClick={openUser} >
-                    <div className={`flex justify-between mx-6  hover:text-white   `}>
-                        <HeartIcon className='h-6 w-6 ' />
+                <button onClick={() => dispatch(cart_sidebar_on())}>
+                    <div className={`flex justify-between mx-6  hover:text-white relative px-3 `}>
+                        <ShoppingCartIcon className='h-6 w-6 ' />
+                        {
+                            total_items !== 0 && <span className="bg-rou text-white absolute right-0 top-0 rounded-full px-1 text-xs ">{total_items}</span>
+                        }
+
                     </div>
-
                 </button>
-            </div>
-            <div className='w-full '>
-                    <button onClick={()=> dispatch(cart_sidebar_on())}>
-                        <div className={`flex justify-between mx-6  hover:text-white relative px-3 `}>
-                            <ShoppingCartIcon className='h-6 w-6 ' />
-                            {
-                                total_items !== 0 && <span className="bg-rou text-white absolute right-0 top-0 rounded-full px-1 text-xs ">{total_items}</span>
-                            }
-
-                        </div>
-                    </button>
 
             </div>
 

@@ -1,5 +1,5 @@
-import React, { FunctionComponent, MouseEvent, useEffect } from 'react'
-import { LockClosedIcon, XIcon } from '@heroicons/react/solid'
+import React, { useEffect } from 'react'
+import { LockClosedIcon, ShoppingCartIcon, XIcon } from '@heroicons/react/solid'
 
 import { motion } from 'framer-motion';
 import { AppDispatch, RootState } from '../../redux/store';
@@ -10,6 +10,8 @@ import CartItem from './CartItem';
 import OrdenSumary from './OrdenSumary';
 import { get_total_order } from '../../redux/api/order';
 import { cart_sidebar_off } from '../../redux/slice/cartSlice';
+import { clear_cart } from '../../redux/api/cart';
+import Image from 'next/image';
 
 
 const SidebarCart = () => {
@@ -26,31 +28,50 @@ const SidebarCart = () => {
         }
     }, [amount, dispatch, items])
 
+    const handleClear = () => {
+        dispatch(clear_cart())
+    }
+
     return (
         <div>
             {sidebarCartState && (
                 <motion.div
                     animate={{ x: [150, 0], opacity: [0, 1], }}
                     transition={{ duration: 0.4, type: 'spring', delay: 0.2 }}
-                    className={`bg-slate-300 md:w-2/5 w-5/6  xl:w-3/12 lg:w-4/12 right-0 top-0 z-40 fixed h-full rounded-md  overflow-y-auto `}
+                    className={`bg-white border-l-2 border-gray-400 md:w-2/5 w-5/6  xl:w-3/12 lg:w-4/12 right-0 top-0 z-40 fixed h-full rounded-md  overflow-y-auto `}
 
                 >
-                    <div className=' mx-2 '>
+                    <div className=' mx-2  h-full'>
 
                         {
                             items?.length ?
                                 (<div className={`mt-10`}>
                                     <div className=' w-full '>
-                                        <h1 className='font-semibold text-center text-xl my-4'>Carrito </h1>
+                                        <div className='flex justify-center items-center font-semibold  text-xl text-gray-700  border-b-2 border-dashed  '>
+                                            <ShoppingCartIcon className='h-5 w-5' />
+                                            <h1 className='my-1 '>Carrito </h1>
+                                        </div>
+
                                         {
-                                            items?.map((item: itemCart) => (
-                                                <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded ">
+                                            items?.map((item: itemCart, index) => (
+                                                <div key={index} className="flex flex-col px-2 md:px-6 m-2  bg-white rounded ">
                                                     <CartItem item={item} />
                                                 </div>
                                             ))
                                         }
+
+                                        <div className='flex justify-end mx-8'>
+                                            <button
+                                                className="text-right text-gray-600 font-semibold  py-2 px-4 focus:outline-none hover:text-red-600"
+                                                onClick={handleClear}
+                                            >
+                                                <span className='text-xs '>Vaciar carrito</span>
+                                            </button>
+                                        </div>
+
+
                                     </div>
-                                    <div className='bg-white p-2 px-8 m-2 rounded'>
+                                    <div className='bg-white p-2 px-2 md:px-6 m-2 rounded'>
                                         <OrdenSumary />
                                         <Link href='/cart'>
                                             <a
@@ -66,8 +87,16 @@ const SidebarCart = () => {
 
                                     </div>
                                 </div>) :
-                                (<div className=" flex justify-center items-center flex-col pt-10 space-y-8 click-text">
-                                    <h3 className="font-semibold text-lg ">No hay productos en el carrito</h3>
+                                (<div className=" flex justify-center items-center flex-col pt-10 click-text text-gray-600 h-full">
+                                    <Image
+                                        src={`/assets/images/empty_cart.jpg`}
+                                        layout="intrinsic"
+                                        width="100"
+                                        height="100"
+                                        alt={`logo`}
+                                    />
+                                    <h3 className="font-semibold text-lg ">No hay productos en tu carrito </h3>
+                                    <span className='text-xs mt-3 mb-10'>Agrega cuantos productos quieras </span>
                                     <Link href={'/store'}><a className="bg-pri px-4 py-3 rounded hover:bg-indigo-600 text-gray-100 ">Ver Productos</a></Link>
                                 </div>)
                         }

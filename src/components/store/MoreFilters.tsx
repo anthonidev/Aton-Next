@@ -16,8 +16,8 @@ const MoreFilters: FunctionComponent<{
     }
     return (
         <div className=" md:flex-row flex-col flex md:space-x-10  space-y-2 md:space-y-0  ">
-            <div className=' flex '>
-                <label htmlFor='sort_by' className='mr-1 font-semibold w-full md:w-auto'>Clasificar por:</label>
+            <div className=' flex items-end'>
+                <label htmlFor='sort_by' className='mr-1  w-full md:w-auto italic  text-sm tracking-wide font-semibold text-gray-600'>Clasificar: </label>
                 <select
                     className='bg-white border rounded w-full md:w-auto'
                     id='sort_by'
@@ -32,8 +32,8 @@ const MoreFilters: FunctionComponent<{
 
                 </select>
             </div>
-            <div className='flex'>
-                <label htmlFor='order' className='mr-1 font-semibold w-full md:w-auto'>Ordenar por:</label>
+            <div className='flex items-end'>
+                <label htmlFor='order' className='mr-1  w-full md:w-auto italic  text-sm tracking-wide font-semibold text-gray-600'>Ordenar:</label>
                 <select
                     className='  bg-white border rounded w-full md:w-auto'
                     id='order'

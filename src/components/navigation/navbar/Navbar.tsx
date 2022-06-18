@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { MainNav, NavbarItensIcons } from '../../../utils/helpers/data'
-import { ChevronRightIcon, MenuIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, MenuIcon, ChevronDownIcon } from '@heroicons/react/solid';
 import NavItem from './NavItem';
 import NavItenRight from './NavItenRight';
 import NavBarItenIcom from './NavBarItenIcom';
@@ -35,8 +35,11 @@ const Navbar: FunctionComponent<{
               MainNav.map((iten, index) => (<NavItem key={index} iten={iten} type={"main"} />))
             }
             <div className='md:block hidden'>
-              <div className={`  font-semibold text-plo  `} onMouseOver={() => setViewCategories(true)} onMouseLeave={() => setViewCategories(false)}>
-                <span className=' text-white cursor-pointer ' >Categoria</span>
+              <div className={`   `} onMouseOver={() => setViewCategories(true)} onMouseLeave={() => setViewCategories(false)}>
+                <div className={`flex font-semibold tracking-wide cursor-default  hover:text-rou  ${viewCategories ? "text-rou" : "text-white transition-colors"}`} >
+                  <span>Categorias</span>
+                  <ChevronDownIcon className=" h-6 w-6" />
+                </div>
 
                 {
                   viewCategories && (
@@ -45,27 +48,32 @@ const Navbar: FunctionComponent<{
 
                         {
                           categories?.map((category) => (
-                            <div key={category.id}>
+                            <div key={category.id} className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
+                              <Image
+                                className="aspect-video object-cover rounded-sm"
+                                src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
+                                layout="fixed"
+                                height="100"
+                                width="200"
+                                quality={50}
+                                alt={category.slug}
+                              />
                               <Link href={'/category/' + category.slug}>
-
-                                <a className="text-gray-600 hover:text-gray-900 flex-col flex justify-start items-center  border p-4 " >
-                                  <Image
-                                    className="aspect-video object-cover "
-                                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
-                                    layout="fixed"
-                                    height="100"
-                                    width="100"
-                                    quality={50}
-                                    alt={category.slug}
-                                  />
-
-                                  <span className='uppercase'>  {category.title}</span>
-                                </a>
+                                <button className='uppercase text-sm my-2  bg-rou hover:bg-rose-500 text-white py-3 px-2 rounded w-full text-center border-rou-100 border-2'>
+                                  <span className=' tracking-wider '>
+                                    {category.title}
+                                  </span>
+                                </button>
                               </Link>
                             </div>
 
                           ))
                         }
+                        <div >
+                          <Link href='/store'>
+                            <a className='text-gray-900 bg-gray-200 py-1 px-2 text-sm  border-2 hover:bg-gray-300'>Ver todos los productos</a>
+                          </Link>
+                        </div>
                       </div>
 
 
@@ -78,18 +86,23 @@ const Navbar: FunctionComponent<{
             </div>
             <div className='md:block hidden'>
               <div className={`   font-semibold text-plo  `} onMouseOver={() => setViewBrands(true)} onMouseLeave={() => setViewBrands(false)}>
-                <span className='text-white cursor-pointer ' >Marcas</span>
+                <div className={`flex items-center font-semibold tracking-wide cursor-default hover:text-rou  ${viewBrands ? "text-rou" : "text-white transition-colors"}`} >
+
+                  <span> Marcas</span>
+                  <ChevronDownIcon className=" h-6 w-6" />
+                </div>
+
                 {
                   viewBrands && (
                     <div className='absolute   pt-4 left-0 right-0 xl:mx-96 md:mx-0 p-2 '>
-                      <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow'>
+                      <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow '>
 
                         {
                           brands?.map((brand) => (
-                            <div key={brand.id}>
+                            <div key={brand.id} className="py-2 ">
                               <Link href={'/brand/' + brand.id}>
 
-                                <a className="text-plo  flex justify-start items-center hover:text-rou" >
+                                <a className="text-gray-700 tracking-wider  flex justify-start items-center hover:text-rou" >
                                   <ChevronRightIcon className='h-4 w-4' />
                                   <span className='uppercase'>  {brand.title}</span>
                                 </a>
@@ -104,13 +117,10 @@ const Navbar: FunctionComponent<{
                   )
                 }
 
-
-
               </div>
 
             </div>
           </div>
-
 
           <div className='flex text-plo'>
             <NavBarItenIcom openUser={openUser} />

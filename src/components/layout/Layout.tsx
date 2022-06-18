@@ -1,6 +1,6 @@
 import Head from "next/head"
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from "react-redux";
 import Alert from "../notifications/Alert";
 import Navbar from "../navigation/navbar/Navbar";
 import NavBartMain from "../navigation/navbar/NavBarMain";
@@ -11,7 +11,7 @@ import { Props } from "../../utils/types/types";
 import { check_authenticated, load_user, refresh } from "../../redux/api/auth";
 import { get_items } from "../../redux/api/cart";
 import { Footer } from "../navigation/footer/Footer";
-import { AppDispatch, RootState } from "../../redux/store";
+import { AppDispatch } from "../../redux/store";
 import NavbarMovile from "../navigation/navbar/NavbarMovile";
 import NavBartMainMovile from "../navigation/navbar/NavBartMainMovile";
 import SidebarCart from "../cart/SidebarCart";

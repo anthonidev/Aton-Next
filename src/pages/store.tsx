@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/layout/Layout'
-import { ArrowLeftIcon, ArrowRightIcon, } from '@heroicons/react/solid'
+import { ArrowLeftIcon, ArrowRightIcon, ViewGridIcon, MenuIcon } from '@heroicons/react/solid';
 import CategoryFather from '../components/form/CategoryFather';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
@@ -13,6 +13,13 @@ import FilterPrice from '../components/store/FilterPrice';
 import { FilterIcon } from '@heroicons/react/solid';
 import { Breadcrumb } from '../components/navigation/Breadcrumb';
 import { ButtonWithIcon } from '../components/button/ButtonWithIcon';
+import ProductCardRow from '../components/product/ProductCardRow';
+
+enum View {
+    LIST = 'list',
+    GRID = 'grid'
+}
+
 
 const Store = () => {
 
@@ -21,13 +28,15 @@ const Store = () => {
         dispatch(productsAll())
     }, [dispatch])
 
+    const [viewProducts, setViewProducts] = useState<View>(View.GRID)
+
+
     const products = useSelector((state: RootState) => state.product.products);
     const categories = useSelector((state: RootState) => state.product.categories);
     const count = useSelector((state: RootState) => state.product.count)
     const next = useSelector((state: RootState) => state.product.next)
     const previous = useSelector((state: RootState) => state.product.previous)
-    const navigationOn = 'bg-white rounded-md  hover:bg-blue-500  hover:text-white px-4 py-2 mx-1 text-gray-700 transition-colors duration-200 transform'
-    const navigationOff = 'bg-gray-200 cursor-not-allowed px-4 py-2 mx-1 text-gray-500 capitalize  rounded-md '
+
 
     function nextPage(next: string) {
         dispatch(get_pages_products(next))
@@ -65,6 +74,7 @@ const Store = () => {
 
 
 
+
     return (
         <Layout title='Tienda' content='tienda de aton productos de tecnologia ' >
 
@@ -81,16 +91,7 @@ const Store = () => {
                         </>
                     </Breadcrumb>
 
-                    <MoreFilters state={false} sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
-                    <div className="flex justify-between ">
-                        <p className='text-sm  font-semibold  '>Hay {count} productos</p>
-                        <div className="md:hidden ">
-                            <ButtonWithIcon Icom={FilterIcon} funtion={() => SetMobileFilter(!mobileFilter)}>
-                                <span className='uppercase text-sm'>Filtrar</span>
-                            </ButtonWithIcon>
-                        </div>
 
-                    </div>
 
 
                 </div>
@@ -123,8 +124,10 @@ const Store = () => {
                     )
                 }
 
-                <div className=" flex">
-                    <div className='lg:w-1/4 sm:w-1/3 bg-white rounded-md p-5  hidden sm:block'>
+                {/* productos */}
+
+                <div className=" flex bg-gray-100/60">
+                    <div className='lg:w-1/4 sm:w-1/3 bg-gray p-5  hidden sm:block border-r-2'>
                         <div className='text-xl flex space-x-3 text-gray-800 items-center font-semibold'>
                             <FilterIcon className='h-5 w-5' />
                             <p>Categorias </p>
@@ -151,20 +154,62 @@ const Store = () => {
 
 
                     </div>
-                    <div className='lg:w-3/4 sm:w-2/3 p-6 w-full'>
+                    <div className='lg:w-3/4 sm:w-2/3 p-6 w-full bg-gray-100/90'>
+                        <div className='flex lg:justify-between mb-2 lg:flex-row md:flex-col'>
 
+                            <MoreFilters state={false} sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
+                            <div className="flex justify-between items-end ">
+
+                                <div className="sm:hidden ml-3">
+                                    <ButtonWithIcon Icom={FilterIcon} funtion={() => SetMobileFilter(!mobileFilter)}>
+                                        <span className=' text-xs'>Ver Filtros</span>
+                                    </ButtonWithIcon>
+                                </div>
+
+                            </div>
+                            <div className=' hidden md:flex md:space-x-2 md:justify-end '>
+                                <p className='text-sm  italic text-gray-500 '>Hay {count} productos</p>
+                                <ViewGridIcon
+                                    onClick={() => setViewProducts(View.GRID)}
+                                    className={`h-6 w-6 ${viewProducts === View.GRID ? 'text-gray-900' : 'text-gray-400'}`}
+                                />
+                                <MenuIcon
+                                    onClick={() => setViewProducts(View.LIST)}
+                                    className={`h-6 w-6 ${viewProducts === View.LIST ? 'text-gray-900' : 'text-gray-400'}`}
+                                />
+                            </div>
+                        </div>
                         <div>
-                            <div className='grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8'>
+                            <div
+                                className={` hidden md:grid  grid-cols-1  gap-8  ${viewProducts === View.GRID ? 'lg:grid-cols-3 sm:grid-cols-1 md:grid-cols-2 ' : 'grid-cols-1  '}`}
+                            >
+                                {
+                                    viewProducts === View.GRID && products?.map((product: Product) => (
+                                        <ProductCard product={product} key={product.id} />
+                                    ))
+                                }
+                                {
+                                    viewProducts === View.LIST && products?.map((product: Product) => (
+                                        <ProductCardRow product={product} key={product.id} />
+                                    ))
+                                }
+
+                            </div>
+                            <div
+                                className={`grid  grid-cols-1 sm:grid-cols-2  gap-8 md:hidden  '}`}
+                            >
                                 {
                                     products?.map((product: Product) => (
                                         <ProductCard product={product} key={product.id} />
                                     ))
                                 }
 
+
                             </div>
+                            {/* pagination */}
                             <div className="flex justify-between mt-5">
                                 {
-                                    previous && (<button className={`${previous !== null ? navigationOn : navigationOff}  `} onClick={e => previousPage(previous)} >
+                                    previous && (<button className="bg-slate-500 py-1 px-2 border text-white hover:bg-gray-700 focus:outline-none" onClick={e => previousPage(previous)} >
                                         <div className="flex items-center -mx-1">
                                             <ArrowLeftIcon className="w-6 h-6 mx-1" />
                                             <span className="mx-1">
@@ -177,7 +222,7 @@ const Store = () => {
 
                                 {
                                     next && (
-                                        <button onClick={e => nextPage(next)} className={` ${next !== null ? navigationOn : navigationOff}  `}>
+                                        <button onClick={e => nextPage(next)} className="bg-slate-500 py-1 px-2 border text-white hover:bg-gray-700  focus:outline-none">
                                             <div className="flex items-center -mx-1">
                                                 <span className="mx-1">
                                                     Siguiente
@@ -195,45 +240,7 @@ const Store = () => {
                     </div>
                 </div>
 
-                {/* {
-                    mobileFilter && (
-                        <div className="fixed inset-0 flex z-40  ">
-                            <div className=" ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto">
-                                <div className='ml-2 text-lg flex space-x-3 justify-between text-gray-800 items-center font-semibold'>
 
-                                    <p>Categorias</p>
-                                    <a className='cursor-pointer'>
-                                        <XIcon className='h-5 w-5' onClick={e => SetMobileFilter(false)} />
-
-                                    </a>
-
-
-                                </div>
-                                {
-                                    categories?.map((category: Category) => (
-                                        <div key={category.id}>
-                                            <CategoryFather category={category} formdata={formData.categoriesform} setFilter={setFilter} />
-                                            <div className=' my-1 '></div>
-                                        </div>
-
-                                    ))
-                                }
-
-                                <Brands state={false} formdata={formData.brandsform} setFilter={setFilter} />
-                                <div className=' my-1 '></div>
-
-                                <FilterPrice state={false} price_range={formData.price_range} onChange={onChange} />
-                                <div className=' my-1 '></div>
-
-                                <MoreFilters state={false} sort_by={formData.sort_by} order={formData.order} onChange={onChange} />
-                                <div className=' my-1 '></div>
-
-                               
-                            </div>
-                        </div>
-
-                    )
-                } */}
             </div>
         </Layout>
 

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { CartState } from "../../utils/types/interface";
 
 const initialState: CartState = {
+    id: 0,
     items: null,
     amount: null,
     total_items: null,
@@ -14,10 +15,10 @@ export const cartSlice = createSlice({
     reducers: {
         get_item_ok: (state: CartState, action: PayloadAction<CartState>) => {
             localStorage.setItem('cart', JSON.stringify(action.payload));
+            state.id = action.payload.id
             state.items = action.payload.items
             state.amount = action.payload.amount
             state.total_items = action.payload.total_items
-
         },
         remove: (state: CartState) => {
             state.items = null
@@ -30,7 +31,7 @@ export const cartSlice = createSlice({
         cart_sidebar_off: (state: CartState) => {
             state.sidebar = false
         },
-      
+
 
     }
 });

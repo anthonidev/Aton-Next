@@ -3,8 +3,8 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { itemCart, Product } from '../../utils/types/interface'
-import { add_item } from '../../redux/api/cart'
+import { itemCart, Product } from '../../utils/types/interface';
+import { add_item, update_item } from '../../redux/api/cart'
 import { setAlert } from '../../redux/api/alert'
 import Link from 'next/link'
 import { formatterSoles } from '../../utils/helpers/prices'
@@ -15,9 +15,10 @@ import { addToWishlist, removeFromWishlist } from '../../redux/api/wishlist'
 const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   const dispatch: AppDispatch = useDispatch()
   const items = useSelector((state: RootState) => state.wishlist.results)
+  const cart_items = useSelector((state: RootState) => state.cart.items)
   const [loading, setLoading] = useState(false);
-
   const [isPresent, setIsPresent] = useState(false);
+  const [isPresentCart, setIsPresentCart] = useState<itemCart>();
 
   useEffect(() => {
     items?.map(item => {
@@ -26,10 +27,32 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
     )
   }, [items, product])
 
+  useEffect(() => {
+    cart_items?.map(item => {
+      if (item.product.id === product.id) setIsPresentCart(item)
+      else setIsPresentCart(undefined)
+    }
+    )
+  }, [cart_items, product])
+
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
+
   const addToCart = async () => {
     setLoading(true)
-    dispatch(add_item(product));
+    if (!isPresentCart) {
+      if (product.quantity > 0) {
+        dispatch(add_item(product))
+        dispatch(setAlert('Producto agregado al carrito', 'green'))
+      } else {
+        dispatch(setAlert('No hay stock', 'red'))
+      }
+    } else {
+      if (product.quantity >= isPresentCart.count + 1) {
+        dispatch(update_item(product, isPresentCart.count + 1));
+      } else {
+        dispatch(setAlert('No hay stock suficiente', 'red'));
+      }
+    }
     dispatch(cart_sidebar_on());
 
     setLoading(false)
@@ -50,17 +73,12 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   }
   return (
     <div>
-
-      <div className='bg-white  rounded-sm  hover:border-black border shadow-sm'>
+      <div className='bg-white  rounded-sm  hover:border-black border shadow-sm '>
         <div className='flex justify-between items-center ' >
           <Stock quantity={product.quantity} />
           <button onClick={wishListAction}>
-            <HeartIcon className={`h-4 w-4 mr-3   ${isPresent ? "text-rou" : "text-plo"}`} />
-
-
+            <HeartIcon className={`mr-3   ${isPresent ? "text-rou h-5 w-5" : "text-plo h-4 w-4"}`} />
           </button>
-
-
         </div>
         <Link href={{
           pathname: '/product/[slug]',

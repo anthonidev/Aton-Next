@@ -24,8 +24,8 @@ const AccountInfo = () => {
     const Treatment = useSelector((state: RootState) => state.account?.treatment);
     const IdUser = useSelector((state: RootState) => state.auth.user?.id);
 
-
-
+    const [image, setImage] = useState(null);
+    const onFileChange = (e: any) => setImage(e.target.files[0]);
     const [formData, setFormData] = useState<IFormUpdateInfo>({
         user: 0,
         first_name: '',
@@ -73,7 +73,7 @@ const AccountInfo = () => {
         e.preventDefault();
         if (chekTC) {
             window.scrollTo(0, 0)
-            dispatch(update_profile(formData.first_name, formData.last_name, formData.dni, formData.dob, formData.treatment))
+            dispatch(update_profile(formData.first_name, formData.last_name, formData.dni, formData.dob, formData.treatment, image))
         } else {
             dispatch(setAlert('Debes aceptar los términos y condiciones', 'red'))
         }
@@ -173,7 +173,18 @@ const AccountInfo = () => {
 
                             />
                         </div>
-
+                        <div className='form-group'>
+                            <label className='form-label' htmlFor='image'>
+                                Image Upload
+                            </label>
+                            <input
+                                className='form-control'
+                                type='file'
+                                name='image'
+                                onChange={onFileChange}
+                                required
+                            />
+                        </div>
                         <div className='flex flex-col md:flex-row  items-start md:items-center max-w-lg space-x-4'>
                             <label htmlFor={'dob'} className="block w-1/2 text-sm font-medium text-gray-700 capitalize">
                                 Fecha de nacimiento

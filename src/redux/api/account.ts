@@ -41,22 +41,27 @@ export const update_profile = (
     last_name: string,
     dni: string,
     dob: string,
-    treatment: string
+    treatment: string,
+    image: any
 ) => async (dispatch: AppDispatch) => {
+    console.log(image);
+
+    const formData = new FormData();
+    formData.append('image', image);
+    formData.append('last_name', last_name);
+    formData.append('dni', dni);
+    formData.append('first_name', first_name);
+    formData.append('dob', dob);
+    formData.append('treatment', treatment);
     dispatch(on_loading());
+    const body = formData;
     await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL}/api/account/update`,
-        JSON.stringify({
-            first_name,
-            last_name,
-            dni,
-            dob,
-            treatment
-        })
+        body
         , {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                'Content-Type': 'multipart/form-data',
                 'Authorization': `JWT ${getStoreLocal('access')}`
             }
         }).then(res => {

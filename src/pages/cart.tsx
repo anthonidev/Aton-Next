@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../redux/store'
 import CartItem from '../components/cart/CartItem'
 import Layout from '../components/layout/Layout'
-import { get_shipping_options } from '../redux/api/shipping'
 import { itemCart } from '../utils/types/interface'
 import { get_total_order } from '../redux/api/order'
 import Link from 'next/link'
@@ -38,14 +37,14 @@ const Cart = () => {
                             <h1 className='font-semibold text-lg my-4 ml-5 uppercase tracking-wider text-gray-700'>Carrito </h1>
                             {
                                 items?.map((item: itemCart) => (
-                                    <div key={item.product.id} className="flex flex-col px-8 m-2 bg-white rounded-lg shadow ">
+                                    <div key={item.product.id} className="flex flex-col px-4 m-2 bg-white rounded-lg  ">
                                         <CartItem item={item} />
                                     </div>
                                 ))
                             }
                             <Link href="/store">
-                                <button className="flex bg-gray-700 hover:bg-gray-900 text-white px-4 py-3 mt-4 rounded justify-center items-center space-x-2">
-                                    <HomeIcon className="h-5 w-5" />
+                                <button className="flex bg-gray-700 hover:bg-gray-900 text-white px-4 py-2 mt-4 rounded justify-center items-center space-x-2 text-sm">
+                                    <HomeIcon className="h-4 w-4" />
                                     <span>Continuar Comprando</span>
                                 </button>
                             </Link>
@@ -74,7 +73,19 @@ const Cart = () => {
                                     )
                                 }
                                 {!authenticated &&
-                                    (<Link href={'/auth/login'}  ><a className='mt-3 hover:bg-indigo-500 text-center bg-indigo-400 flex   px-5 py-4 w-full rounded-md font-semibold text-gray-800 text-lg' >Iniciar Sesion</a></Link>)
+                                    (
+                                        <div>
+                                            <Link href={'/auth/login'}  >
+                                                <a
+                                                    className='mt-3 hover:bg-indigo-500 text-center bg-indigo-700 flex   px-4 py-3 w-full rounded-md font-semibold text-white text-lg'
+                                                >Iniciar Sesion
+                                                </a>
+                                            </Link>
+                                            <span className='text-xs italic'>Debes iniciar sessión para poder continuar con el pago</span>
+                                        </div>
+
+                                    )
+
                                 }
                             </div>
 

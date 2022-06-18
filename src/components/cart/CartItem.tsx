@@ -1,4 +1,4 @@
-import { MinusCircleIcon, PlusCircleIcon, XIcon } from '@heroicons/react/solid'
+import { MinusCircleIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -7,7 +7,7 @@ import { setAlert } from '../../redux/api/alert'
 import { itemCart } from '../../utils/types/interface'
 import { remove_item, update_item } from '../../redux/api/cart'
 import { get_total_order } from '../../redux/api/order'
-import { formatterSoles } from '../../utils/helpers/prices'
+import { formatterSoles } from '../../utils/helpers/prices';
 
 const CartItem: FunctionComponent<{
     item: itemCart
@@ -48,51 +48,57 @@ const CartItem: FunctionComponent<{
     };
     return (
 
-        <div className="bg-white grid grid-cols-2 sm:grid-cols-3 py-1  md:grid-cols-4   border-b space-x-5 border-gray-100">
-            <div className='flex col-span-2 sm:col-span-1 justify-center items-center'>
-                <Image
-                    className="object-center object-cover "
-                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.product.photo}`}
-                    alt={item.product.slug}
-                    layout="intrinsic"
-                    height="100"
-                    width="100"
+        <div className="bg-white   border-b space-x-5 border-gray-100 py-2 shadow px-3">
+            <div className='flex justify-between'>
+                <div className='w-1/4'>
+                    <Image
+                        className="object-center object-cover "
+                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.product.photo}`}
+                        alt={item.product.slug}
+                        layout="intrinsic"
+                        height="75"
+                        width="75"
 
-                />
-            </div>
-            <div className='col-span-2  flex flex-col justify-center items-start '>
-                <h2 className='text-base font-semibold'>{item.product.title}</h2>
-                <div className=" flex text-sm text-gray-500 ">
-                    <p className="">Marca:</p>
-                    <p className="ml-3 ">sony</p>
+                    />
                 </div>
-                <div className="flex  justify-center items-center space-x-3 ">
-                    <span className="font-bold text-rou">{formatterSoles.format(item.product?.price)}</span>
-                    <span className="font-semibold text-plo line-through ">{formatterSoles.format(item.product?.compare_price)}</span>
-                </div>
-            </div>
-            <div className='flex  col-span-3 md:col-span-1  justify-between items-center'>
-                <div className='w-16 flex justify-center items-center space-x-3'>
-                    <span className='font-bold text-plo'>{item.count}</span>
-                    <div className='flex flex-col space-y-3 '>
-                        <button onClick={plus} className='text-plo hover:text-pri'>
-                            <PlusCircleIcon className='h-6 w-6' />
-                        </button>
-                        <button onClick={minus} className='text-plo hover:text-pri'>
-                            <MinusCircleIcon className='h-6 w-6 ' />
-                        </button>
+
+                <div className='w-3/4 flex flex-col justify-between'>
+                    <div className='flex justify-between items-start'>
+                        <h1 className='text-sm ' >{item.product.title.substr(0, 40)}...</h1>
+                        <div className="flex justify-end items-end ">
+                            <button
+                                className='text-red-300 hover:text-red-600'
+                                onClick={removeItemHandler}
+                            >
+                                <TrashIcon className='h-4 w-4' />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className=" flex text-xs text-gray-500 justify-end italic">
+                        <p className="">Marca:</p>
+                        <p className="ml-3 ">sony</p>
+                    </div>
+                    <div className='flex justify-between'>
+                        <div>
+                            <p className="text-gray-600 font-bold">{formatterSoles.format(item.product?.price)}</p>
+                        </div>
+                        <div className='flex space-x-1'>
+                            <button onClick={minus} className='text-plo hover:text-pri'>
+                                <MinusCircleIcon className='h-5 w-5' />
+                            </button>
+
+                            <span className='font-bold text-plo'>{item.count}</span>
+                            <button onClick={plus} className='text-plo hover:text-pri'>
+                                <PlusCircleIcon className='h-5 w-5' />
+                            </button>
+
+                        </div>
 
                     </div>
                 </div>
-                <div className="flex justify-end items-end ">
-                    <button
-                        className='text-plo hover:text-pri'
-                        onClick={removeItemHandler}
-                    >
-                        <XIcon className='h-6 w-6' />
-                    </button>
-                </div>
             </div>
+
 
         </div>
     )

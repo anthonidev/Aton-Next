@@ -11,11 +11,11 @@ export const alertSlice = createSlice({
     name: "authenticated",
     initialState,
     reducers: {
-        onAlert: (state, action: PayloadAction<AlertState>) => {
+        onAlert: (state:AlertState, action: PayloadAction<AlertState>) => {
             state.msg = action.payload.msg
             state.type = action.payload.type
         },
-        offAlert: (state) => {
+        offAlert: (state:AlertState) => {
             state.msg = null
             state.type = null
         }

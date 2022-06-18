@@ -34,6 +34,7 @@ export interface IFormResetPassConfirm {
 }
 
 export interface CartState {
+    id:number
     items: itemCart[] | null
     amount: number | null
     total_items: number | null
@@ -117,6 +118,7 @@ export interface shipping_option {
     photo: string
 }
 export interface itemCart {
+    id:number
     product: Product
     count: number
 }

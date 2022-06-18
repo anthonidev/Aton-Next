@@ -6,31 +6,30 @@ import { AppDispatch } from "../store";
 import { setAlert } from "./alert";
 
 export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
+
     if (getStoreLocal('access')) {
-        const config = {
+        const product_id = item.id;
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/`,
+            JSON.stringify({ product_id }), {
             headers: {
-                'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'Authorization': `JWT ${getStoreLocal('access')}`,
+                'Content-Type': 'application/json'
             }
-        };
-        const product_id = item.id;
-        const body = JSON.stringify({ product_id });
+        }).then(res => {
+            dispatch(get_item_ok(res.data.cart));
+            dispatch(setAlert('Producto agregado', 'green'));
 
-        try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/add-item`, body, config);
-            dispatch(get_item_ok(res.data));
-        } catch (err) {
-            dispatch(setAlert("Ocurrio un error inesperado","red"));
 
-        }
+        }).catch(err => {
+            console.log("error");
+        })
     } else {
         let cart: CartState;
         let shouldAddItem = true;
         let order_item: itemCart
         let cartNew: itemCart[] = [];
-        let count = 1
-
+        
         if (localStorage.getItem('cart')) {
 
             cart = JSON.parse(localStorage.getItem('cart') || "{}");
@@ -41,6 +40,7 @@ export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
                 }
             });
             order_item = {
+                id: 0,
                 product: item,
                 count: 1
             };
@@ -53,19 +53,20 @@ export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
             cart.items?.map(product_item => {
                 if (product_item.count !== null && cart.amount) {
                     cart.amount += product_item.product.price * product_item.count
-
                 }
             })
             dispatch(get_item_ok(cart));
         } else {
 
             order_item = {
+                id: 0,
                 product: item,
                 count: 1
             };
             cartNew.push(order_item)
 
             dispatch(get_item_ok({
+                id: 0,
                 items: cartNew,
                 amount: item.price,
                 total_items: 1,
@@ -77,13 +78,13 @@ export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
 
 export const get_items = () => async (dispatch: AppDispatch) => {
     if (getStoreLocal('access')) {
-        await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/cart-items`, {
+        await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/`, {
             headers: {
                 'Accept': 'application/json',
                 'Authorization': `JWT ${getStoreLocal('access')}`,
             }
         }).then(res => {
-            dispatch(get_item_ok(res.data));
+            dispatch(get_item_ok(res.data.cart));
 
         }).catch(err => {
             console.log("error");
@@ -101,17 +102,19 @@ export const get_items = () => async (dispatch: AppDispatch) => {
 }
 
 export const update_item = (item: Product, count: number) => async (dispatch: AppDispatch) => {
-
+    
     if (getStoreLocal('access')) {
-        const product_id=item.id
-        axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/update-item`, JSON.stringify({ product_id, count }), {
+        const product_id = item.id
+        axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/`, JSON.stringify({ product_id, count }), {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'Authorization': `JWT ${getStoreLocal('access')}`,
             }
         }).then(res => {
-            dispatch(get_item_ok(res.data));
+            dispatch(get_item_ok(res.data.cart));
+            dispatch(setAlert('Producto actualizado', 'green'));
+
         }).catch(err => {
             console.log(err);
         })
@@ -148,19 +151,17 @@ export const remove_item = (item: itemCart) => async (dispatch: AppDispatch) => 
     let new_cart: CartState;
     if (getStoreLocal('access')) {
         const product_id = item.product.id
-        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/remove-item`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/?id=${product_id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'Authorization': `JWT ${getStoreLocal('access')}`,
             },
-            data: JSON.stringify({ product_id })
         }).then(res => {
-            dispatch(get_item_ok(res.data));
+            dispatch(get_item_ok(res.data.cart));
             dispatch(setAlert('Producto Eliminado', 'yellow'));
 
         }).catch(err => {
-            console.log("error");
             dispatch(setAlert('Error con el servidor', 'red'));
 
         })
@@ -169,13 +170,15 @@ export const remove_item = (item: itemCart) => async (dispatch: AppDispatch) => 
         if (localStorage.getItem('cart')) {
             cart = JSON.parse(localStorage.getItem('cart') || "{}");
             new_cart = {
+                id: 0,
                 items: [],
                 amount: 0,
                 total_items: 0,
-                sidebar:false
+                sidebar: false
             }
             cart.items?.map((product_item: itemCart) => {
-                if (product_item.product.id === item.product.id) {
+                
+                if (product_item.product.id!== item.product.id) {
                     new_cart.items?.push(product_item)
                 }
             });
@@ -188,16 +191,42 @@ export const remove_item = (item: itemCart) => async (dispatch: AppDispatch) => 
             if (new_cart.items !== null) {
                 new_cart.total_items = new_cart.items?.length
             }
+            console.log(new_cart);
+            
             dispatch(get_item_ok(new_cart));
         }
+
     }
 
 }
+export const clear_cart = () => async (dispatch: AppDispatch) => {
 
-export const clear = () => async (dispatch: AppDispatch) => {
-    localStorage.removeItem("cart")
-    dispatch(remove());
-    dispatch(setAlert(`El carrito esta vacio`, "green"));
+    if (getStoreLocal('access')) {
+        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/empty-cart`, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `JWT ${getStoreLocal('access')}`,
+            },
+        }).then(res => {
+            dispatch(get_item_ok(res.data.cart));
+            dispatch(setAlert('Carrito vaciado', 'yellow'));
 
+        }).catch(err => {
+            console.log(err);
+        })
+    } else {
+        localStorage.removeItem('cart');
+        dispatch(get_item_ok({
+            id: 0,
+            items: [],
+            amount: 0,
+            total_items: 0,
+            sidebar: false
+        }));
+        dispatch(setAlert('Carrito vaciado', 'yellow'));
+
+    }
 }
+
+
 

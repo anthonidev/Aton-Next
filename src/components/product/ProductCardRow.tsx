@@ -1,0 +1,139 @@
+import Image from 'next/image'
+import React, { FunctionComponent, useEffect, useState } from 'react'
+import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/solid'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../../redux/store'
+import { itemCart, Product } from '../../utils/types/interface'
+import { add_item, update_item } from '../../redux/api/cart'
+import { setAlert } from '../../redux/api/alert'
+import Link from 'next/link'
+import { formatterSoles } from '../../utils/helpers/prices'
+import Stock from './Stock'
+import { cart_sidebar_on } from '../../redux/slice/cartSlice'
+import { addToWishlist, removeFromWishlist } from '../../redux/api/wishlist'
+
+const ProductCardRow: FunctionComponent<{ product: Product }> = ({ product }) => {
+    const dispatch: AppDispatch = useDispatch()
+    const items = useSelector((state: RootState) => state.wishlist.results)
+    const [loading, setLoading] = useState(false);
+
+    const [isPresent, setIsPresent] = useState(false);
+    const [isPresentCart, setIsPresentCart] = useState<itemCart>();
+    const cart_items = useSelector((state: RootState) => state.cart.items)
+
+    useEffect(() => {
+        items?.map(item => {
+            if (item.product.id === product.id) setIsPresent(true)
+        }
+        )
+    }, [items, product])
+    useEffect(() => {
+        cart_items?.map(item => {
+          if (item.product.id === product.id) setIsPresentCart(item)
+          else setIsPresentCart(undefined)
+        }
+        )
+      }, [cart_items, product])
+
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
+    const addToCart = async () => {
+        setLoading(true)
+        if (!isPresentCart) {
+            if (product.quantity > 0) {
+                dispatch(add_item(product))
+                dispatch(setAlert('Producto agregado al carrito', 'green'))
+            } else {
+                dispatch(setAlert('No hay stock', 'red'))
+            }
+        } else {
+            if (product.quantity >= isPresentCart.count + 1) {
+                dispatch(update_item(product, isPresentCart.count + 1));
+            } else {
+                dispatch(setAlert('No hay stock suficiente', 'red'));
+            }
+        }
+        dispatch(cart_sidebar_on());
+
+        setLoading(false)
+    }
+
+    const wishListAction = async () => {
+        if (isAuthenticated) {
+            if (isPresent) {
+                dispatch(removeFromWishlist(product.id))
+                dispatch(setAlert('Se elimino el producto de la lista de deseos', 'green'))
+                setIsPresent(false)
+            } else {
+                dispatch(addToWishlist(product.id))
+                dispatch(setAlert('Se agrego el producto a la lista de deseos', 'green'))
+
+            }
+        }
+    }
+    return (
+        <div>
+            <div className='bg-white  rounded-sm grid grid-cols-3 hover:border-black border shadow-sm '>
+                <div className='flex justify-center items-center overflow-hidden'>
+                    <Link href={{
+                        pathname: '/product/[slug]',
+                        query: { slug: product.slug },
+                    }}>
+                        <a >
+                            <Image
+                                className="aspect-video object-cover"
+                                src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo}`}
+                                layout="fixed"
+                                height="170"
+                                width="170"
+                                alt={product.slug}
+                            />
+                        </a>
+                    </Link>
+                </div>
+
+
+
+
+                <div className='w-full col-span-2 '>
+                    <div className='flex justify-between items-center ' >
+                        <Stock quantity={product.quantity} />
+                        <button className='focus:outline-none' onClick={wishListAction}>
+                            <HeartIcon className={`mr-3   ${isPresent ? "text-rou h-5 w-5" : "text-plo h-4 w-4"}`} />
+                        </button>
+                    </div>
+                    <div className='flex justify-between   '>
+                        <div className=' px-3 flex flex-col justify-center'>
+                            <Link href={{
+                                pathname: '/product/[slug]',
+                                query: { slug: product.slug },
+                            }}>
+                                <a className='text-gray-800 lg:text-xl font-semibold '>{product.title}</a>
+                            </Link>
+
+                        </div>
+
+                        <div className='px-3 text-lg bg-white mt-3 flex flex-col justify-center items-center mb-2'>
+                            <div>
+                                <p className='text-let line-through font-semibold text-sm'>{formatterSoles.format(product?.compare_price)}</p>
+                                <p className='text-black'>{formatterSoles.format(product?.price)}</p>
+                            </div>
+
+                            <div className=' flex justify-end items-end   '>
+                                {loading ? <button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-indigo-400 dark:text-coolGray-900 hover:bg-indigo-600">Añadir al carrito</button> :
+                                    <button onClick={addToCart} className='bg-white text-gray-900 hover:text-white  rounded-md hover:bg-gray-700 flex border px-2 py-1'>
+                                        <ShoppingCartIcon className='h-6 w-6  ' />
+                                        <span>Comprar</span>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default ProductCardRow

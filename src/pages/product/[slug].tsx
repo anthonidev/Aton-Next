@@ -1,4 +1,4 @@
-import { ArrowSmRightIcon, CheckIcon, MinusIcon, PlusIcon, ShoppingCartIcon, XIcon } from '@heroicons/react/solid'
+import { ArrowSmRightIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,12 +6,13 @@ import Layout from '../../components/layout/Layout'
 import ProductCard from '../../components/product/ProductCard'
 import ProductImages from '../../components/product/ProductImages'
 import Stock from '../../components/product/Stock'
-import { add_item } from '../../redux/api/cart'
+import { setAlert } from '../../redux/api/alert'
+import { add_item, update_item } from '../../redux/api/cart'
 import { product_detail } from '../../redux/api/product'
 import { cart_sidebar_on } from '../../redux/slice/cartSlice'
 import { RootState } from '../../redux/store'
 import { formatterSoles } from '../../utils/helpers/prices'
-import { Characteristic, Product } from '../../utils/types/interface'
+import { Characteristic, itemCart, Product } from '../../utils/types/interface'
 
 const Product = () => {
     const router = useRouter()
@@ -26,15 +27,39 @@ const Product = () => {
     const related = useSelector((state: RootState) => state.product.related)
     const products_views = useSelector((state: RootState) => state.product.products_views)
     const characteristic = useSelector((state: RootState) => state.product.characteristic)
+    const cart_items = useSelector((state: RootState) => state.cart?.items)
 
     const images = useSelector((state: RootState) => state.product.images)
     const [loading, setLoading] = useState(false);
+    const [isPresentCart, setIsPresentCart] = useState<itemCart>();
 
+    useEffect(() => {
+
+        product !== null && cart_items?.map((item: itemCart) => {
+            
+            if (item.product === product.id) setIsPresentCart(item)
+        }
+        )
+    }, [cart_items, product])
 
     const addToCart = async () => {
         setLoading(true)
-        dispatch(add_item(product));
+        if (!isPresentCart) {
+            if (product.quantity > 0) {
+                dispatch(add_item(product))
+                dispatch(setAlert('Producto agregado al carrito', 'green'))
+            } else {
+                dispatch(setAlert('No hay stock', 'red'))
+            }
+        } else {
+            if (product.quantity >= isPresentCart.count + 1) {
+                dispatch(update_item(product, isPresentCart.count + 1));
+            } else {
+                dispatch(setAlert('No hay stock suficiente', 'red'));
+            }
+        }
         dispatch(cart_sidebar_on());
+
         setLoading(false)
     }
 
@@ -63,7 +88,7 @@ const Product = () => {
 
                                         <li className="flex items-center text-sm text-gray-600 my-2" key={item.title}>
                                             <div className=' flex w-2/5'>
-                                                <span className='mr-2 font-bold'> {item.title}</span>
+                                                <span className='mr-2 font-bold text-gray-800'> {item.title}</span>
                                             </div>
 
                                             <div className=' text-gray-900 w-3/5   pl-3'>
