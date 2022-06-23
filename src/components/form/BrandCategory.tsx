@@ -9,12 +9,9 @@ const CategoryBrand: FunctionComponent<{
 }> = ({
     category: {
         id,
-        description,
         photo,
         slug,
-        sub_categories,
         title,
-        total
     },
     formdata,
     setFilter

@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useEffect } from 'react'
-import { CategoryChildren } from '../../utils/types/interface'
+import { Brand, CategoryChildren } from '../../utils/types/interface'
 
 const Check: FunctionComponent<{
-    option:CategoryChildren
+    option: CategoryChildren | Brand
     formdata: number[]
-    setFilter:(arg:boolean) =>void
+    setFilter: (arg: boolean) => void
 }> = ({
     option,
     formdata,
@@ -17,11 +17,14 @@ const Check: FunctionComponent<{
         const AddCheck = (id: number) => {
             if (i !== -1) {
                 formdata.splice(i, 1)
-            } else{
+            } else {
                 formdata.push(id)
-            } 
+            }
             setFilter(true)
 
+        }
+        function isCategoryChildren(object: any): object is CategoryChildren {
+            return 'get_total' in object;
         }
         return (
             <div className=' className="flex items-center"'>
@@ -41,9 +44,10 @@ const Check: FunctionComponent<{
                     {option.title}
                 </label>
                 {
-                    option.get_total !==0&& option.get_total&&( <span className='text-plo mx-2'>({option.get_total})</span>)
+
+                    isCategoryChildren(option) && option?.get_total !== 0 && option.get_total && (<span className='text-plo mx-2'>({option.get_total})</span>)
                 }
-               
+
 
             </div>
         )

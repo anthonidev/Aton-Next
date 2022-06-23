@@ -61,7 +61,7 @@ const AdressAdd: FunctionComponent<{
                 </div>
             </div>
             {dataForm('district', formData.district, 'Distrito', true, '[a-zA-Z0-9\s]{1,25}')}
-            {dataForm('phone', formData.phone, 'Teléfono', true, '[0-9]{8}')}
+            {dataForm('phone', formData.phone, 'Teléfono', true, '[0-9]{9}')}
             {dataForm('enterprise', formData.enterprise, 'Empresa', false, '[a-zA-Z0-9\s]{1,25}')}
             {dataForm('zipcode', formData.zipcode, 'Código Postal', false, '[0-9]{5}')}
 

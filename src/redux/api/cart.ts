@@ -68,7 +68,7 @@ export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
             dispatch(get_item_ok({
                 id: 0,
                 items: cartNew,
-                amount: item.price,
+                amount: parseInt(item.price),
                 total_items: 1,
                 sidebar: false
             }));

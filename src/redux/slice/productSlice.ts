@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ProductState,Category, Brand, resultProducts, HomeProducts, CategoryChildren } from '../../utils/types/interface';
+import { ProductState,Category, Brand, resultProducts, HomeProducts, CategoryChildren, DetailProduct } from '../../utils/types/interface';
 
 const initialState: ProductState = {
     home:null,
@@ -10,11 +10,6 @@ const initialState: ProductState = {
     previous: null,
     next: null,
     count: null,
-    characteristic: null,
-    images: null,
-    related: null,
-    products_views:null,
-    colors: null,
     subcategory: null
 }
 
@@ -26,13 +21,8 @@ export const productSlice = createSlice({
         products_home_ok: (state: ProductState, action: PayloadAction<HomeProducts>) => {
             state.home = action.payload
         },
-        product_ok: (state: ProductState, action: PayloadAction<ProductState>) => {
-            state.characteristic = action.payload.characteristic,
-                state.images = action.payload.images,
-                state.related = action.payload.related,
-                state.colors = action.payload.colors,
-                state.products_views = action.payload.products_views,
-                state.product = action.payload.product
+        product_ok: (state: ProductState, action: PayloadAction<DetailProduct>) => {
+            state.product = action.payload
         },
         products_fail: (state: ProductState) => {
             state.products =null

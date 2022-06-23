@@ -8,12 +8,10 @@ const CategorySidebar: FunctionComponent<{
 }> = ({
     category: {
         id,
-        description,
         photo,
         slug,
-        sub_categories,
+        children,
         title,
-        total
     },
 
 }) => {
@@ -34,7 +32,7 @@ const CategorySidebar: FunctionComponent<{
                 </div>
                 <div className="ml-4 my-3">
                     {
-                        view && sub_categories?.map(category => (
+                        view && children?.map(category => (
 
                             <Link key={category.id} href={'/category/subcategory/' + category.slug}>
 

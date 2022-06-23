@@ -28,7 +28,7 @@ const ProductImages: FunctionComponent<{
                             src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${main}`}
                             layout="intrinsic"
                             height="200"
-                            width="200"
+                            width="180"
                         />
                     </button>
                     {images.map((item: any) => (
@@ -44,7 +44,7 @@ const ProductImages: FunctionComponent<{
                                 src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.photo}`}
                                 layout="intrinsic"
                                 height="200"
-                                width="200"
+                                width="180"
                             />
                         </button>
                     ))
@@ -61,7 +61,7 @@ const ProductImages: FunctionComponent<{
                         src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${viewPhoto}`}
                         layout="responsive"
                         height="300"
-                        width="300"
+                        width="270"
                     />
                 )}
 

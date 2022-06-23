@@ -23,20 +23,40 @@ const Product = () => {
         if (slug !== undefined)
             dispatch(product_detail(router.asPath));
     }, [router.asPath, slug, dispatch]);
-    const product: Product = useSelector((state: RootState) => state.product.product)
-    const related = useSelector((state: RootState) => state.product.related)
-    const products_views = useSelector((state: RootState) => state.product.products_views)
-    const characteristic = useSelector((state: RootState) => state.product.characteristic)
+    const product = useSelector((state: RootState) => state.product?.product)
+    const colors = useSelector((state: RootState) => state.product.product?.colors)
+    const products_views = useSelector((state: RootState) => state.product.product?.related)
+    const characteristic = useSelector((state: RootState) => state.product.product?.characteristics)
     const cart_items = useSelector((state: RootState) => state.cart?.items)
 
-    const images = useSelector((state: RootState) => state.product.images)
+    const images = useSelector((state: RootState) => state.product.product?.images)
     const [loading, setLoading] = useState(false);
     const [isPresentCart, setIsPresentCart] = useState<itemCart>();
+
+    const [viewProduct, setViewProduct] = useState<Product>();
+
+    useEffect(() => {
+        if (product !== null) {
+            setViewProduct({
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                compare_price: product.compare_price,
+                quantity: product.quantity,
+                slug: product.slug,
+                photo: product.photo,
+                photo_thumbnail_sm: product.photo_thumbnail_sm,
+                photo_thumbnail_xm: product.photo_thumbnail_xm,
+                get_category: product.get_category,
+                get_brand: product.get_brand
+            })
+        }
+    }, [product])
 
     useEffect(() => {
 
         product !== null && cart_items?.map((item: itemCart) => {
-            
+
             if (item.product === product.id) setIsPresentCart(item)
         }
         )
@@ -44,15 +64,15 @@ const Product = () => {
 
     const addToCart = async () => {
         setLoading(true)
-        if (!isPresentCart) {
-            if (product.quantity > 0) {
+        if (!isPresentCart && product) {
+            if (product?.quantity > 0) {
                 dispatch(add_item(product))
                 dispatch(setAlert('Producto agregado al carrito', 'green'))
             } else {
                 dispatch(setAlert('No hay stock', 'red'))
             }
         } else {
-            if (product.quantity >= isPresentCart.count + 1) {
+            if (isPresentCart && product && product.quantity >= isPresentCart.count + 1) {
                 dispatch(update_item(product, isPresentCart.count + 1));
             } else {
                 dispatch(setAlert('No hay stock suficiente', 'red'));
@@ -69,11 +89,19 @@ const Product = () => {
 
                 <section className=" flex-row md:flex ">
                     <div className="w-full md:w-1/2 bg-white  mt-3 border shadow ">
-                        <ProductImages main={product?.photo} title={product?.title} images={images} />
+                        {
+                            viewProduct !== undefined && images !== undefined && (
+                                <ProductImages main={viewProduct.photo} title={viewProduct.title} images={images} />
+                            )
+                        }
                     </div>
                     <div className="w-full md:w-1/2 bg-gray-50 border mt-3 shadow  ">
                         <div className='flex justify-end items-center ' >
-                            <Stock quantity={product?.quantity} />
+                            {
+                                viewProduct !== undefined && (
+                                    <Stock quantity={viewProduct.quantity} />
+                                )
+                            }
                         </div>
 
                         <div className=" p-5 mt-3">
@@ -100,14 +128,36 @@ const Product = () => {
                                     ))
                                 }
                             </ul>
+                            {colors !== null && colors?.length != 0 && (<section className="w-full">
+                                <div className='flex items-center text-lg font-semibold  text-gray-500 my-5'>
+                                    <ArrowSmRightIcon className='h-5 w-5' />
+                                    <h1 className=''>Colores</h1>
+                                </div>
+                                <div className='grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 '>
+                                    {
+                                        colors?.map((product) => (
+                                            <ProductCard product={product} key={product.id} />
+                                        ))
+                                    }
+
+                                </div>
+                            </section>)}
                             <div className=" my-6 border-2 border-dashed border-rou rounded-md p-2">
                                 <div className='flex flex-col'>
-                                    <span className="line-through text-gray-500 font-semibold text-lg">{formatterSoles.format(product?.compare_price)}</span>
+                                    {
+                                        viewProduct !== undefined && (
+                                            <>
+                                                <span className="line-through text-gray-500 font-semibold text-lg">{formatterSoles.format(parseInt(viewProduct.compare_price))}</span>
 
-                                    <span className="text-2xl font-bold text-rou">{formatterSoles.format(product?.price)}</span>
+                                                <span className="text-2xl font-bold text-rou">{formatterSoles.format(parseInt(viewProduct?.price))}</span>
+                                            </>
+                                        )
+                                    }
+
                                     <span className='text-sm font-light text-gray-800 italic '>Inpuestos incluidos</span>
                                     <div className='flex  justify-start space-x-3 my-3'>
                                     </div>
+
 
                                     <div className=' flex     '>
                                         {loading ? <button type="button" className="flex items-center justify-center p-3 font-semibold tracking-wide rounded-md dark:bg-indigo-400 d hover:bg-indigo-600">Añadir al carrito</button> :
@@ -128,20 +178,7 @@ const Product = () => {
 
                     </div>
                 </section>
-                {related?.length != 0 && (<section className="w-full">
-                    <div className='flex items-center text-lg font-semibold  text-gray-500 my-5'>
-                        <ArrowSmRightIcon className='h-5 w-5' />
-                        <h1 className=''>Productos Relacionados</h1>
-                    </div>
-                    <div className='grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 '>
-                        {
-                            related?.map((product: Product) => (
-                                <ProductCard product={product} key={product.id} />
-                            ))
-                        }
-
-                    </div>
-                </section>)}
+                
                 {products_views?.length != 0 && (<section className="w-full">
                     <div className='flex items-center text-lg font-semibold  text-gray-500 my-5'>
                         <ArrowSmRightIcon className='h-5 w-5' />
@@ -149,7 +186,7 @@ const Product = () => {
                     </div>
                     <div className='grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 '>
                         {
-                            products_views?.map((product: Product) => (
+                            products_views?.map((product) => (
                                 <ProductCard product={product} key={product.id} />
                             ))
                         }

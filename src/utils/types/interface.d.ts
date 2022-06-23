@@ -148,18 +148,44 @@ export interface User {
 export interface ProductState {
     home: HomeProducts | null
     products: Product[] | null
-    product: Product | null
+    product: DetailProduct | null
     categories: Category[] | null
     brands: Brand[] | null
     previous: string | null
     next: string | null
     count: string | null
-    characteristic: Characteristic[] | null
-    images: Image[] | null
-    related: Product[] | null
-    products_views: Product[] | null
-    colors: Product[] | null
     subcategory: CategoryChildren | null
+}
+
+export interface DetailProduct{
+    id: number
+    title: string
+    price: string
+    compare_price: string
+    get_category: string
+    get_brand: string
+    quantity: number
+    slug: string
+    sold: number
+    photo: string
+    photo_thumbnail_sm: string
+    photo_thumbnail_xm: string
+    description: string
+    characteristics: Characteristic[],
+    images: Image[],
+    colors: Product[],
+    related: Product[],
+}
+
+export interface Product_short {
+    id: number,
+    title: string,
+    price: string,
+    compare_price: string,
+    photo: string,
+    photo_thumbnail_sm: string,
+    photo_thumbnail_xm: string,
+    slug: string,
 }
 
 export interface HomeProducts {
@@ -204,11 +230,13 @@ export interface Brand {
 export interface Product {
     id: number
     title: string
-    price: number
-    compare_price: number
+    price: string
+    compare_price: string
     quantity: number
     slug: string
     photo: string
+    photo_thumbnail_sm: string
+    photo_thumbnail_xm: string
     get_category: string
     get_brand: string
 }
@@ -216,6 +244,8 @@ export interface Product {
 export interface Image {
     id: number
     photo: string
+    photo_thumbnail_sm: string
+    photo_thumbnail_xm: string
 }
 
 export interface Characteristic {

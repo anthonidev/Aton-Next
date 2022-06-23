@@ -74,7 +74,7 @@ export const get_pages_products = (url: string) => async (dispatch: AppDispatch)
         dispatch(setAlert('Error con el servidor', 'red'));
     }
 }
-export const get_filtered_products = (brands: number[], categories: number[], order: string, sort_by: string, price_range: string, query: string="") => async (dispatch: AppDispatch) => {
+export const get_filtered_products = (brands: number[], categories: number[], order: string, sort_by: string, price_range: string, query: string = "") => async (dispatch: AppDispatch) => {
 
     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/product/filter`,
         JSON.stringify({
@@ -97,65 +97,65 @@ export const get_filtered_products = (brands: number[], categories: number[], or
 
         })
 }
-export const product_detail = (slug:string) => async  (dispatch: AppDispatch) => {
+export const product_detail = (slug: string) => async (dispatch: AppDispatch) => {
 
-      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api${slug}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            dispatch(product_ok(res.data));
+    await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api${slug}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        dispatch(product_ok(res.data.detail_product));
 
-        }).catch(err => {
-            console.log(err);
-            
-        })
+    }).catch(err => {
+        console.log(err);
 
+    })
 
-}
-export const category_products = (slug:string) => async  (dispatch: AppDispatch) => {
-
-      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            dispatch(products_ok(res.data));
-
-        }).catch(err => {
-            dispatch(products_fail());
-            
-        })
 
 }
-export const brand_products = (slug:string) => async  (dispatch: AppDispatch) => {
+export const category_products = (slug: string) => async (dispatch: AppDispatch) => {
 
-      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            dispatch(products_ok(res.data));
+    await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        dispatch(products_ok(res.data));
 
-        }).catch(err => {
-            dispatch(products_fail());
+    }).catch(err => {
+        dispatch(products_fail());
 
-            
-        })
+    })
 
 }
-export const get_subcategory = (slug:string) => async  (dispatch: AppDispatch) => {
+export const brand_products = (slug: string) => async (dispatch: AppDispatch) => {
 
-      await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            dispatch(subcategoty_ok(res.data));
+    await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        dispatch(products_ok(res.data));
 
-        }).catch(err => {
-            console.log(err);
-            
-        })
+    }).catch(err => {
+        dispatch(products_fail());
+
+
+    })
+
+}
+export const get_subcategory = (slug: string) => async (dispatch: AppDispatch) => {
+
+    await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product${slug}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        dispatch(subcategoty_ok(res.data));
+
+    }).catch(err => {
+        console.log(err);
+
+    })
 
 }

@@ -1,5 +1,4 @@
-import { ArrowLeftIcon, ArrowRightIcon, ChevronRightIcon, FilterIcon } from '@heroicons/react/solid';
-import Link from 'next/link';
+import { ArrowLeftIcon, ArrowRightIcon, FilterIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,8 +10,7 @@ import FilterPrice from '../../components/store/FilterPrice';
 import MoreFilters from '../../components/store/MoreFilters';
 import { brand_products, get_filtered_products, get_pages_products } from '../../redux/api/product';
 import { RootState } from '../../redux/store';
-import { Category, FormFilter, Product, Brand } from '../../utils/types/interface';
-import CategoryFather from '../../components/form/CategoryFather';
+import { Category, FormFilter, Product } from '../../utils/types/interface';
 import CategoryBrand from '../../components/form/BrandCategory';
 
 
@@ -42,11 +40,11 @@ const BrandPage = () => {
     useEffect(() => {
         const result: Category[] = []
 
-        products?.map((element: Product) => {
-            categories?.map(({ sub_categories }) => {
-                sub_categories?.find(sub => element.get_category === sub.title && result.push(sub))
-            })
-        })
+        // products?.map((element: Product) => {
+        //     categories?.map(({ children }) => {
+        //         children?.find(sub => element.get_category === sub.title && result.push(sub))
+        //     })
+        // })
 
         let result2 = result.filter((item, index) => {
             return result.indexOf(item) === index;

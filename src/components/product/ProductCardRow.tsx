@@ -81,10 +81,10 @@ const ProductCardRow: FunctionComponent<{ product: Product }> = ({ product }) =>
                         <a >
                             <Image
                                 className="aspect-video object-cover"
-                                src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo}`}
+                                src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo_thumbnail_xm}`}
                                 layout="fixed"
                                 height="170"
-                                width="170"
+                                width="140"
                                 alt={product.slug}
                             />
                         </a>
@@ -114,8 +114,8 @@ const ProductCardRow: FunctionComponent<{ product: Product }> = ({ product }) =>
 
                         <div className='px-3 text-lg bg-white mt-3 flex flex-col justify-center items-center mb-2'>
                             <div>
-                                <p className='text-let line-through font-semibold text-sm'>{formatterSoles.format(product?.compare_price)}</p>
-                                <p className='text-black'>{formatterSoles.format(product?.price)}</p>
+                                <p className='text-let line-through font-semibold text-sm'>{formatterSoles.format(parseInt(product?.compare_price ) )}</p>
+                                <p className='text-black'>{formatterSoles.format(parseInt(product?.price))}</p>
                             </div>
 
                             <div className=' flex justify-end items-end   '>

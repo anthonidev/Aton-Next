@@ -3,7 +3,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { itemCart, Product } from '../../utils/types/interface';
+import { itemCart, Product, Product_short } from '../../utils/types/interface';
 import { add_item, update_item } from '../../redux/api/cart'
 import { setAlert } from '../../redux/api/alert'
 import Link from 'next/link'
@@ -12,7 +12,7 @@ import Stock from './Stock'
 import { cart_sidebar_on } from '../../redux/slice/cartSlice'
 import { addToWishlist, removeFromWishlist } from '../../redux/api/wishlist'
 
-const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
+const ProductCard: FunctionComponent<{ product: Product  }> = ({ product }) => {
   const dispatch: AppDispatch = useDispatch()
   const items = useSelector((state: RootState) => state.wishlist.results)
   const cart_items = useSelector((state: RootState) => state.cart.items)
@@ -87,10 +87,10 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
           <a >
             <Image
               className="aspect-video object-cover"
-              src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo}`}
+              src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo_thumbnail_sm}`}
               layout="responsive"
               height="200"
-              width="200"
+              width="150"
               alt={product.slug}
             />
           </a>
@@ -108,8 +108,8 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
 
           <div className='px-3 bg-white mt-3 flex justify-between items-center mb-2'>
             <div>
-              <p className='text-let line-through font-semibold text-sm'>{formatterSoles.format(product?.compare_price)}</p>
-              <p className='text-black'>{formatterSoles.format(product?.price)}</p>
+              <p className='text-let line-through font-semibold text-sm'>{formatterSoles.format(parseInt(product?.compare_price))}</p>
+              <p className='text-black'>{formatterSoles.format(parseInt(product?.price))}</p>
             </div>
 
             <div className=' flex justify-center items-end   '>
