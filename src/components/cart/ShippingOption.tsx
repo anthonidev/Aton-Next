@@ -16,6 +16,7 @@ const ShippingOption: FunctionComponent<{
                     width={100}
                     height={100}
                     layout="intrinsic"
+                    alt={item.name}
                     className="object-center object-cover"
                 />
             </div>

@@ -29,7 +29,7 @@ const Cart = () => {
 
 
     return (
-        <Layout title='Aton | Cart' content='home content' >
+        <Layout title='Aton | Cart' content='Carrito de compras de Aton' >
             {
                 items?.length ?
                     (<div className={`max-w-7xl mx-auto px-2 flex flex-col md:flex-row  md:space-x-5 `}>
@@ -42,11 +42,11 @@ const Cart = () => {
                                     </div>
                                 ))
                             }
-                            <Link href="/store">
-                                <button className="flex bg-gray-700 hover:bg-gray-900 text-white px-4 py-2 mt-4 rounded justify-center items-center space-x-2 text-sm">
+                            <Link href={'/store'}>
+                                <a className="flex bg-gray-700 hover:bg-gray-900 text-white px-4 py-2 mt-4 rounded justify-center items-center space-x-2 text-sm">
                                     <HomeIcon className="h-4 w-4" />
                                     <span>Continuar Comprando</span>
-                                </button>
+                                </a>
                             </Link>
                         </div>
 

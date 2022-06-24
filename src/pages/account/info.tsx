@@ -1,9 +1,7 @@
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import { LockClosedIcon, UserCircleIcon } from '@heroicons/react/solid';
+import { LockClosedIcon } from '@heroicons/react/solid';
 import AccountLayout from '../../components/layout/LayoutAccount';
 import { IFormUpdateInfo } from '../../utils/types/interface';
-import Submit from '../../components/button/Submit';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import { update_profile } from '../../redux/api/account';
@@ -47,7 +45,7 @@ const AccountInfo = () => {
 
         })
 
-    }, [firstName, lastName, dniNow, Dob, Treatment, IdUser])
+    }, [firstName, lastName, dniNow, Dob, Treatment, IdUser,formData])
 
 
 
@@ -81,7 +79,7 @@ const AccountInfo = () => {
     }
 
     return (
-        <AccountLayout title='Mi Cuenta | ATON' content='cuenta de usuario de aton' >
+        <AccountLayout title='Mi Cuenta | ATON' content='Cuenta de usuario de Aton ' >
             <div className='shadow p-3'>
                 <h2 className='font-semibold text-lg'>Sus datos personales </h2>
                 <div className='mt-5 '>

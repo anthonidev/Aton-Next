@@ -55,7 +55,7 @@ const Navbar: FunctionComponent<{
                                 height="100"
                                 width="200"
                                 quality={50}
-                                alt={category.slug}
+                                alt={category.title}
                               />
                               <Link href={'/category/' + category.slug}>
                                 <button className='uppercase text-sm my-2  bg-rou hover:bg-rose-500 text-white py-3 px-2 rounded w-full text-center border-rou-100 border-2'>
@@ -69,7 +69,7 @@ const Navbar: FunctionComponent<{
                           ))
                         }
                         <div >
-                          <Link href='/store'>
+                          <Link href={'/store'}>
                             <a className='text-gray-900 bg-gray-200 py-1 px-2 text-sm  border-2 hover:bg-gray-300'>Ver todos los productos</a>
                           </Link>
                         </div>

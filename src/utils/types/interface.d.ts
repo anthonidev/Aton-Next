@@ -112,7 +112,7 @@ export interface ShippingState {
 
 export interface shipping_option {
     id: number
-    name: number
+    name: string
     time_to_delivery: string
     price: string
     photo: string
