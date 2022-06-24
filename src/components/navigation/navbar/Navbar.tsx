@@ -1,8 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { MainNav, NavbarItensIcons } from '../../../utils/helpers/data'
-import { ChevronRightIcon, MenuIcon, ChevronDownIcon } from '@heroicons/react/solid';
+import { MainNav } from '../../../utils/helpers/data'
+import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/solid';
 import NavItem from './NavItem';
-import NavItenRight from './NavItenRight';
 import NavBarItenIcom from './NavBarItenIcom';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,7 +46,7 @@ const Navbar: FunctionComponent<{
                       <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow'>
 
                         {
-                          categories?.map((category) => (
+                          categories && categories?.map((category) => (
                             <div key={category.id} className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
                               <Image
                                 className="aspect-video object-cover rounded-sm"

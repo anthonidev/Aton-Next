@@ -26,14 +26,14 @@ const NavBartMain = () => {
                     </a>
                 </Link>
 
-                <form>
+                {/* <form>
                     <div className='flex bg-white  items-center p-2 border border-plo-100'>
                         <label></label>
                         <input type="text" className='focus:outline-none text-gray-600' placeholder='Busqueda en catálogo' />
                         <SearchIcon className='h-4 w-4 text-let ' />
                     </div>
 
-                </form>
+                </form> */}
                 {
                     !isAuthenticated && (
                         <div className='flex justify-end '>

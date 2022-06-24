@@ -1,4 +1,6 @@
 import { ArrowSmRightIcon, ShoppingCartIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -84,16 +86,19 @@ const Product = () => {
     }
 
     return (
-        <Layout title="Producto | Aton" content='slug'>
+        <Layout title="Producto | Aton" content={` Productos aton  ${product?.title}`}>
             <div className="max-w-7xl  container mx-auto px-6 pt-7  ">
 
                 <section className=" flex-row md:flex ">
-                    <div className="w-full md:w-1/2 bg-white  mt-3 border shadow ">
-                        {
-                            viewProduct !== undefined && images !== undefined && (
-                                <ProductImages main={viewProduct.photo} title={viewProduct.title} images={images} />
-                            )
-                        }
+                    <div className="w-full md:w-2/3 bg-white  mt-3 border shadow  ">
+                        <div >
+                            {
+                                viewProduct !== undefined && images !== undefined && (
+                                    <ProductImages main={viewProduct.photo} title={` Productos aton  ${product?.title}`} images={images} />
+                                )
+                            }
+                        </div>
+
                     </div>
                     <div className="w-full md:w-1/2 bg-gray-50 border mt-3 shadow  ">
                         <div className='flex justify-end items-center ' >
@@ -104,39 +109,62 @@ const Product = () => {
                             }
                         </div>
 
-                        <div className=" p-5 mt-3">
+                        <div className=" p-5 mt-3 flex flex-col justify-between min-h-full">
+                            <div>
+                                <span className="text-xs text-gray-700 ">{product?.get_category} | {product?.get_brand}</span>
+                                <h1 className="text-2xl font-bold my-4">{product?.title}</h1>
+                            </div>
 
-                            <span className="text-xs text-gray-700 ">{product?.get_category} | {product?.get_brand}</span>
-                            <h1 className="text-2xl font-bold my-4">{product?.title}</h1>
+                            <p className='mt-2 mb-4 text-xs text-gray-600 tracking-wider  '>{product?.description}</p>
+                            <div>
+                                <h2 className='text-lg font-bold '>Cararterísticas</h2>
+                                <ul>
+                                    {
+                                        characteristic?.map((item: Characteristic) => (
 
-                            <h2 className='text-lg font-bold'>Cararterísticas</h2>
-                            <ul>
-                                {
-                                    characteristic?.map((item: Characteristic) => (
+                                            <li className="flex items-center text-sm text-gray-600 my-2" key={item.title}>
+                                                <div className=' flex w-2/5'>
+                                                    <span className='mr-2 font-bold text-gray-800'> {item.title}</span>
+                                                </div>
 
-                                        <li className="flex items-center text-sm text-gray-600 my-2" key={item.title}>
-                                            <div className=' flex w-2/5'>
-                                                <span className='mr-2 font-bold text-gray-800'> {item.title}</span>
-                                            </div>
+                                                <div className=' text-gray-900 w-3/5   pl-3'>
+                                                    <span className='font-bold mr-4'> : </span>
+                                                    <span> {item.description}</span>
+                                                </div>
 
-                                            <div className=' text-gray-900 w-3/5   pl-3'>
-                                                <span className='font-bold mr-4'> : </span>
-                                                <span> {item.description}</span>
-                                            </div>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
 
-                                        </li>
-                                    ))
-                                }
-                            </ul>
+
                             {colors !== null && colors?.length != 0 && (<section className="w-full">
                                 <div className='flex items-center text-lg font-semibold  text-gray-500 my-5'>
                                     <ArrowSmRightIcon className='h-5 w-5' />
-                                    <h1 className=''>Colores</h1>
+                                    <h1 className='text-gray-700'>Colores</h1>
                                 </div>
-                                <div className='grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 '>
+                                <div className='grid lg:grid-cols-4 grid-cols-2 gap-4  '>
                                     {
-                                        colors?.map((product) => (
-                                            <ProductCard product={product} key={product.id} />
+                                        colors?.map((product: Product) => (
+                                            <div key={product.id} >
+                                                <Link href={{
+                                                    pathname: '/product/[slug]',
+                                                    query: { slug: product.slug },
+                                                }}>
+                                                    <a className='focus:outline-none flex justify-center items-center bg-white border-2 hover:border-gray-400 rounded' >
+                                                        <Image
+                                                            className="aspect-video object-cover"
+                                                            src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo_thumbnail_xm}`}
+                                                            layout="fixed"
+                                                            height="80"
+                                                            width="60"
+                                                            alt={`Productos ATON ${product.title}`}
+                                                        />
+                                                    </a>
+                                                </Link>
+                                            </div>
+
                                         ))
                                     }
 
@@ -154,7 +182,7 @@ const Product = () => {
                                         )
                                     }
 
-                                    <span className='text-sm font-light text-gray-800 italic '>Inpuestos incluidos</span>
+                                    <span className='text-xs font-light text-gray-400 italic '>Inpuestos incluidos</span>
                                     <div className='flex  justify-start space-x-3 my-3'>
                                     </div>
 
@@ -172,19 +200,18 @@ const Product = () => {
 
 
 
-
                         </div>
 
 
                     </div>
                 </section>
-                
+
                 {products_views?.length != 0 && (<section className="w-full">
                     <div className='flex items-center text-lg font-semibold  text-gray-500 my-5'>
                         <ArrowSmRightIcon className='h-5 w-5' />
-                        <h1 className=''>Productos Más Vistos</h1>
+                        <h1 className=''>Productos Relacionados</h1>
                     </div>
-                    <div className='grid lg:grid-cols-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-8 '>
+                    <div className='grid lg:grid-cols-5 grid-cols-2 sm:grid-cols-1 md:grid-cols-3 gap-8 '>
                         {
                             products_views?.map((product) => (
                                 <ProductCard product={product} key={product.id} />

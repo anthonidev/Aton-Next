@@ -22,15 +22,11 @@ const Home: NextPage = () => {
   const products_views = useSelector((state: RootState) => state.product.home?.products_views);
 
   return (
-    <Layout title='Home' content='home content' >
+    <Layout title='Aton Peru | Inicio' content='Aton es un tienda online donde encontraras productos de tecnologia como controles de tv, accesorios de televisores etc' >
       <div>
         <div >
           <DemoCarousel />
         </div>
-
-
-
-
         <div className="max-w-7xl container mx-auto px-6 mt-9   ">
           <section className="my-5">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900 " >Productos Destacados</h1>

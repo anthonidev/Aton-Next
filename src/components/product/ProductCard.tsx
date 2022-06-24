@@ -91,7 +91,7 @@ const ProductCard: FunctionComponent<{ product: Product  }> = ({ product }) => {
               layout="responsive"
               height="200"
               width="150"
-              alt={product.slug}
+              alt={product.title}
             />
           </a>
         </Link>

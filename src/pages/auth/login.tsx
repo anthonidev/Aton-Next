@@ -47,7 +47,7 @@ const Login = () => {
 
     return (
         <Layout title='Ingresar | ATON' content="Iniciar sesion en aton">
-            <div className=" max-w-7xl flex mx-auto items-center  m-auto bg-gradient-to-br from-gray-100  to-gray-300/50 my-10 shadow ">
+            <div className=" max-w-7xl flex mx-auto items-center  m-auto bg-gradient-to-br from-gray-100  to-gray-300/50  shadow ">
                 <div className="w-1/2 hidden md:block ">
                     <Image
                         className="object-cover"

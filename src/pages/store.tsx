@@ -37,7 +37,7 @@ const Store = () => {
     const next = useSelector((state: RootState) => state.product.next)
     const previous = useSelector((state: RootState) => state.product.previous)
 
-
+    
     function nextPage(next: string) {
         dispatch(get_pages_products(next))
         window.scrollTo(0, 0);
@@ -133,7 +133,7 @@ const Store = () => {
                             <p>Categorias </p>
                         </div>
                         {
-                            categories?.map((category: Category) => (
+                            categories&&categories.map((category: Category) => (
                                 <div key={category.id}>
                                     <CategoryFather category={category} formdata={formData.categoriesform} setFilter={setFilter} />
                                     <div className='my-5 '></div>
