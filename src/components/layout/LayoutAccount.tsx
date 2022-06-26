@@ -1,18 +1,31 @@
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout'
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/store';
 import { get_profile } from '../../redux/api/account';
 import SidebarAccount from '../../components/account/SidebarAccount';
 import { Props } from '../../utils/types/types';
+import { useRouter } from 'next/router';
 
 const AccountLayout: React.FC<Props> = ({ title, content, children }) => {
     const dispatch: AppDispatch = useDispatch();
 
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+
+    const router = useRouter();
+
+
     useEffect(() => {
         dispatch(get_profile())
     }, [dispatch])
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            router.push('/auth/login')
+        }
+    }, [isAuthenticated, router])
+
 
     return (
         <Layout title={title} content={content} >

@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
-import { BeakerIcon, ChevronRightIcon, UserCircleIcon, XIcon } from '@heroicons/react/solid'
+import { UserCircleIcon, XIcon } from '@heroicons/react/solid'
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -69,20 +68,31 @@ const SidebarUser: FunctionComponent<{
 
 
                 ) : (
-                    <div className="  flex-1 flex flex-col items-center   mt-5 justify-center space-y-4 ">
-                        <Link href="/auth/login">
-                            <a className="font-bold text-lg border-2 border-pri text-pri hover:text-indigo-500 p-3 rounded-md">
-                                Ingresar
-                            </a>
-                        </Link>
-                        <Link href="/auth/signup">
-                            <a className="font-bold text-lg border-2 border-pri text-pri hover:text-indigo-500 p-3 rounded-md">
-                                Registrarce
-                            </a>
-                        </Link>
+
+                    <div className="  flex-1 flex flex-col items-center   mt-5 justify-evenly space-y-4 ">
+                        <div className=''>
+                            <div className='my-6' >
+                                <Link href={'/auth/login'}>
+                                    <a className='hover:text-rou text-gray-600 font-bol text-lg flex justify-start items-center  border-2 border-gray-400 bg-white rounded py-2 px-4 ' >
+                                        <UserCircleIcon className='h-6 w-6' />
+                                        <span className='ml-4' >Iniciar sesión</span>
+                                    </a>
+                                </Link>
+                            </div>
 
 
+
+                            <div className='my-6' >
+                                <Link href={'/auth/signup'}>
+                                    <a className='hover:text-rou text-gray-600 font-bol text-lg flex justify-start items-center  border-2 border-gray-400 bg-white rounded py-2 px-4 ' >
+                                        <UserCircleIcon className='h-6 w-6' />
+                                        <span className='ml-4' >Registrarse</span>
+                                    </a>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
+
                 )}
 
                 <div className="absolute top-0 left-0 -mr-12 pt-2">

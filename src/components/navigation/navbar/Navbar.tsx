@@ -42,35 +42,67 @@ const Navbar: FunctionComponent<{
 
                 {
                   viewCategories && (
-                    <div className='absolute   pt-4 left-0 right-0 xl:mx-96 md:mx-0 p-1'>
+                    <div className='absolute   pt-4 left-0 right-0 md:mx-0 p-1'>
                       <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow'>
 
                         {
                           categories && categories?.map((category) => (
-                            <div key={category.id} className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
-                              <Image
-                                className="aspect-video object-cover rounded-sm"
-                                src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
-                                layout="fixed"
-                                height="100"
-                                width="200"
-                                quality={50}
-                                alt={category.title}
-                              />
-                              <Link href={'/category/' + category.slug}>
-                                <button className='uppercase text-sm my-2  bg-rou hover:bg-rose-500 text-white py-3 px-2 rounded w-full text-center border-rou-100 border-2'>
-                                  <span className=' tracking-wider '>
-                                    {category.title}
-                                  </span>
-                                </button>
-                              </Link>
+                            <div>
+                              <div className='relative h-60 '>
+                                <div key={category.id} className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
+                                  <Image
+                                    className="aspect-video object-cover rounded-sm"
+                                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
+                                    layout="fill"
+                                    height="100"
+                                    width="200"
+                                    quality={50}
+                                    alt={category.title}
+                                  />
+                                  <div className='absolute'>
+                                    <Link href={'/category/' + category.slug}>
+                                      <button className='uppercase text-sm my-2  bg-white hover:bg-red-500 text-red-600  hover:text-white py-3 px-2 rounded w-full text-center border-rou-100 border-2'>
+                                        <h3 className=' tracking-wider font-bold   '>
+                                          {category.title}
+                                        </h3>
+                                      </button>
+                                    </Link>
+                                  </div>
+
+
+
+                                </div>
+
+                              </div>
+
+
+                              <div className='shadow p-2'>
+                                {
+                                  category.children && category.children.map((child) => (
+                                    <div className='mx-4 my-3'>
+                                      <Link href={'/category/' + child.slug}>
+                                        <a className='hover:text-gray-900 flex space-x-3 items-center  text-gray-700 text-sm'>
+                                          <h3 className=' tracking-wider font-bol list-item   '>
+                                            {child.title}
+                                          </h3>
+                                          <span className='text-xs text-gray-500 '>({child.get_total})</span>
+                                        </a>
+                                      </Link>
+                                    </div>
+                                  ))
+
+                                }
+                              </div>
+
                             </div>
+
+
 
                           ))
                         }
-                        <div >
+                        <div className='py-4' >
                           <Link href={'/store'}>
-                            <a className='text-gray-900 bg-gray-200 py-1 px-2 text-sm  border-2 hover:bg-gray-300'>Ver todos los productos</a>
+                            <a className='text-gray-700 bg-gray-200 py-2 px-4 uppercase rounded border-2 hover:bg-gray-300'>Ver todos los productos</a>
                           </Link>
                         </div>
                       </div>

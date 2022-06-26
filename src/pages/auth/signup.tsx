@@ -8,6 +8,7 @@ import Submit from '../../components/button/Submit';
 import { IFormSignUp } from '../../utils/types/interface';
 import { signup } from '../../redux/api/auth';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Signup = () => {
     const loading = useSelector((state: RootState) => state.auth.loading);
@@ -46,19 +47,32 @@ const Signup = () => {
         window.scrollTo(0, 0)
     }
     if (accountCreated)
-        router.push('/auth/login');
+        router.push('/auth/confirm');
 
     return (
         <Layout title='Registrarse | Auth' content="registrar usuario">
-            <div className=" max-w-7xl flex mx-auto items-center justify-center m-auto bg-gradient-to-br from-gray-100  to-gray-300/50 my-10 shadow ">
+            <div className="lg:min-h-screen min-h-fit bg-white flex">
+                <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+                    <div className="mx-auto w-full max-w-sm">
+                        <div>
+                            <div>
+                                <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                                    <h2 className=" text-center text-3xl font-extrabold text-gray-800 ">Registrate es gratis y lo seguira siendo</h2>
+                                </div>
+                                <p className="mt-2 text-center text-sm text-gray-600">
+                                    O{' '}
+                                    <Link href="/auth/login" >
+                                        <a className='className="font-medium text-indigo-700 hover:underline hover:text-indigo-500"'>ingresar si ya tienes una.</a>
+                                    </Link>
+                                </p>
 
-                <div className="md:w-1/2 w-full">
-                    <div className=" mx-auto lg:w-3/4 ">
-                        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                            <h2 className=" text-center text-3xl font-extrabold text-gray-900 ">Registrate es gratis y lo seguira siendo</h2>
+
+                            </div>
                         </div>
-                        <div className=" sm:mx-auto sm:w-full sm:max-w-md">
-                            <div className=" py-8 px-4  sm:px-10">
+
+                        <div className="mt-8">
+
+                            <div className="mt-6">
                                 <form onSubmit={onSubmit} className="space-y-6">
 
                                     <div>
@@ -152,21 +166,19 @@ const Signup = () => {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-                <div className="w-1/2 hidden lg:block ">
+                <div className="hidden lg:block relative w-0 flex-1">
                     <Image
-                        className="object-cover"
-                        src={`/assets/images/loginPortada.jpg`}
-                        layout="responsive"
-                        width="100"
-                        height="100"
-                        alt={`logo`}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        src={`/assets/images/portada_signup.jpg`}
+                        layout="fill"
+                        alt={`Portada de login Aton`}
+                        quality={100}
 
                     />
-                </div >
+                </div>
             </div>
+
         </Layout>
     )
 }

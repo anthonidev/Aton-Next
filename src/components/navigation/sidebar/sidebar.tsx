@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React, { FunctionComponent, useState } from 'react'
 import { motion } from 'framer-motion';
-import { BeakerIcon, ChevronDownIcon, XIcon } from '@heroicons/react/solid';
+import { ChevronDownIcon, XIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
@@ -58,7 +58,6 @@ const SidebarOpen: FunctionComponent<{
                     ))
                 }
 
-
                 <div className='mt-3 '>
                     <div className='text-gray-900 text-sm flex justify-between items-center bg-gray-100 px-1 py-3 border-y-2 border-gray-200 '>
                         <h2 className='font-bold mx-2 '>Marcas</h2>
@@ -70,24 +69,13 @@ const SidebarOpen: FunctionComponent<{
                         {
                             view && brands?.map((brand: Brand) => (
                                 <h2 className='font-bold text-black' key={brand.id}>{brand.title}</h2>
-
-
                             ))
                         }
                     </div>
 
                 </div>
-
-
-
-
-
-
             </div>
-
         </motion.div>
-
-
     )
 }
 

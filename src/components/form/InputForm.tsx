@@ -15,7 +15,7 @@ const InputForm: FunctionComponent<{
 }) => {
         return (
             <div>
-                <label htmlFor={name} className="block text-sm font-medium text-gray-700 capitalize">
+                <label htmlFor={name} className="block text-sm font-medium text-gray-700 mt-4 mb-1 capitalize">
                     {placeholder} 
                 </label>
                 <input

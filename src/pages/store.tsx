@@ -20,7 +20,6 @@ enum View {
     GRID = 'grid'
 }
 
-
 const Store = () => {
 
     const dispatch: AppDispatch = useDispatch()
