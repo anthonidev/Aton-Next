@@ -11,7 +11,7 @@ export default class DemoCarousel extends Component {
                    <div className='relative'  >
                     <div className='hidden md:block'>
                         <Image
-                            src={`/assets/images/team_banner.jpg`}
+                            src={`/assets/images/team_banner.webp`}
                             layout="responsive"
                             alt={`logo`}
                             className="object-cover"
@@ -55,7 +55,7 @@ export default class DemoCarousel extends Component {
 
                     <div className='md:hidden block '>
                         <Image
-                            src={`/assets/images/team_banner.jpg`}
+                            src={`/assets/images/team_banner.webp`}
                             layout="responsive"
                             alt={`logo`}
                             className="object-cover"
@@ -103,7 +103,7 @@ export default class DemoCarousel extends Component {
                  <div className='relative'  >
                     <div className='hidden md:block'>
                         <Image
-                            src={`/assets/images/loginPortada.jpg`}
+                            src={`/assets/images/loginPortada.webp`}
                             layout="responsive"
                             alt={`logo`}
                             className="object-cover"
@@ -146,7 +146,7 @@ export default class DemoCarousel extends Component {
 
                     <div className='md:hidden block '>
                         <Image
-                            src={`/assets/images/loginPortada.jpg`}
+                            src={`/assets/images/loginPortada.webp`}
                             layout="responsive"
                             alt={`logo`}
                             className="object-cover"
@@ -192,7 +192,7 @@ export default class DemoCarousel extends Component {
                 <div className='relative'  >
                     <div className='hidden md:block'>
                         <Image
-                            src={`/assets/images/red_banner.jpg`}
+                            src={`/assets/images/red_banner.webp`}
                             layout="responsive"
                             alt={`logo`}
                             className="object-cover"
@@ -235,7 +235,7 @@ export default class DemoCarousel extends Component {
 
                     <div className='md:hidden block '>
                         <Image
-                            src={`/assets/images/red_banner.jpg`}
+                            src={`/assets/images/red_banner.webp`}
                             layout="responsive"
                             alt={`logo`}
                             className="object-cover"

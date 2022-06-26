@@ -42,14 +42,12 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
     if (!isPresentCart) {
       if (product.quantity > 0) {
         dispatch(add_item(product))
-        dispatch(setAlert('Producto agregado al carrito', 'green'))
       } else {
         dispatch(setAlert('No hay stock', 'red'))
       }
     } else {
-      if (product.quantity >= isPresentCart.count + 1) {
+      if (product.quantity > isPresentCart.count + 1) {
         dispatch(update_item(product, isPresentCart.count + 1));
-        dispatch(setAlert('Producto actualizado en el carrito', 'green'));
 
       } else {
         dispatch(setAlert('No hay stock suficiente', 'red'));

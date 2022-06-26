@@ -9,13 +9,13 @@ export const check_authenticated = () => async (dispatch: AppDispatch) => {
         await axios.post(
             `${process.env.NEXT_PUBLIC_API_URL}/auth/jwt/verify/`,
             JSON.stringify({ token: getStoreLocal('access') }),
-            { headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json',} }
+            { headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', } }
         ).then(res => {
             dispatch(authenticated_ok());
         }).catch(err => {
             dispatch(fail_clear());
             console.log(err);
-            
+
         })
     }
 };
@@ -49,7 +49,7 @@ export const login = (email: string, password: string) => async (dispatch: AppDi
         { headers: { 'Content-Type': 'application/json' } }
     ).then(res => {
         dispatch(login_ok(res.data));
-        dispatch(setAlert("WELCOME", "green"));
+        dispatch(setAlert("Bienvenido", "green"));
     }).catch(err => {
         dispatch(fail_clear());
         dispatch(setAlert("Credinciales incorectas", "red"));
@@ -128,28 +128,28 @@ export const logout = () => (dispatch: AppDispatch) => {
 
 export const reset_password = (email: string) => async (dispatch: AppDispatch) => {
     dispatch(on_loading());
-       await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/users/reset_password/`, JSON.stringify({ email }), {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            dispatch(setAlert("Te enviamos un correo, revisa tu bandeja", "green"))
-        }).catch(err => {
-            dispatch(setAlert("Error en el servidor, intente mas tarde", "red"))
-        })
-        dispatch(off_loading());
+    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/users/reset_password/`, JSON.stringify({ email }), {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(res => {
+        dispatch(setAlert("Te enviamos un correo, revisa tu bandeja", "green"))
+    }).catch(err => {
+        dispatch(setAlert("Error en el servidor, intente mas tarde", "red"))
+    })
+    dispatch(off_loading());
 }
 
 export const reset_password_confirm = (uid: (string | string[] | undefined), token: (string | string[] | undefined), new_password: string, re_new_password: string) => async (dispatch: AppDispatch) => {
     dispatch(on_loading());
-  
+
     if (new_password === re_new_password) {
         await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/users/reset_password_confirm/`, JSON.stringify({
             uid,
             token,
             new_password,
             re_new_password
-        }), { headers: {'Content-Type': 'application/json'}}).then(res => {
+        }), { headers: { 'Content-Type': 'application/json' } }).then(res => {
             dispatch(setAlert("Tu clave ha sido cambiada con exito", "green"))
         }).catch(err => {
             dispatch(setAlert("Error en el servidor", "red"))

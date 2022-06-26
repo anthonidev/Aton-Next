@@ -15,6 +15,12 @@ const CartItem: FunctionComponent<{
     const dispatch: AppDispatch = useDispatch();
     const [countItem, setCountItem] = useState<number>(item.count)
     const [add, setAdd] = useState<boolean>(false)
+
+    useEffect(() => {
+        setCountItem(item.count)
+    }, [item.count])
+
+
     useEffect(() => {
         if (add) {
             dispatch(update_item(item.product, countItem));
@@ -25,7 +31,6 @@ const CartItem: FunctionComponent<{
     function minus() {
         if (item.product.quantity >= countItem && countItem - 1 !== 0) {
             setCountItem(countItem - 1)
-            dispatch(setAlert('Carrito actualizado', 'green'));
             setAdd(true)
         } else if (countItem - 1 === 0) {
             dispatch(remove_item(item));
@@ -34,7 +39,6 @@ const CartItem: FunctionComponent<{
     function plus() {
         if (item.product.quantity >= countItem && countItem + 1 < item.product.quantity) {
             setCountItem(countItem + 1)
-            dispatch(setAlert('Carrito actualizado', 'green'));
             setAdd(true)
 
         } else {

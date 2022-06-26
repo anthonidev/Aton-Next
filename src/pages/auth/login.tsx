@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { IFormLogin } from '../../utils/types/interface';
 import { login } from '../../redux/api/auth';
 import Image from 'next/image';
+import { setAlert } from '../../redux/api/alert';
 
 const Login = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -41,8 +42,10 @@ const Login = () => {
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         dispatch(login(formData.email, formData.password));
+
     };
     if (typeof window !== 'undefined' && isAuthenticated)
+
         router.push('/');
 
     return (
@@ -107,7 +110,7 @@ const Login = () => {
                 <div className="hidden lg:block relative w-0 flex-1">
                     <Image
                         className="absolute inset-0 h-full w-full object-cover"
-                        src={`/assets/images/login_portada.jpg`}
+                        src={`/assets/images/login_portada.webp`}
                         layout="fill"
                         alt={`Portada de login Aton`}
                         quality={100}

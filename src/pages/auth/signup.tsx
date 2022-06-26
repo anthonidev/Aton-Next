@@ -170,7 +170,7 @@ const Signup = () => {
                 <div className="hidden lg:block relative w-0 flex-1">
                     <Image
                         className="absolute inset-0 h-full w-full object-cover"
-                        src={`/assets/images/portada_signup.jpg`}
+                        src={`/assets/images/portada_signup.webp`}
                         layout="fill"
                         alt={`Portada de login Aton`}
                         quality={100}
