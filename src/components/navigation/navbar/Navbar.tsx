@@ -47,26 +47,27 @@ const Navbar: FunctionComponent<{
 
                         {
                           categories && categories?.map((category) => (
-                            <div>
+                            <div key={category.id}>
                               <div className='relative h-60 '>
-                                <div key={category.id} className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
+                                <div className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
                                   <Image
-                                    className="aspect-video object-cover rounded-sm"
+                                    className="aspect-video object-cover "
                                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
                                     layout="fill"
-                                    height="100"
-                                    width="200"
                                     quality={50}
                                     alt={category.title}
                                   />
                                   <div className='absolute'>
-                                    <Link href={'/category/' + category.slug}>
-                                      <button className='uppercase text-sm my-2  bg-white hover:bg-red-500 text-red-600  hover:text-white py-3 px-2 rounded w-full text-center border-rou-100 border-2'>
-                                        <h3 className=' tracking-wider font-bold   '>
-                                          {category.title}
-                                        </h3>
-                                      </button>
-                                    </Link>
+                                    <div className='uppercase text-sm my-2  bg-white hover:bg-red-500 text-red-600  hover:text-white py-3 px-2 rounded w-full text-center border-rou-100 border-2'>
+                                      <Link href={'/category/' + category.slug}>
+                                        <a >
+                                          <h3 className=' tracking-wider font-bold   '>
+                                            {category.title}
+                                          </h3>
+                                        </a>
+                                      </Link>
+                                    </div>
+
                                   </div>
 
 
@@ -79,7 +80,7 @@ const Navbar: FunctionComponent<{
                               <div className='shadow p-2'>
                                 {
                                   category.children && category.children.map((child) => (
-                                    <div className='mx-4 my-3'>
+                                    <div key={child.id} className='mx-4 my-3'>
                                       <Link href={'/category/' + child.slug}>
                                         <a className='hover:text-gray-900 flex space-x-3 items-center  text-gray-700 text-sm'>
                                           <h3 className=' tracking-wider font-bol list-item   '>

@@ -29,7 +29,7 @@ export const add_item = (item: Product) => async (dispatch: AppDispatch) => {
         let shouldAddItem = true;
         let order_item: itemCart
         let cartNew: itemCart[] = [];
-        
+
         if (localStorage.getItem('cart')) {
 
             cart = JSON.parse(localStorage.getItem('cart') || "{}");
@@ -102,7 +102,7 @@ export const get_items = () => async (dispatch: AppDispatch) => {
 }
 
 export const update_item = (item: Product, count: number) => async (dispatch: AppDispatch) => {
-    
+
     if (getStoreLocal('access')) {
         const product_id = item.id
         axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/`, JSON.stringify({ product_id, count }), {
@@ -177,8 +177,8 @@ export const remove_item = (item: itemCart) => async (dispatch: AppDispatch) => 
                 sidebar: false
             }
             cart.items?.map((product_item: itemCart) => {
-                
-                if (product_item.product.id!== item.product.id) {
+
+                if (product_item.product.id !== item.product.id) {
                     new_cart.items?.push(product_item)
                 }
             });
@@ -191,8 +191,7 @@ export const remove_item = (item: itemCart) => async (dispatch: AppDispatch) => 
             if (new_cart.items !== null) {
                 new_cart.total_items = new_cart.items?.length
             }
-            console.log(new_cart);
-            
+
             dispatch(get_item_ok(new_cart));
         }
 

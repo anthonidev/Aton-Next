@@ -3,7 +3,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import { HeartIcon, ShoppingCartIcon } from '@heroicons/react/solid'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../../redux/store'
-import { itemCart, Product, Product_short } from '../../utils/types/interface';
+import { itemCart, Product } from '../../utils/types/interface';
 import { add_item, update_item } from '../../redux/api/cart'
 import { setAlert } from '../../redux/api/alert'
 import Link from 'next/link'
@@ -12,7 +12,7 @@ import Stock from './Stock'
 import { cart_sidebar_on } from '../../redux/slice/cartSlice'
 import { addToWishlist, removeFromWishlist } from '../../redux/api/wishlist'
 
-const ProductCard: FunctionComponent<{ product: Product  }> = ({ product }) => {
+const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   const dispatch: AppDispatch = useDispatch()
   const items = useSelector((state: RootState) => state.wishlist.results)
   const cart_items = useSelector((state: RootState) => state.cart.items)
@@ -49,6 +49,8 @@ const ProductCard: FunctionComponent<{ product: Product  }> = ({ product }) => {
     } else {
       if (product.quantity >= isPresentCart.count + 1) {
         dispatch(update_item(product, isPresentCart.count + 1));
+        dispatch(setAlert('Producto actualizado en el carrito', 'green'));
+
       } else {
         dispatch(setAlert('No hay stock suficiente', 'red'));
       }

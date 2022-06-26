@@ -59,7 +59,7 @@ const Product = () => {
 
         product !== null && cart_items?.map((item: itemCart) => {
 
-            if (item.product === product.id) setIsPresentCart(item)
+            if (item.product.id === product.id) setIsPresentCart(item)
         }
         )
     }, [cart_items, product])
@@ -76,6 +76,8 @@ const Product = () => {
         } else {
             if (isPresentCart && product && product.quantity >= isPresentCart.count + 1) {
                 dispatch(update_item(product, isPresentCart.count + 1));
+                dispatch(setAlert('Producto actualizado en el carrito', 'green'))
+
             } else {
                 dispatch(setAlert('No hay stock suficiente', 'red'));
             }

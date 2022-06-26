@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import React from 'react'
 import Layout from '../components/layout/Layout'
@@ -26,11 +27,14 @@ const Thanks = () => {
                     </div>
                     {/* button for orders */}
                     <div>
-                        <a href='/account/order' className='text-center text-lg text-gray-600 max-w-lg mx-auto'>
-                            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-                                Ver mis pedidos
-                            </button>
-                        </a>
+                        <Link href='/account/order' >
+                            <a className='text-center text-lg text-gray-600 max-w-lg mx-auto'>
+                                <span className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+                                    Ver mis pedidos
+                                </span>
+                            </a>
+
+                        </Link>
                     </div>
 
                 </div>
