@@ -42,74 +42,77 @@ const Navbar: FunctionComponent<{
 
                 {
                   viewCategories && (
-                    <div className='absolute   pt-4 left-0 right-0 md:mx-0 p-1'>
-                      <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow'>
+                    <div className='  z-auto '>
+                      <div className='absolute   pt-4 left-0 right-0 md:mx-0 p-1 '>
+                        <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow overflow-y-auto'>
 
-                        {
-                          categories && categories?.map((category) => (
-                            <div key={category.id}>
-                              <div className='relative h-60 '>
-                                <div className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
-                                  <Image
-                                    className="aspect-video object-cover "
-                                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
-                                    layout="fill"
-                                    quality={50}
-                                    alt={category.title}
-                                  />
-                                  <div className='absolute'>
-                                    <div className='uppercase text-sm my-2  bg-white hover:bg-red-500 text-red-600  hover:text-white py-3 px-2 rounded w-full text-center border-rou-100 border-2'>
-                                      <Link href={'/category/' + category.slug}>
-                                        <a >
-                                          <h3 className=' tracking-wider font-bold   '>
-                                            {category.title}
-                                          </h3>
-                                        </a>
-                                      </Link>
+                          {
+                            categories && categories?.map((category) => (
+                              <div key={category.id}>
+                                <div className='relative  '>
+                                  <div className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
+                                    <Image
+                                      className="aspect-video object-cover "
+                                      src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
+                                      layout="fill"
+                                      quality={50}
+                                      alt={category.title}
+                                    />
+                                    <div className='absolute'>
+                                      <div className='uppercase text-sm my-2  bg-gray-700 hover:bg-gray-900 text-white   py-3 px-2 rounded w-full text-center  border-2'>
+                                        <Link href={'/category/' + category.slug}>
+                                          <a >
+                                            <h3 className=' tracking-wider font-bold   '>
+                                              {category.title}
+                                            </h3>
+                                          </a>
+                                        </Link>
+                                      </div>
+
                                     </div>
+
+
 
                                   </div>
 
+                                </div>
 
 
+                                <div className='shadow p-2'>
+                                  {
+                                    category.children && category.children.map((child) => (
+                                      <div key={child.id} className='mx-4 my-3'>
+                                        <Link href={'/category/' + child.slug}>
+                                          <a className='hover:text-gray-900 flex space-x-3 items-center  text-gray-700 text-sm'>
+                                            <h3 className=' tracking-wider font-bol list-item   '>
+                                              {child.title}
+                                            </h3>
+                                            <span className='text-xs text-gray-500 '>({child.get_total})</span>
+                                          </a>
+                                        </Link>
+                                      </div>
+                                    ))
+
+                                  }
                                 </div>
 
                               </div>
 
 
-                              <div className='shadow p-2'>
-                                {
-                                  category.children && category.children.map((child) => (
-                                    <div key={child.id} className='mx-4 my-3'>
-                                      <Link href={'/category/' + child.slug}>
-                                        <a className='hover:text-gray-900 flex space-x-3 items-center  text-gray-700 text-sm'>
-                                          <h3 className=' tracking-wider font-bol list-item   '>
-                                            {child.title}
-                                          </h3>
-                                          <span className='text-xs text-gray-500 '>({child.get_total})</span>
-                                        </a>
-                                      </Link>
-                                    </div>
-                                  ))
 
-                                }
-                              </div>
-
-                            </div>
-
-
-
-                          ))
-                        }
-                        <div className='py-4' >
-                          <Link href={'/store'}>
-                            <a className='text-gray-700 bg-gray-200 py-2 px-4 uppercase rounded border-2 hover:bg-gray-300'>Ver todos los productos</a>
-                          </Link>
+                            ))
+                          }
+                          <div className='py-4 ' >
+                            <Link href={'/store'}>
+                              <a className='text-gray-700 bg-gray-200 py-2 px-4  rounded border-2 hover:bg-gray-300'>Ver todos los productos</a>
+                            </Link>
+                          </div>
                         </div>
+
+
                       </div>
-
-
-                    </div>)
+                    </div>
+                  )
                 }
 
 
