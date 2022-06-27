@@ -36,7 +36,7 @@ const Store = () => {
     const next = useSelector((state: RootState) => state.product.next)
     const previous = useSelector((state: RootState) => state.product.previous)
 
-    
+
     function nextPage(next: string) {
         dispatch(get_pages_products(next))
         window.scrollTo(0, 0);
@@ -75,7 +75,7 @@ const Store = () => {
 
 
     return (
-        <Layout title='Tienda' content='tienda de aton productos de tecnologia ' >
+        <Layout title='Tienda | Aton Peru' content='Aton Store cuenta con productos de tecnologia para el hogar ' >
 
             <div className="max-w-7xl container mx-auto px-6   ">
                 <div className='flex-col md:flex-row flex justify-between  px-5 space-y-4'>
@@ -89,9 +89,6 @@ const Store = () => {
                             </li>
                         </>
                     </Breadcrumb>
-
-
-
 
                 </div>
                 {/* movile */}
@@ -132,7 +129,7 @@ const Store = () => {
                             <p>Categorias </p>
                         </div>
                         {
-                            categories&&categories.map((category: Category) => (
+                            categories && categories.map((category: Category) => (
                                 <div key={category.id}>
                                     <CategoryFather category={category} formdata={formData.categoriesform} setFilter={setFilter} />
                                     <div className='my-5 '></div>

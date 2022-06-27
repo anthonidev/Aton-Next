@@ -50,7 +50,9 @@ const Product = () => {
                 photo_thumbnail_sm: product.photo_thumbnail_sm,
                 photo_thumbnail_xm: product.photo_thumbnail_xm,
                 get_category: product.get_category,
-                get_brand: product.get_brand
+                get_brand: product.get_brand,
+                description: product.description,
+
             })
         }
     }, [product])

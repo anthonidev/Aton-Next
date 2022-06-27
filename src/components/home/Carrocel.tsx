@@ -7,8 +7,8 @@ import Link from 'next/link';
 export default class DemoCarousel extends Component {
     render() {
         return (
-            <Carousel width={'100%'} autoPlay  infiniteLoop dynamicHeight showThumbs={false} >
-                   <div className='relative'  >
+            <Carousel width={'100%'} autoPlay infiniteLoop dynamicHeight showArrows={true} showIndicators={false} showThumbs={false}   >
+                <section className='relative'  >
                     <div className='hidden md:block'>
                         <Image
                             src={`/assets/images/team_banner.webp`}
@@ -17,15 +17,14 @@ export default class DemoCarousel extends Component {
                             className="object-cover"
                             width="100"
                             height="30"
+                            priority
                         />
                         <div className='absolute  top-0 bottom-0 left-0  bg-gradient-to-b from-red-500 via-orange-500 to-red-500 '>
                             <div className='flex flex-col items-center justify-center h-full p-3'>
                                 <div className='text-center max-w-sm'>
-                                    <p className='text-xs'>
-                                        <span className='text-orange-800 font-bold tracking-wider'>
-                                            Del 20 al 26 de junio
-                                        </span>
-                                    </p>
+                                    <span className='text-orange-800 font-bold tracking-wider text-xs'>
+                                        Del 20 al 26 de junio
+                                    </span>
                                     <h1 className='text-3xl font-bold'>
                                         <Link href='/store'>
                                             <a className='text-white uppercase '>
@@ -34,22 +33,19 @@ export default class DemoCarousel extends Component {
                                             </a>
                                         </Link>
                                     </h1>
-                                  
+
                                     {/* button for the store */}
-                                    <div className='mt-4'>
-                                        <Link href='/'>
-                                            <a className='bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded'>
-                                                <span className='text-white text-xl uppercase'>
+                                    <h2 className='mt-4'>
+                                        <Link href='/store'>
+                                            <a className='bg-red-700 text-white font-bold py-3 px-4 rounded'>
+                                                <span className='text-white text-xl '>
                                                     Ir a la tienda
                                                 </span>
                                             </a>
                                         </Link>
-                                    </div>
+                                    </h2>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
 
@@ -61,15 +57,14 @@ export default class DemoCarousel extends Component {
                             className="object-cover"
                             width="100"
                             height="60"
+                            priority
                         />
                         <div className='absolute  top-0 bottom-0 left-0  bg-gradient-to-b from-red-500 via-orange-500 to-red-500 w-1/2'>
                             <div className='flex flex-col items-center justify-center h-full p-3'>
                                 <div className='text-center '>
-                                    <p className='text-xs'>
-                                        <span className='text-orange-100 font-bold tracking-wider'>
-                                            Del 20 al 26 de junio
-                                        </span>
-                                    </p>
+                                    <span className='text-xs text-orange-100 font-bold tracking-wider'>
+                                        Del 20 al 26 de junio
+                                    </span>
                                     <h1 className=' font-bold leading-loose  '>
                                         <Link href='/store'>
                                             <a className='text-white  uppercase'>
@@ -78,29 +73,26 @@ export default class DemoCarousel extends Component {
                                             </a>
                                         </Link>
                                     </h1>
-                                 
+
                                     {/* button for the store */}
-                                    <div className='mt-4 '>
-                                        <Link href='/'>
-                                            <a className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded'>
-                                                <span className='text-white  uppercase'>
+                                    <h2 className='mt-4 '>
+                                        <Link href='/store'>
+                                            <a className='bg-red-700 text-white font-bold py-2 px-3 rounded'>
+                                                <span className='text-white  '>
                                                     Ir a la tienda
                                                 </span>
                                             </a>
                                         </Link>
-                                    </div>
+                                    </h2>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
 
 
-                </div>
+                </section>
 
-                 <div className='relative'  >
+                <section className='relative'  >
                     <div className='hidden md:block'>
                         <Image
                             src={`/assets/images/loginPortada.webp`}
@@ -109,6 +101,7 @@ export default class DemoCarousel extends Component {
                             className="object-cover"
                             width="100"
                             height="30"
+                            priority
                         />
                         <div className='absolute  top-0 bottom-0 left-0  bg-gradient-to-b from-blue-400 via-violet-400 to-sky-400'>
                             <div className='flex flex-col items-center justify-center h-full p-3'>
@@ -121,21 +114,19 @@ export default class DemoCarousel extends Component {
                                             </a>
                                         </Link>
                                     </h1>
-                                    <p className='text-xl'>
-                                        <span className='text-gray-600'>
-                                            Apúrate, son por tiempo limitado
-                                        </span>
-                                    </p>
+                                    <span className='text-xl text-gray-600'>
+                                        Apúrate, son por tiempo limitado
+                                    </span >
                                     {/* button for the store */}
-                                    <div className='mt-4'>
+                                    <h2 className='mt-4'>
                                         <Link href='/'>
-                                            <a className='bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded'>
-                                                <span className='text-white text-xl uppercase'>
+                                            <a className='bg-red-700 text-white font-bold py-3 px-4 rounded'>
+                                                <span className=' text-xl '>
                                                     Ir a la tienda
                                                 </span>
                                             </a>
                                         </Link>
-                                    </div>
+                                    </h2>
                                 </div>
                             </div>
 
@@ -152,6 +143,7 @@ export default class DemoCarousel extends Component {
                             className="object-cover"
                             width="100"
                             height="60"
+                            priority
                         />
                         <div className='absolute  top-0 bottom-0 left-0  bg-gradient-to-b from-blue-400 via-violet-400 to-sky-400 w-1/2'>
                             <div className='flex flex-col items-center justify-center h-full p-3'>
@@ -164,21 +156,19 @@ export default class DemoCarousel extends Component {
                                             </a>
                                         </Link>
                                     </h1>
-                                    <p className='text-sm'>
-                                        <span className='text-gray-600'>
-                                            Apúrate, son por tiempo limitado
-                                        </span>
-                                    </p>
+                                    <span className='text-sm text-gray-600'>
+                                        Apúrate, son por tiempo limitado
+                                    </span>
                                     {/* button for the store */}
-                                    <div className='mt-4 '>
+                                    <h2 className='mt-4 '>
                                         <Link href='/'>
-                                            <a className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded'>
-                                                <span className='text-white  uppercase'>
+                                            <a className='bg-red-700  text-white font-bold py-2 px-3 rounded'>
+                                                <span className='text-white  '>
                                                     Ir a la tienda
                                                 </span>
                                             </a>
                                         </Link>
-                                    </div>
+                                    </h2>
                                 </div>
                             </div>
 
@@ -188,8 +178,8 @@ export default class DemoCarousel extends Component {
                     </div>
 
 
-                </div>
-                <div className='relative'  >
+                </section>
+                <section className='relative'  >
                     <div className='hidden md:block'>
                         <Image
                             src={`/assets/images/red_banner.webp`}
@@ -198,6 +188,7 @@ export default class DemoCarousel extends Component {
                             className="object-cover"
                             width="100"
                             height="30"
+                            priority
                         />
                         <div className='absolute  top-0 bottom-0 left-0 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 '>
                             <div className='flex flex-col items-center justify-center h-full p-3'>
@@ -210,26 +201,22 @@ export default class DemoCarousel extends Component {
                                             </a>
                                         </Link>
                                     </h1>
-                                    <p className='text'>
-                                        <span className='text-red-100'>
-                                            Apúrate, son por tiempo limitado
-                                        </span>
-                                    </p>
+                                    <h3 className='text text-red-100'>
+
+                                        Apúrate, son por tiempo limitado
+                                    </h3>
                                     {/* button for the store */}
-                                    <div className='mt-4'>
-                                        <Link href='/'>
-                                            <a className='bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded'>
-                                                <span className='text-white text-xl uppercase'>
+                                    <h2 className='mt-4'>
+                                        <Link href='/store'>
+                                            <a className='bg-red-700 text-white font-bold py-3 px-4 rounded'>
+                                                <span className='text-white text-xl '>
                                                     Ir a la tienda
                                                 </span>
                                             </a>
                                         </Link>
-                                    </div>
+                                    </h2>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
 
@@ -241,6 +228,7 @@ export default class DemoCarousel extends Component {
                             className="object-cover"
                             width="100"
                             height="60"
+                            priority
                         />
                         <div className='absolute  top-0 bottom-0 left-0 bg-gradient-to-b from-red-500 via-orange-500 to-red-500 w-1/2'>
                             <div className='flex flex-col items-center justify-center h-full p-3'>
@@ -253,37 +241,25 @@ export default class DemoCarousel extends Component {
                                             </a>
                                         </Link>
                                     </h1>
-                                    <p className='text-sm'>
-                                        <span className='text-red-100'>
-                                            Apúrate, son por tiempo limitado
-                                        </span>
-                                    </p>
+                                    <span className='text-sm text-red-100'>
+                                        Apúrate, son por tiempo limitado
+                                    </span>
                                     {/* button for the store */}
-                                    <div className='mt-4 '>
-                                        <Link href='/'>
-                                            <a className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded'>
-                                                <span className='text-white  uppercase'>
+                                    <h2 className='mt-4 '>
+                                        <Link href='/store'>
+                                            <a className='bg-red-700 text-white font-bold py-2 px-3 rounded'>
+                                                <span className='text-white  '>
                                                     Ir a la tienda
                                                 </span>
                                             </a>
                                         </Link>
-                                    </div>
+                                    </h2>
                                 </div>
                             </div>
 
-
-
                         </div>
                     </div>
-
-
-                </div>
-
-               
-             
-
-
-
+                </section>
             </Carousel>
         );
     }

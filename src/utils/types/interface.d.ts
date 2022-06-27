@@ -216,6 +216,7 @@ export interface CategoryChildren {
     slug: string
     get_parent_slug: string
     get_parent: string
+    photo:string
     get_total: number
 }
 export interface Brand {
@@ -239,6 +240,7 @@ export interface Product {
     photo_thumbnail_xm: string
     get_category: string
     get_brand: string
+    description:string
 }
 
 export interface Image {

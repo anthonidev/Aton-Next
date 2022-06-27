@@ -19,7 +19,7 @@ const ProductCardRow: FunctionComponent<{ product: Product }> = ({ product }) =>
 
     const [isPresent, setIsPresent] = useState(false);
     const [isPresentCart, setIsPresentCart] = useState<itemCart>();
-    const cart_items = useSelector((state: RootState) => state.cart.items)
+    const cart_items = useSelector((state: RootState) => state.cart?.items)
 
     useEffect(() => {
         items?.map(item => {
@@ -97,7 +97,7 @@ const ProductCardRow: FunctionComponent<{ product: Product }> = ({ product }) =>
                 <div className='w-full col-span-2 '>
                     <div className='flex justify-between items-center ' >
                         <Stock quantity={product.quantity} />
-                        <button className='focus:outline-none' onClick={wishListAction}>
+                        <button aria-label='Agregar a la lista de deseos ' className='focus:outline-none' onClick={wishListAction}>
                             <HeartIcon className={`mr-3   ${isPresent ? "text-rou h-5 w-5" : "text-plo h-4 w-4"}`} />
                         </button>
                     </div>
@@ -114,7 +114,7 @@ const ProductCardRow: FunctionComponent<{ product: Product }> = ({ product }) =>
 
                         <div className='px-3 text-lg bg-white mt-3 flex flex-col justify-center items-center mb-2'>
                             <div>
-                                <p className='text-let line-through font-semibold text-sm'>{formatterSoles.format(parseInt(product?.compare_price ) )}</p>
+                                <p className='text-gray-600  line-through font-semibold text-sm'>{formatterSoles.format(parseInt(product?.compare_price ) )}</p>
                                 <p className='text-black'>{formatterSoles.format(parseInt(product?.price))}</p>
                             </div>
 

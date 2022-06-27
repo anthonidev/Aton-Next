@@ -8,6 +8,9 @@ import ProductCard from '../components/product/ProductCard';
 import { Product } from '../utils/types/interface';
 import { productsHome } from '../redux/api/product';
 import DemoCarousel from '../components/home/Carrocel';
+import ProductNew from '../components/home/ProductNew';
+import CategoryHome from '../components/home/CategoryHome';
+import Features from '../components/home/Features';
 
 const Home: NextPage = () => {
 
@@ -21,17 +24,45 @@ const Home: NextPage = () => {
   const products_sold = useSelector((state: RootState) => state.product.home?.products_sold);
   const products_views = useSelector((state: RootState) => state.product.home?.products_views);
 
+  const categories = useSelector((state: RootState) => state.product.categories);
+
   return (
-    <Layout title='Aton Peru | Inicio' content='Aton es un tienda online donde encontraras productos de tecnologia como controles de tv, accesorios de televisores etc' >
+    <Layout title='Aton Peru | Inicio' content='  En Aton Perú buscamos conectar y mejorar la calidad de vida de las personas con la tecnología que ofrecen todos nuestros productos.' >
       <div>
-        <div >
-          <DemoCarousel />
-        </div>
-        <div className="max-w-7xl container mx-auto px-6 mt-9   ">
-          <section className="my-5">
+        <DemoCarousel />
+        <div className="  ">
+          {/* categorias */}
+
+          <article className='bg-white '>
+            <h1 className=' text-center text-3xl font-semibold uppercase tracking-wider mt-4 mb-2 text-gray-700' >Categorias</h1>
+            <h2 className='text-center text-xl text-gray-700 mb-4'>Encuentra lo que buscas!</h2>
+            <div className='grid md:grid-cols-2 grid-cols-1 '>
+              {categories?.map((category, index) => (
+                <CategoryHome key={index} category={category} />
+              ))}
+            </div>
+
+
+          </article>
+
+          <article className='max-w-7xl container mx-auto px-6 mt-9 '>
+            <h1 className='md:text-2xl text-lg sm:text-xl lg:text-3xl font-semibold uppercase text-gray-700 mt-10 mb-5 tracking-widest underline underline-offset-8  ' >Productos Nuevos</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {products_news?.slice(0, 3)?.map((product: Product) => (
+                <ProductNew key={product.id} product={product} />
+              ))}
+            </div>
+            
+
+          </article>
+
+          <article>
+            <Features />
+          </article>
+
+          <article className="my-5 max-w-7xl mx-auto">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900 " >Productos Destacados</h1>
             <div className='snap-x gap-4 p-4 w-full flex overflow-x-auto'>
-
               {
                 products_featured?.map((product: Product) => (
                   <div className="snap-center shrink-0 lg:w-1/5 md:w-4/12 sm:w-3/6 w-5/6  rounded overflow-hidden" key={product.id}>
@@ -41,10 +72,12 @@ const Home: NextPage = () => {
                 ))
               }
             </div>
-          </section>
-          <Banner />
+          </article>
 
-          <section>
+
+
+
+          <article className="my-5 max-w-7xl mx-auto">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900" >Productos Nuevos</h1>
             <div className='snap-x gap-4 p-4 w-full flex overflow-x-auto'>
 
@@ -57,8 +90,8 @@ const Home: NextPage = () => {
                 ))
               }
             </div>
-          </section>
-          <section>
+          </article>
+          <article className="my-5 max-w-7xl mx-auto">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900" >Productos Más vendidos</h1>
             <div className='snap-x gap-4 p-4 w-full flex overflow-x-auto'>
 
@@ -71,8 +104,8 @@ const Home: NextPage = () => {
                 ))
               }
             </div>
-          </section>
-          <section>
+          </article>
+          <article className="my-5 max-w-7xl mx-auto">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900" >Productos Más vistos</h1>
             <div className='snap-x gap-4 p-4 w-full flex overflow-x-auto'>
 
@@ -85,9 +118,9 @@ const Home: NextPage = () => {
                 ))
               }
             </div>
-          </section>
+          </article>
 
-          <section className=" my-5 lg:my-10">
+          <article className=" my-5 lg:my-10">
             <div className="container  mx-auto  text-center p y-5">
               <div className="flex flex-wrap  justify-around text-plo">
                 <div className=" px-4 shadow">
@@ -108,7 +141,8 @@ const Home: NextPage = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </article>
+          <Banner />
 
 
         </div>

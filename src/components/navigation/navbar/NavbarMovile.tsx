@@ -31,8 +31,8 @@ const NavbarMovile: FunctionComponent<{
 
             </form> */}
             <div className=' flex items-center'>
-                <button onClick={() => dispatch(cart_sidebar_on())} className={`flex justify-between  text-white relative pr-3 `}>
-                    <ShoppingCartIcon className='h-5 w-5 ' />
+                <button aria-label='Ver carrito de aton store ' onClick={() => dispatch(cart_sidebar_on())} className={`flex justify-between  text-white relative pr-3 `}>
+                    <ShoppingCartIcon  className='h-5 w-5 ' />
                     {
                         total_items !== 0 && <span className="bg-rou text-white absolute right-0 top-0 rounded-full px-1 text-xs ">{total_items}</span>
                     }

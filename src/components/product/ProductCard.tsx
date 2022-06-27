@@ -76,7 +76,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
       <div className='bg-white  rounded-sm  hover:border-black border shadow-sm '>
         <div className='flex justify-between items-center ' >
           <Stock quantity={product.quantity} />
-          <button onClick={wishListAction}>
+          <button aria-label='Agregar a la lista de deseos ' onClick={wishListAction}>
             <HeartIcon className={`mr-3   ${isPresent ? "text-rou h-5 w-5" : "text-plo h-4 w-4"}`} />
           </button>
         </div>
@@ -108,7 +108,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
 
           <div className='px-3 bg-white mt-3 flex justify-between items-center mb-2'>
             <div>
-              <p className='text-let line-through font-semibold text-sm'>{formatterSoles.format(parseInt(product?.compare_price))}</p>
+              <p className='text-gray-600 line-through font-semibold text-sm'>{formatterSoles.format(parseInt(product?.compare_price))}</p>
               <p className='text-black'>{formatterSoles.format(parseInt(product?.price))}</p>
             </div>
 
