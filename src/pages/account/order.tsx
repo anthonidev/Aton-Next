@@ -7,6 +7,9 @@ import { AppDispatch, RootState } from '../../redux/store';
 import { get_orders } from '../../redux/api/account';
 import { EyeIcon } from '@heroicons/react/solid';
 import ModelOrder from '../../components/account/ModelOrder';
+import moment from 'moment';
+import { formatterSoles } from '../../utils/helpers/prices';
+import StateOrder from '../../components/account/StateOrder';
 
 const AccountOrders = () => {
 
@@ -45,28 +48,25 @@ const AccountOrders = () => {
 
 		return (
 			<tr key={order.id} className="border-b border-opacity-20  hover:bg-gray-100">
+
 				<td className="p-3">
-					<p>{order.transaction_id}</p>
-				</td>
-				<td className="p-3">
-					<p>{order.full_name}</p>
-				</td>
-				<td className="p-3">
-					{order.address}
+					<p className='capitalize font-semibold text-gray-800'>{order.full_name}</p>
+					<p className='text-xs  text-gray-700'>{moment(order.date_issued).format('MMMM Do YYYY, h:mm:ss a')}</p>
 				</td>
 				<td className="p-3">
-					{order.date_issued}
+					<p>{order.address}</p>
 				</td>
-				<td className="p-3 text-right">
-					<p>{order.amount}</p>
+
+				<td className="p-3 ">
+					<p> {formatterSoles.format(parseInt(order.amount))}</p>
 				</td>
-				<td className="p-3 text-left">
+				<td className="p-3 ">
 					<span className="px-3 py-1 font-semibold rounded-md ">
-						<span>{order.status}</span>
+						<StateOrder status={order.status} />
 					</span>
 				</td>
 				<td className="p-3 text-left">
-					<button onClick={() => viewOrder(order)} className='flex text-gray-600 hover:text-rou '>
+					<button onClick={() => viewOrder(order)} className='flex text-gray-600 hover:text-gray-900 '>
 						<EyeIcon className='h-5 w-5 ' />
 					</button>
 				</td>
@@ -84,16 +84,15 @@ const AccountOrders = () => {
 					)
 				}
 				<h2 className='font-semibold text-lg'>Mis Pedidos  </h2>
-				<div className="container p-2 mx-auto sm:p-4 shadow">
+				<div className="container mx-auto  shadow">
 					<div className="overflow-x-auto">
 						<table className="min-w-full text-sm">
-							<thead className="">
+							<thead className="bg-gray-200 ">
 								<tr className="text-left">
-									<th className="p-3">Codigo</th>
+
 									<th className="p-3">Nombre Completo</th>
-									<th className="p-3">Dirección</th>
-									<th className="p-3">Fecha</th>
-									<th className="p-3">Total</th>
+									<th className="p-3 ">Dirección</th>
+									<th className="p-3 ">Total</th>
 									<th className="p-3">Estado</th>
 									<th className="p-3"></th>
 								</tr>

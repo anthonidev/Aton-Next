@@ -29,10 +29,10 @@ const Cart = () => {
 
 
     return (
-        <Layout title='Aton | Cart' content='Carrito de compras de Aton' >
+        <Layout title='Aton Store | Cart' content='Carrito de compras de Aton Store ' >
             {
                 items?.length ?
-                    (<div className={`max-w-7xl mx-auto px-2 flex flex-col md:flex-row  md:space-x-5 `}>
+                    (<div className={`max-w-7xl mx-auto px-2 flex flex-col md:flex-row  md:space-x-5 pb-20 md:pb-10`}>
                         <div className=' w-full md:w-4/6 '>
                             <h1 className='font-semibold text-lg my-4 ml-5 uppercase tracking-wider text-gray-700'>Carrito </h1>
                             {
@@ -97,7 +97,7 @@ const Cart = () => {
 
                     </div>) :
                     (<div className=" flex justify-center items-center flex-col pt-10 space-y-8 ">
-                        <h3 className="font-semibold text-lg ">No hay productos en el carrito</h3>
+                        <span className="font-semibold text-lg ">No hay productos en el carrito</span>
                         <Link href={'/store'}><a className="bg-pri px-4 py-3 rounded hover:bg-indigo-600 text-gray-100 ">Ver Productos</a></Link>
                     </div>)
             }

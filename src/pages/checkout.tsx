@@ -105,8 +105,8 @@ const Checkout = () => {
         router.push('/thanks');
 
     return (
-        <Layout title='Aton | Checkout' content='home content' >
-            <div className={`max-w-7xl mx-auto px-2`}>
+        <Layout title='Aton Store | Pedido' content='Realiza tus pedido facilmente en aton store' >
+            <div className={`max-w-7xl mx-auto px-2 pb-20 md:pb-10`}>
                 <div className='flex flex-col md:flex-row md:space-x-5'>
                     <div className=' w-full md:w-4/6 '>
                         <h1 className='font-semibold text-lg my-4'>Orden</h1>

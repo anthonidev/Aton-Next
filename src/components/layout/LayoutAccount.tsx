@@ -16,20 +16,21 @@ const AccountLayout: React.FC<Props> = ({ title, content, children }) => {
     const router = useRouter();
 
 
+
     useEffect(() => {
         dispatch(get_profile())
     }, [dispatch])
 
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!isAuthenticated && isAuthenticated !== null) {
             router.push('/auth/login')
         }
-    }, [isAuthenticated, router])
+    }, [isAuthenticated])
 
 
     return (
         <Layout title={title} content={content} >
-            <div className='max-w-7xl mx-auto flex md:my-10 my-5'>
+            <div className='max-w-7xl mx-auto flex md:my-10 my-5 min-h-screen'>
                 <SidebarAccount />
                 <div className='md:w-3/4 w-full mx-5'>
                     {children}

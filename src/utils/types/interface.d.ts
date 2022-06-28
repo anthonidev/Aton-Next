@@ -131,7 +131,7 @@ export interface AlertState {
 export interface AuthState {
     access: (string | null)
     refresh: (string | null)
-    isAuthenticated: boolean
+    isAuthenticated: (boolean|null)
     user: (User | null)
     loading: boolean
 }

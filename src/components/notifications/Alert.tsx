@@ -7,8 +7,6 @@ const Alert = () => {
     const alert = useSelector((state: RootState) => state.alert);
 
     useEffect(() => {
-        console.log(alert);
-        
         if (alert.type === "green") {
             toast.custom((t) => (
                 <div

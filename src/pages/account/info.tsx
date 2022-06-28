@@ -15,12 +15,9 @@ const AccountInfo = () => {
     const dispatch: AppDispatch = useDispatch();
 
 
-    const dniNow = useSelector((state: RootState) => state.account?.dni);
-    const firstName = useSelector((state: RootState) => state.auth.user?.first_name);
-    const lastName = useSelector((state: RootState) => state.auth.user?.last_name);
-    const Dob = useSelector((state: RootState) => state.account?.dob);
-    const Treatment = useSelector((state: RootState) => state.account?.treatment);
-    const IdUser = useSelector((state: RootState) => state.auth.user?.id);
+    const account = useSelector((state: RootState) => state.account);
+    const user = useSelector((state: RootState) => state.auth.user);
+
 
     const [image, setImage] = useState(null);
     const onFileChange = (e: any) => setImage(e.target.files[0]);
@@ -34,20 +31,16 @@ const AccountInfo = () => {
     })
 
     useEffect(() => {
-        setFormData({
-            ...formData,
-            last_name: lastName || '',
-            first_name: firstName || '',
-            dob: Dob || '',
-            treatment: Treatment || '',
-            dni: dniNow || '',
-            user: IdUser || 0,
+        if (user) {
+            setFormData({ ...formData, user: user.id, first_name: user.first_name, last_name: user.last_name })
+        }
+    }, [user])
 
-        })
-
-    }, [firstName, lastName, dniNow, Dob, Treatment, IdUser,formData])
-
-
+    useEffect(() => {
+        if (account) {
+            setFormData({ ...formData, dob: account.dob || "", dni: account.dni || "", treatment: account.treatment || "" })
+        }
+    }, [account])
 
 
 
@@ -165,7 +158,7 @@ const AccountInfo = () => {
                                 value={formData.dni}
                                 placeholder="DNI"
                                 required
-                                minLength={8}
+                                minLength={1}
                                 maxLength={8}
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-pri-100 rounded-t-md focus:outline-none   sm:text-sm"
 

@@ -5,7 +5,7 @@ import { AuthState, User } from "../../utils/types/interface";
 const initialState: AuthState = {
     access: getStoreLocal('access'),
     refresh: getStoreLocal('refresh'),
-    isAuthenticated: false,
+    isAuthenticated: null,
     user: {
         id: 0,
         email: '',

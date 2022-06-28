@@ -1,6 +1,8 @@
 import { XIcon } from '@heroicons/react/solid'
+import moment from 'moment'
 import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
+import { formatterSoles } from '../../utils/helpers/prices'
 import { Order, OrderItem } from '../../utils/types/interface'
 
 const ModelOrder: FunctionComponent<{
@@ -60,7 +62,7 @@ const ModelOrder: FunctionComponent<{
                             <h2 className='font-semibold text-lg'>Código de la orden: {order.transaction_id}</h2>
                             <p className='text-sm'>{order.full_name}</p>
                             <p className='text-sm'>{order.address}</p>
-                            <p className='text-sm'>{order.date_issued}</p>
+                            <p className='text-sm'>{moment(order.date_issued).format('MMMM Do YYYY, h:mm:ss a')}</p>
 
                         </div>
 
@@ -87,11 +89,10 @@ const ModelOrder: FunctionComponent<{
 
                     </div>
                     <div className="flex-auto p-6">
-                        <div className="flex flex-wrap border-b-2 my-4">
-                        </div>
+
                         <div className="flex flex-wrap border-b-2 my-2">
                             <h1 className="flex-auto text-base font-semibold ">
-                                Cantidad de productos en el carrito
+                                Cantidad de productos
                             </h1>
                             <div className="text-xl font-semibold text-gray-500 ">
                                 {order.orders.length}
@@ -99,10 +100,10 @@ const ModelOrder: FunctionComponent<{
                         </div>
                         <div className="flex flex-wrap border-b-2 my-2">
                             <h1 className="flex-auto text-base font-semibold ">
-                                Total a pagar
+                                Total
                             </h1>
                             <div className="text-xl font-semibold text-gray-500 ">
-                                ${order.amount}
+                                {formatterSoles.format(parseInt(order.amount))}
                             </div>
                         </div>
                     </div>
