@@ -1,5 +1,6 @@
 import axios from "axios";
-import { brands_ok, categories_ok, products_fail, products_home_ok, products_ok, product_ok, subcategoty_ok } from "../slice/productSlice";
+import { itemCart } from "../../utils/types/interface";
+import { brands_ok, categories_ok, products_fail, products_home_ok, products_ok, product_ok, recomendation_ok, subcategoty_ok } from "../slice/productSlice";
 import { AppDispatch } from "../store";
 import { setAlert } from "./alert";
 
@@ -158,4 +159,25 @@ export const get_subcategory = (slug: string) => async (dispatch: AppDispatch) =
 
     })
 
+}
+
+export const get_product_recommendations = (items: itemCart[]) => async (dispatch: AppDispatch) => {
+
+    let ids = items.map(({product}) => product.id);
+    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/product/recomendation`,
+        JSON.stringify({
+            ids
+        }),
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+
+            dispatch(recomendation_ok(res.data));
+
+        }).catch(err => {
+
+        })
 }

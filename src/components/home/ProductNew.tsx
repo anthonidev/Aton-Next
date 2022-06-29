@@ -53,22 +53,8 @@ const ProductNew: FunctionComponent<{ product: Product }> = ({ product }) => {
         setLoading(false)
     }
     return (
-        <section className="flex flex-col justify-between border-2 hover:border-gray-400 rounded shadow  ">
-            <div className="px-4 py-2">
-
-                <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 uppercase ">
-                    <Link href={{
-                        pathname: '/product/[slug]',
-                        query: { slug: product.slug },
-                    }}>
-                        <a className='hover:text-red-700'>{product.title}</a>
-
-
-
-                    </Link></h1>
-                <h2 className="mt-3 text-xs lg:text-sm text-gray-600 w-3/4  ">{product.description}</h2>
-            </div>
-            <div>
+        <section className="grid md:grid-cols-3 grid-cols-2 border-2 hover:border-gray-400 rounded shadow  ">
+            <div className='lg:col-span-2'>
                 <Link href={{
                     pathname: '/product/[slug]',
                     query: { slug: product.slug },
@@ -87,8 +73,22 @@ const ProductNew: FunctionComponent<{ product: Product }> = ({ product }) => {
 
                 </Link>
             </div>
+            <div className="py-2 flex justify-center items-center p-2">
 
-            <div className="flex items-center justify-between px-4 py-2 bg-gray-900">
+                <h1 className="text-lg sm:text-xl  font-bold text-gray-800 uppercase ">
+                    <Link href={{
+                        pathname: '/product/[slug]',
+                        query: { slug: product.slug },
+                    }}>
+                        <a className='hover:text-red-700'>{product.title}</a>
+
+
+
+                    </Link></h1>
+            </div>
+
+
+            <div className="flex items-center justify-between px-4 py-2 bg-gray-900 col-span-2 md:col-span-3">
                 <span className="text-lg font-bold text-white">{formatterSoles.format(parseInt(product.price))}</span>
                 {loading ? <button type="button" className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-indigo-400 dark:text-coolGray-900 hover:bg-indigo-600">Añadir al carrito</button> :
                     <button onClick={addToCart} className='bg-white text-gray-900   rounded-md hover:bg-gray-300 flex border px-2 py-1'>

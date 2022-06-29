@@ -97,9 +97,26 @@ export const signup = (first_name: string, last_name: string, email: string, pas
             'Content-Type': 'application/json'
         }
     }).then(res => {
-        dispatch(setAlert("Te enviamos un correo, por favor activa tu cuenta. Revisa el correo de spam", "green"))
+        dispatch(setAlert("Usuario creado correctamente", "green"));
+        dispatch(setAlert("Te enviamos un correo, por favor activa tu cuenta.", "green"))
+
     }).catch(err => {
-        dispatch(setAlert('Error al crear cuenta', 'red'));
+
+        if (err.response.data.password) {
+            err.response.data.password.map((error: string) => {
+                dispatch(setAlert(error, "red"));
+            }
+            )
+        } else if (err.response.data.email) {
+            err.response.data.email.map((error: string) => {
+                dispatch(setAlert(error, "red"));
+            }
+            )
+
+        } else {
+            dispatch(setAlert("Error al crear usuario", "red"));
+        }
+
     })
 
     dispatch(off_loading());

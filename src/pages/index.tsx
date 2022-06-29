@@ -47,8 +47,8 @@ const Home: NextPage = () => {
 
           <article className='max-w-7xl container mx-auto px-6 mt-9 '>
             <h1 className='md:text-2xl text-lg sm:text-xl lg:text-3xl font-semibold uppercase text-gray-700 mt-10 mb-5 tracking-widest underline underline-offset-8  ' >Productos Nuevos</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {products_news?.slice(0, 3)?.map((product: Product) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+              {products_news?.slice(0, 4)?.map((product: Product) => (
                 <ProductNew key={product.id} product={product} />
               ))}
             </div>
@@ -56,11 +56,11 @@ const Home: NextPage = () => {
 
           </article>
 
-          <article>
+          <article className='max-w-7xl md:mx-auto px-2'>
             <Features />
           </article>
 
-          <article className="my-5 max-w-7xl mx-auto">
+          <article className="my-5 max-w-7xl md:mx-auto px-2">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900 " >Productos Destacados</h1>
             <div className='snap-x gap-4 p-4 w-full flex overflow-x-auto'>
               {
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
 
 
 
-          <article className="my-5 max-w-7xl mx-auto">
+          <article className="my-5 max-w-7xl md:mx-auto px-2">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900" >Productos Nuevos</h1>
             <div className='snap-x gap-4 p-4 w-full flex overflow-x-auto'>
 
@@ -91,7 +91,7 @@ const Home: NextPage = () => {
               }
             </div>
           </article>
-          <article className="my-5 max-w-7xl mx-auto">
+          <article className="my-5 max-w-7xl md:mx-auto px-2">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900" >Productos Más vendidos</h1>
             <div className='snap-x gap-4 p-4 w-full flex overflow-x-auto'>
 
@@ -105,7 +105,7 @@ const Home: NextPage = () => {
               }
             </div>
           </article>
-          <article className="my-5 max-w-7xl mx-auto">
+          <article className="my-5 max-w-7xl md:mx-auto px-2 ">
             <h1 className="uppercase font-bold text-xl my-3 text-gray-900" >Productos Más vistos</h1>
             <div className='snap-x gap-4 p-4 w-full flex overflow-x-auto'>
 

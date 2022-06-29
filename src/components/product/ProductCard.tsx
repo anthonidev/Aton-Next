@@ -73,7 +73,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
   }
   return (
     <div>
-      <div className='bg-white  rounded-sm  hover:border-black border shadow-sm '>
+      <div className='bg-white  rounded-sm  hover:border-black border shadow-sm flex flex-col justify-between h-full'>
         <div className='flex justify-between items-center ' >
           <Stock quantity={product.quantity} />
           <button aria-label='Agregar a la lista de deseos ' onClick={wishListAction}>
@@ -84,7 +84,7 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
           pathname: '/product/[slug]',
           query: { slug: product.slug },
         }}>
-          <a >
+          <a className='focus:outline-none ' >
             <Image
               className="aspect-video object-cover"
               src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${product.photo_thumbnail_sm}`}
@@ -102,11 +102,11 @@ const ProductCard: FunctionComponent<{ product: Product }> = ({ product }) => {
               pathname: '/product/[slug]',
               query: { slug: product.slug },
             }}>
-              <a className='text-gray-800  '>{product.title.substr(0, 40)}...</a>
+              <a className='text-gray-800 focus:outline-none '>{product.title.substr(0, 40)}...</a>
             </Link>
           </div>
 
-          <div className='px-3 bg-white mt-3 flex justify-between items-center mb-2'>
+          <div className='px-3 bg-white mt-3 flex md:flex-row flex-col  justify-between items-center mb-2' >
             <div>
               <p className='text-gray-600 line-through font-semibold text-sm'>{formatterSoles.format(parseInt(product?.compare_price))}</p>
               <p className='text-black'>{formatterSoles.format(parseInt(product?.price))}</p>

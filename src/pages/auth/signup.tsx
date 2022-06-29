@@ -9,6 +9,7 @@ import { IFormSignUp } from '../../utils/types/interface';
 import { signup } from '../../redux/api/auth';
 import Image from 'next/image';
 import Link from 'next/link';
+import { setAlert } from '../../redux/api/alert';
 
 const Signup = () => {
     const loading = useSelector((state: RootState) => state.auth.loading);
@@ -35,16 +36,21 @@ const Signup = () => {
         } else {
             item.replace("border-gray-300", "border-red-300")
             item.replace("border-green-300", "border-red-300")
-
         }
 
     }
 
     const onSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatch(signup(formData.first_name, formData.last_name, formData.email, formData.password, formData.re_password))
-        setAccountCreated(true);
-        window.scrollTo(0, 0)
+
+        if (formData.password !== formData.re_password) {
+            dispatch(setAlert('Las contraseñas no coinciden', 'red'))
+        }
+        else {
+            dispatch(signup(formData.first_name, formData.last_name, formData.email, formData.password, formData.re_password))
+            setAccountCreated(true);
+            window.scrollTo(0, 0)
+        }
     }
     if (accountCreated)
         router.push('/auth/confirm');

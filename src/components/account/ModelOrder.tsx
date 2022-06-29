@@ -1,4 +1,4 @@
-import { XIcon } from '@heroicons/react/solid'
+import { ClipboardCheckIcon, XIcon } from '@heroicons/react/solid'
 import moment from 'moment'
 import Image from 'next/image'
 import React, { FunctionComponent } from 'react'
@@ -57,19 +57,19 @@ const ModelOrder: FunctionComponent<{
                         </button>
                     </div>
                     <div className='flex flex-col'>
+                        <span className='text-center text-xs'>{moment(order.date_issued).format('MMMM Do YYYY, h:mm:ss a')}</span>
 
-                        <div>
-                            <h2 className='font-semibold text-lg'>Código de la orden: {order.transaction_id}</h2>
-                            <p className='text-sm'>{order.full_name}</p>
-                            <p className='text-sm'>{order.address}</p>
-                            <p className='text-sm'>{moment(order.date_issued).format('MMMM Do YYYY, h:mm:ss a')}</p>
-
+                        <span className='text-center mb-3 uppercase font-bold text-lg text-gray-700'>Detalle del pedido</span>
+                        <div className='text-sm text-gray-800 mx-5 capitalize'>
+                            <p ><span className='font-semibold '> Nombre:</span> {order.full_name}</p>
+                            <p ><span className='font-semibold '> Dirección:</span> {order.address}</p>
+                            <p ><span className='font-semibold '> Código:</span> {order.transaction_id}</p>
                         </div>
 
                         <div className="container p-2 mx-auto sm:p-4 ">
                             <div className="overflow-x-auto">
                                 <table className="min-w-full text-sm">
-                                    <thead className="">
+                                    <thead className="bg-gray-200">
                                         <tr className="text-left">
                                             <th className="p-3">Imagen</th>
                                             <th className="p-3">Producto</th>
@@ -88,21 +88,20 @@ const ModelOrder: FunctionComponent<{
 
 
                     </div>
-                    <div className="flex-auto p-6">
-
-                        <div className="flex flex-wrap border-b-2 my-2">
-                            <h1 className="flex-auto text-base font-semibold ">
+                    <div className="flex-auto px-6 text-gray-700">
+                        <div className="flex flex-wrap border-b my-2">
+                            <span className="flex-auto text-base font-semibold ">
                                 Cantidad de productos
-                            </h1>
-                            <div className="text-xl font-semibold text-gray-500 ">
+                            </span>
+                            <div className="text-xl font-semibold text-gray-900  ">
                                 {order.orders.length}
                             </div>
                         </div>
-                        <div className="flex flex-wrap border-b-2 my-2">
-                            <h1 className="flex-auto text-base font-semibold ">
+                        <div className="flex flex-wrap border-b my-2">
+                            <span className="flex-auto text-base font-semibold ">
                                 Total
-                            </h1>
-                            <div className="text-xl font-semibold text-gray-500 ">
+                            </span>
+                            <div className="text-xl font-semibold text-gray-900 ">
                                 {formatterSoles.format(parseInt(order.amount))}
                             </div>
                         </div>

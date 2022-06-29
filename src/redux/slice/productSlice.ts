@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ProductState,Category, Brand, resultProducts, HomeProducts, CategoryChildren, DetailProduct } from '../../utils/types/interface';
+import { ProductState,Category, Brand, resultProducts, HomeProducts, CategoryChildren, DetailProduct, Product } from '../../utils/types/interface';
 
 const initialState: ProductState = {
     home:null,
@@ -10,7 +10,8 @@ const initialState: ProductState = {
     previous: null,
     next: null,
     count: null,
-    subcategory: null
+    subcategory: null,
+    recomendation:null
 }
 
 export const productSlice = createSlice({
@@ -42,6 +43,9 @@ export const productSlice = createSlice({
         subcategoty_ok: (state: ProductState, action: PayloadAction<CategoryChildren>) => {
             state.subcategory = action.payload
         },
+        recomendation_ok: (state: ProductState, action: PayloadAction<Product[]>) => {
+            state.recomendation = action.payload
+        }
 
     }
 });
@@ -54,7 +58,8 @@ export const {
     brands_ok,
     products_ok,
     subcategoty_ok,
-    products_fail
+    products_fail,
+    recomendation_ok
 } = productSlice.actions
 
 

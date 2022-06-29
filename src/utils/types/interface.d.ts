@@ -155,6 +155,7 @@ export interface ProductState {
     next: string | null
     count: string | null
     subcategory: CategoryChildren | null
+    recomendation:Product[]|null
 }
 
 export interface DetailProduct{

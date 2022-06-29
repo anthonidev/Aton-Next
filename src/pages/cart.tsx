@@ -9,7 +9,8 @@ import Link from 'next/link'
 import OrdenSumary from '../components/cart/OrdenSumary'
 import { HomeIcon, LockClosedIcon } from '@heroicons/react/solid'
 import { cart_sidebar_off } from '../redux/slice/cartSlice'
-
+import { get_product_recommendations } from '../redux/api/product'
+import ProductCard from '../components/product/ProductCard'
 const Cart = () => {
 
     const dispatch: AppDispatch = useDispatch()
@@ -20,20 +21,28 @@ const Cart = () => {
 
     useEffect(() => {
         dispatch(cart_sidebar_off())
-
     }, [dispatch])
+
+    useEffect(() => {
+        if (items)
+            dispatch(get_product_recommendations(items))
+    }
+        , [dispatch, items])
+
+
     useEffect(() => {
         dispatch(get_total_order())
     }, [amount, dispatch])
 
+    const products_recomendation = useSelector((state: RootState) => state.product.recomendation)
 
 
     return (
         <Layout title='Aton Store | Cart' content='Carrito de compras de Aton Store ' >
             {
                 items?.length ?
-                    (<div className={`max-w-7xl mx-auto px-2 flex flex-col md:flex-row  md:space-x-5 pb-20 md:pb-10`}>
-                        <div className=' w-full md:w-4/6 '>
+                    (<div className={`max-w-7xl mx-auto px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  md:space-x-5 pb-20 md:pb-10`}>
+                        <div className='lg:col-span-2  '>
                             <h1 className='font-semibold text-lg my-4 ml-5 uppercase tracking-wider text-gray-700'>Carrito </h1>
                             {
                                 items?.map((item: itemCart) => (
@@ -48,10 +57,10 @@ const Cart = () => {
                                     <span>Continuar Comprando</span>
                                 </a>
                             </Link>
+
                         </div>
 
-
-                        <div className='w-full md:w-2/6'>
+                        <div>
                             <h1 className='font-semibold text-lg my-4 uppercase tracking-wider  ml-5 text-gray-700'>Suma de la orden</h1>
                             <div className='bg-white rounded-lg  shadow px-4 py-3 '>
 
@@ -94,12 +103,26 @@ const Cart = () => {
                         </div>
 
 
+                        <div className='lg:col-span-2 ' >
+                            <h2> Productos relacionados </h2>
+                            <div className="grid grid-cols-2 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                {
+                                    products_recomendation?.map((product) => (
+                                        <ProductCard key={product.id} product={product} />
+
+                                    ))
+                                }
+
+                            </div>
+                        </div>
+
 
                     </div>) :
                     (<div className=" flex justify-center items-center flex-col pt-10 space-y-8 ">
                         <span className="font-semibold text-lg ">No hay productos en el carrito</span>
                         <Link href={'/store'}><a className="bg-pri px-4 py-3 rounded hover:bg-indigo-600 text-gray-100 ">Ver Productos</a></Link>
                     </div>)
+
             }
 
         </Layout>
