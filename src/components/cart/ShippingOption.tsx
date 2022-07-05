@@ -9,7 +9,7 @@ const ShippingOption: FunctionComponent<{
 }> = ({ item, onChange, shipping_id }) => {
     return (
 
-        <div className={`w-full md:w-3/4 text-center flex justify-around items-center rounded-lg px-1 border-2 ${shipping_id == item.id ? "border-blue-400 " : "border-plo"}`}>
+        <div className={`w-full md:w-3/4 text-center flex justify-around items-center rounded-lg px-1 border-2 ${shipping_id == item.id ? "border-blue-400 bg-blue-50" : "border-plo"}`}>
             <div>
                 <Image
                     src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.photo}`}

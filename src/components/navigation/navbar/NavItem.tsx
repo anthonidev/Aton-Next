@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { FunctionComponent } from 'react'
-import { motion } from 'framer-motion';
+
 import { NavbarIten } from '../../../utils/types/interface';
 
 const NavItem: FunctionComponent<{ iten: NavbarIten, type: string }> = ({ iten: {
@@ -12,8 +12,8 @@ const NavItem: FunctionComponent<{ iten: NavbarIten, type: string }> = ({ iten: 
     const { pathname } = useRouter()
 
     if (type === "main") {
-        hover = 'hover:text-rou'
-        select = 'text-rou '
+        hover = 'hover:text-rou '
+        select = 'text-rou border-rou border-b-2 '
         noSelect=' '
 
     }

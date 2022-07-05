@@ -77,7 +77,7 @@ const Store = () => {
     return (
         <Layout title='Tienda | Aton Peru' content='Aton Store cuenta con productos de tecnologia para el hogar ' >
 
-            <div className="max-w-7xl container mx-auto px-6   ">
+            <div className="max-w-7xl container mx-auto px-6  ">
                 <div className='flex-col md:flex-row flex justify-between  px-5 space-y-4'>
                     <Breadcrumb >
                         <>

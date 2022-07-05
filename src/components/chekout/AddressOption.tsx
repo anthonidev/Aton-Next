@@ -25,7 +25,7 @@ const AddressOption: FunctionComponent<{
     }
     return (
 
-        <div className={`flex-col flex justify-between rounded px-1 border-2 ${address_id == item.id ? "border-blue-400 " : "border-plo"}`}>
+        <div className={`flex-col flex justify-between rounded px-1 border-2  ${address_id == item.id ? "border-blue-400 bg-blue-50  " : "border-plo"}`}>
 
             <input
                 className='mt-2'
@@ -48,7 +48,7 @@ const AddressOption: FunctionComponent<{
 
             </div>
             <div className='flex border-t mt-2 justify-between p-2  '>
-                <button onClick={EditAdress} className='text-gray-500 hover:text-gray-700'>Editar</button>
+                <button onClick={EditAdress} className='text-gray-800 hover:text-gray-900'>Editar</button>
                 <button onClick={Delete} className='text-red-400 hover:text-red-600'>Eliminar</button>
             </div>
         </div >

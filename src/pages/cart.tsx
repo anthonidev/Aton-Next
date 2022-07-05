@@ -57,9 +57,7 @@ const Cart = () => {
                                     <span>Continuar Comprando</span>
                                 </a>
                             </Link>
-
                         </div>
-
                         <div>
                             <h1 className='font-semibold text-lg my-4 uppercase tracking-wider  ml-5 text-gray-700'>Suma de la orden</h1>
                             <div className='bg-white rounded-lg  shadow px-4 py-3 '>
@@ -101,10 +99,8 @@ const Cart = () => {
 
 
                         </div>
-
-
                         <div className='lg:col-span-2 ' >
-                            <h2> Productos relacionados </h2>
+                            <h2 className='text-lg mt-3 mb-1 font-medium'> Productos relacionados </h2>
                             <div className="grid grid-cols-2 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                                 {
                                     products_recomendation?.map((product) => (
@@ -112,15 +108,12 @@ const Cart = () => {
 
                                     ))
                                 }
-
                             </div>
                         </div>
-
-
                     </div>) :
-                    (<div className=" flex justify-center items-center flex-col pt-10 space-y-8 ">
-                        <span className="font-semibold text-lg ">No hay productos en el carrito</span>
-                        <Link href={'/store'}><a className="bg-pri px-4 py-3 rounded hover:bg-indigo-600 text-gray-100 ">Ver Productos</a></Link>
+                    (<div className=" flex justify-center items-center flex-col pt-10 space-y-8 h-screen -m-48">
+                        <span className="font-semibold text-2xl text-gray-800 ">No hay productos en el carrito</span>
+                        <Link href={'/store'}><a className="bg-pri px-4 py-3 rounded hover:bg-indigo-600 text-gray-100  ">Ir a la tienda</a></Link>
                     </div>)
 
             }

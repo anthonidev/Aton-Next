@@ -7,6 +7,7 @@ import { get_profile } from '../../redux/api/account';
 import SidebarAccount from '../../components/account/SidebarAccount';
 import { Props } from '../../utils/types/types';
 import { useRouter } from 'next/router';
+import { logout } from '../../redux/api/auth';
 
 const AccountLayout: React.FC<Props> = ({ title, content, children }) => {
     const dispatch: AppDispatch = useDispatch();
@@ -26,7 +27,9 @@ const AccountLayout: React.FC<Props> = ({ title, content, children }) => {
             router.push('/auth/login')
         }
     }, [isAuthenticated])
-
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
 
     return (
         <Layout title={title} content={content} >
@@ -38,7 +41,7 @@ const AccountLayout: React.FC<Props> = ({ title, content, children }) => {
                         <Link href={'/account/main'}>
                             <a className='w-1/2   ' >Volver</a>
                         </Link>
-                        <button className='w-1/2 flex justify-end'>Cerrar Seccion</button>
+                        <button onClick={logoutHandler} className='w-1/2 flex justify-end hover:text-red-500'>Cerrar Seccion</button>
                     </div>
 
                 </div>

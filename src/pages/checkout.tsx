@@ -12,7 +12,7 @@ import SelectShipping from '../components/chekout/SelectShipping'
 import CouponApply from '../components/chekout/CouponApply'
 import { LockClosedIcon } from '@heroicons/react/solid'
 import Steps from '../components/chekout/Steps'
-import { get_address_profile } from '../redux/api/account';
+import OrdenDetailConfirm from '../components/chekout/OrdenDetailConfirm';
 
 export enum Modulo {
     SHIPPING = "SHIPPING",
@@ -30,7 +30,6 @@ const Checkout = () => {
     const coupon = useSelector((state: RootState) => state.order.coupon)
 
     const [modulo, setModulo] = useState<Modulo>(Modulo.SHIPPING)
-    const [success, setSuccess] = useState(false)
     const [chekTC, setChekTC] = useState(false)
     const [codeCoupon, setCoupon] = useState('')
     const [formData, setFormData] = useState<IFormCheckout>({
@@ -92,7 +91,8 @@ const Checkout = () => {
                 )
                 )
                 dispatch(setAlert("Gracias por su compra", "green"))
-                setSuccess(true)
+                setModulo(Modulo.CONFIRM)
+                router.push('/thanks');
             } else {
                 dispatch(setAlert("Debe aceptar los terminos y condiciones", "yellow"))
                 setModulo(Modulo.MAKEORDER)
@@ -101,12 +101,11 @@ const Checkout = () => {
         }
     }
 
-    if (typeof window !== 'undefined' && success)
-        router.push('/thanks');
+   
 
     return (
         <Layout title='Aton Store | Pedido' content='Realiza tus pedido facilmente en aton store' >
-            <div className={`max-w-7xl mx-auto px-2 pb-20 md:pb-10`}>
+            <div className={`max-w-7xl mx-auto px-2 pb-20 md:pb-10  min-h-screen`}>
                 <div className='flex flex-col md:flex-row md:space-x-5'>
                     <div className=' w-full md:w-4/6 '>
                         <h1 className='font-semibold text-lg my-4'>Orden</h1>
@@ -144,7 +143,10 @@ const Checkout = () => {
                         {
                             modulo === Modulo.MAKEORDER && (
                                 <div className='w-full '>
-                                    <div className='flex items-center justify-center'>
+
+                                    <OrdenDetailConfirm />
+
+                                    <div className='flex items-center justify-center mt-4'>
                                         <input
                                             type="checkbox"
                                             className="h-4 w-4 border-gray-300 rounded  focus:outline-none checkbox checkbox-primary "
@@ -163,14 +165,7 @@ const Checkout = () => {
                             )
 
                         }
-                        {
-                            modulo === Modulo.CONFIRM && (
-                                <div className='w-full '>
-                                    <h1 className='font-semibold text-lg my-4'>...</h1>
-                                </div>
-                            )
-
-                        }
+                       
 
                         <div className="flex justify-end mt-5 md:mt-10  ">
                             <button

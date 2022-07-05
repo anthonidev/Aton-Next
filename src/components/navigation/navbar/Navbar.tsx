@@ -42,52 +42,32 @@ const Navbar: FunctionComponent<{
 
                 {
                   viewCategories && (
-                    <div className='  z-auto '>
-                      <div className='absolute   pt-4 left-0 right-0 md:mx-0 p-1 '>
-                        <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow overflow-y-auto'>
+                    <div className='  z-auto overflow-y-scroll '>
+                      <div className='absolute   pt-4 left-0 right-0 md:mx-0 p-1  '>
+                        <div className='grid grid-cols-3 py-4 px-5 gap-5 bg-white shadow '>
 
                           {
                             categories && categories?.map((category) => (
                               <div key={category.id}>
-                                <div className='relative  '>
-                                  <div className="flex-col flex justify-start items-center  border-2 rounded p-4  ">
-                                    <Image
-                                      className="aspect-video object-cover "
-                                      src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${category.photo}`}
-                                      layout="fill"
-                                      quality={50}
-                                      alt={category.title}
-                                    />
-                                    <div className='absolute'>
-                                      <div className='uppercase text-sm my-2  bg-gray-700 hover:bg-gray-900 text-white   py-3 px-2 rounded w-full text-center  border-2'>
-                                        <Link href={'/category/' + category.slug}>
-                                          <a >
-                                            <h3 className=' tracking-wider font-bold   '>
-                                              {category.title}
-                                            </h3>
-                                          </a>
-                                        </Link>
-                                      </div>
-
-                                    </div>
-
-
-
-                                  </div>
-
-                                </div>
-
-
-                                <div className='shadow p-2'>
+                                
+                                <div className='flex  border rounded'>
                                   {
                                     category.children && category.children.map((child) => (
-                                      <div key={child.id} className='mx-4 my-3'>
+                                      <div key={child.id} className='mx-4 my-2 space-y-2  py-2 px-4 rounded hover:bg-red-50'>
                                         <Link href={'/category/' + child.slug}>
-                                          <a className='hover:text-gray-900 flex space-x-3 items-center  text-gray-700 text-sm'>
-                                            <h3 className=' tracking-wider font-bol list-item   '>
+                                          <a className=' flex flex-col justify-center items-center'>
+                                            <Image
+                                              className="aspect-video object-cover "
+                                              src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${child.photo}`}
+                                              layout="fixed"
+                                              height={60}
+                                              width={60}
+                                              quality={50}
+                                              alt={child.title}
+                                            />
+                                            <span className='hover:text-gray-900 flex space-x-3 items-center tracking-wider font-bol text-gray-700 text-sm'>
                                               {child.title}
-                                            </h3>
-                                            <span className='text-xs text-gray-500 '>({child.get_total})</span>
+                                            </span>
                                           </a>
                                         </Link>
                                       </div>
@@ -129,7 +109,7 @@ const Navbar: FunctionComponent<{
 
                 {
                   viewBrands && (
-                    <div className='absolute   pt-4 left-0 right-0 xl:mx-96 md:mx-0 p-2 '>
+                    <div className='absolute   pt-4 left-0 right-0  p-2 '>
                       <div className='grid grid-cols-3 py-4 px-5 gap-5  bg-white shadow '>
 
                         {
@@ -164,7 +144,7 @@ const Navbar: FunctionComponent<{
       </div>
 
 
-    </div>
+    </div >
 
   )
 }
