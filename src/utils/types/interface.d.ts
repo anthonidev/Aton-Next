@@ -158,6 +158,29 @@ export interface ProductState {
     recomendation:Product[]|null
 }
 
+export interface CampaingState {
+    campaings: Campaing[] | null
+}
+
+export interface Campaing {
+    channels: Channel[] | null
+    segments: Segment[] | null
+}
+
+export interface Channel {
+    id: number,
+    name: string,
+    short: string,
+}
+
+export interface Segment {
+    id: number,
+    name: string,
+    short: string,
+    info:string
+}
+
+
 export interface DetailProduct{
     id: number
     title: string

@@ -9,7 +9,7 @@ export const shippingSlice = createSlice({
     name: "shipping",
     initialState,
     reducers: {
-        get_shipping: (state, action: PayloadAction<shipping_option[]>) => {
+        get_shipping: (state:ShippingState, action: PayloadAction<shipping_option[]>) => {
             state.shipping_options = action.payload
         },
     }

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { HeartIcon, LocationMarkerIcon, ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/solid';
+import { HeartIcon, LocationMarkerIcon, PresentationChartLineIcon, ShoppingBagIcon, UserCircleIcon } from '@heroicons/react/solid';
 import AccountLayout from '../../components/layout/LayoutAccount';
 
 export const AccountMain = [
@@ -8,6 +8,7 @@ export const AccountMain = [
     { "url": "/account/address", "text": "Direcciones", "icon": <LocationMarkerIcon /> },
     { "url": "/account/order", "text": "Pedidos", "icon": <ShoppingBagIcon /> },
     { "url": "/account/wishlist", "text": "Lista de deseos", "icon": <HeartIcon /> },
+    { "url": "/report/main", "text": "Reportes", "icon": <PresentationChartLineIcon /> },
 ]
 
 
