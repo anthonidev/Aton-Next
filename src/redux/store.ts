@@ -7,6 +7,7 @@ import shippingReducer from "./slice/shippingSlice";
 import orderReducer from "./slice/orderSlice";
 import accountReducer from "./slice/accountSlice";
 import wishlistReducer from "./slice/wishlistSlice";
+import reportReducer from "./slice/reportSlice";
 
 export const store = configureStore({
     reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
         shipping: shippingReducer,
         order: orderReducer,
         account: accountReducer,
-        wishlist: wishlistReducer
+        wishlist: wishlistReducer,
+        report: reportReducer
     },
 });
 

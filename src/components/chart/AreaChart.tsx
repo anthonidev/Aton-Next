@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,7 +11,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
+import { chart } from '../../redux/slice/reportSlice';
 
 
 ChartJS.register(
@@ -33,32 +33,37 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Chart.js Line Chart',
+            text: 'Ventas por días',
         },
     },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-export const data = {
+
+
+
+const AreaChart: FunctionComponent<{
+    area: chart
+}> = ({ area: {
     labels,
-    datasets: [
-        {
-            fill: true,
-            label: 'Dataset 2',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-            borderColor: 'rgb(53, 162, 235)',
-            backgroundColor: 'rgba(53, 162, 235, 0.5)',
-        },
-    ],
-};
+    data,
+} }) => {
+        const pushdata = {
+            labels,
+            datasets: [
+                {
+                    fill: true,
+                    label: 'Ventas',
+                    data: data,
+                    borderColor: 'rgb(53, 162, 235)',
+                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                },
+            ],
+        };
+        return (
 
-
-const AreaChart = () => {
-    return (
-        <Line options={options} data={data} />
-
-    )
-}
+            <Line options={options} data={pushdata} />
+        )
+    }
 
 export default AreaChart

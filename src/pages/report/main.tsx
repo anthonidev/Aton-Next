@@ -1,16 +1,27 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import AreaChart from '../../components/chart/AreaChart'
+import GeneralData from '../../components/chart/GeneralData'
 import PieChart from '../../components/chart/PieChart'
 import RadarChart from '../../components/chart/RadarChart'
 import VerticalBar from '../../components/chart/VerticalBar'
-import { RootState } from '../../redux/store';
+import { getReports } from '../../redux/api/report'
+import { RootState, AppDispatch } from '../../redux/store';
 
 const Main = () => {
 
+    const dispatch: AppDispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getReports())
+    }, [dispatch])
+
     const user = useSelector((state: RootState) => state.auth.user)
+    const { area, pie, general, radar } = useSelector((state: RootState) => state.report)
+
+
 
     return (
         <div>
@@ -136,20 +147,41 @@ const Main = () => {
                     </div>
                 </div>
 
-                <div className="px-6 pt-6 2xl:container">
+                <div className="px-4 lg:px-10 pt-6  2xl:container">
                     <div className="grid gap-20 md:grid-cols-2 lg:grid-cols-2 ">
-                        <div>
+                        {/* <div>
                             <VerticalBar />
-                        </div>
-                        <div>
-                            <AreaChart />
-                        </div>
-                        <div>
-                            <PieChart />
-                        </div>
-                        <div>
-                            <RadarChart />
-                        </div>
+                        </div> */}
+                        {
+                            general && (
+                                <>
+                                    <GeneralData data={general} />
+                                </>
+                            )
+                        }
+                        {
+                            area && (
+                                <div className=' rounded-lg border shadow-sm p-3 max-w-md md:max-w-full'>
+                                    <AreaChart area={area} />
+                                </div>
+                            )
+                        }
+                        {
+                            pie && (
+                                <div className=' rounded-lg border shadow-sm p-3  max-w-md md:max-w-full'>
+                                    <PieChart pie={pie} />
+                                </div>
+                            )
+                        }
+                        {
+                            radar && (
+                                <div className=' rounded-lg border shadow-sm p-3 max-w-md md:max-w-full'>
+                                    <RadarChart radar={radar} />
+                                </div>
+                            )
+                        }
+
+
                     </div>
                 </div>
             </div>
