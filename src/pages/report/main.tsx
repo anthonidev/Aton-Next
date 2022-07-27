@@ -43,11 +43,11 @@ const Main = () => {
                         </Link>
                     </div>
 
-                    <div className="mt-8 text-center">
+                    {/* <div className="mt-8 text-center">
                         <img src="https://tailus.io/sources/blocks/stats-cards/preview/images/first_user.webp" alt="" className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28" />
                         <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block capitalize">{user?.get_full_name}</h5>
                         <span className="hidden text-gray-400 lg:block">Administrador</span>
-                    </div>
+                    </div> */}
 
                     <ul className="space-y-2 tracking-wide mt-8">
                         <li>
@@ -60,7 +60,7 @@ const Main = () => {
                                 <span className="-mr-1 font-medium">Dashboard</span>
                             </a>
                         </li>
-                        <li>
+                        {/* <li>
                             <a href="#" className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path className="fill-current text-gray-300 group-hover:text-cyan-300" fillRule="evenodd" d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z" clipRule="evenodd" />
@@ -95,7 +95,7 @@ const Main = () => {
                                 </svg>
                                 <span className="group-hover:text-gray-700">Finance</span>
                             </a>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
 
